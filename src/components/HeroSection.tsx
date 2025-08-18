@@ -2,18 +2,21 @@
 
 import { Trophy, Target, Zap, ArrowRight, Calendar, Users, Star } from 'lucide-react';
 import Image from 'next/image';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface HeroSectionProps {
   onGetPlan: () => void;
 }
 
 export default function HeroSection({ onGetPlan }: HeroSectionProps) {
+  const { currentUser } = useAuth();
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       const headerHeight = 80; // Height of the fixed header
       const elementPosition = element.offsetTop - headerHeight;
-      
+
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
@@ -28,62 +31,56 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <div className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-300">
-                <Image
-                  src="/aceplanlogo.png"
-                  alt="AcePlan Logo"
-                  width={48}
-                  height={48}
-                  className="object-contain drop-shadow-lg"
-                />
-              </div>
-              <div className="text-2xl font-black bg-gradient-to-r from-indigo-900 to-blue-800 bg-clip-text text-transparent">
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/aceplanlogo.png"
+                alt="AcePlan Logo"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                 AcePlan
-              </div>
+              </span>
             </div>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection('features')}
-                className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group"
-              >
+              <button onClick={() => scrollToSection('features')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 Features
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button 
-                onClick={() => scrollToSection('how-it-works')}
-                className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group"
-              >
+              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button 
-                onClick={() => scrollToSection('ai-analyzer')}
-                className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group"
-              >
+              <button onClick={() => scrollToSection('ai-analyzer')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 AI Video Analyzer
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
                 <span className="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium">Coming Soon</span>
               </button>
-              <button 
-                onClick={() => scrollToSection('about')}
-                className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group"
-              >
+              <button onClick={() => scrollToSection('about')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
             </nav>
 
-            {/* CTA Button */}
-            <button
-              onClick={onGetPlan}
-              className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-            >
-              <span>Get Started</span>
-              <ArrowRight className="h-4 w-4" />
-            </button>
+            {/* CTA Buttons */}
+            <div className="flex items-center space-x-4">
+              {!currentUser && (
+                <button
+                  onClick={() => window.location.href = '/#quiz'}
+                  className="px-4 py-2 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors"
+                >
+                  Sign In
+                </button>
+              )}
+              <button
+                onClick={onGetPlan}
+                className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                Get My Free AcePlan
+              </button>
+            </div>
           </div>
         </div>
       </header>

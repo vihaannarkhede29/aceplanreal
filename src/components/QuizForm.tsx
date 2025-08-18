@@ -114,9 +114,36 @@ export default function QuizForm({ onComplete }: QuizFormProps) {
 
       case 'multi-select':
         const currentMultiAnswer = Array.isArray(currentAnswer) ? currentAnswer : [];
+        const allOptions = currentQuestion.options || [];
+        
+        const handleSelectAll = () => {
+          if (currentMultiAnswer.length === allOptions.length) {
+            // If all are selected, deselect all
+            handleAnswerChange(questionId, []);
+          } else {
+            // Select all
+            handleAnswerChange(questionId, allOptions);
+          }
+        };
+
         return (
           <div className="space-y-4">
-            {currentQuestion.options?.map((option, index) => (
+            {/* Select All Button */}
+            <div className="flex justify-center mb-4">
+              <button
+                type="button"
+                onClick={handleSelectAll}
+                className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${
+                  currentMultiAnswer.length === allOptions.length
+                    ? 'bg-red-500 text-white hover:bg-red-600'
+                    : 'bg-green-500 text-white hover:bg-green-600'
+                }`}
+              >
+                {currentMultiAnswer.length === allOptions.length ? 'Deselect All' : 'Select All'}
+              </button>
+            </div>
+            
+            {allOptions.map((option, index) => (
               <label key={index} className="flex items-start space-x-4 cursor-pointer group">
                 <div className="relative flex items-center">
                   <input

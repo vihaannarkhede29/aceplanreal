@@ -114,16 +114,19 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'trainingDays',
-    question: 'How many days per week can you train?',
-    type: 'select',
+    question: 'Which days of the week do you want to train?',
+    type: 'multi-select',
     options: [
-      '1-2 days per week',
-      '3-4 days per week',
-      '5-6 days per week',
-      '7 days per week'
+      'Monday',
+      'Tuesday', 
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
     ],
     required: true,
-    description: 'This helps create your personalized training schedule'
+    description: 'Select the days you want to include in your training schedule'
   },
   {
     id: 'trainingHours',

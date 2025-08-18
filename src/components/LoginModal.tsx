@@ -15,6 +15,7 @@ interface LoginModalProps {
 export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalProps) {
   const { currentUser, signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   console.log('LoginModal: isOpen:', isOpen, 'currentUser:', currentUser);
 
@@ -37,6 +38,13 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
         localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
         console.log('LoginModal: Quiz results saved to localStorage');
       }
+
+      // Show success message and auto-close
+      setShowSuccess(true);
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+      
     } catch (error) {
       console.error('LoginModal: Sign in error:', error);
       
@@ -76,6 +84,25 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
   if (!isOpen) return null;
 
   console.log('LoginModal: Rendering modal, isOpen:', isOpen);
+
+  // Show success message
+  if (showSuccess) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+          <div className="bg-gradient-to-r from-green-500 to-blue-600 p-6 text-white text-center">
+            <div className="text-6xl mb-4">🎉</div>
+            <h2 className="text-2xl font-bold mb-2">Welcome to AcePlan!</h2>
+            <p className="text-green-100">Your results have been saved successfully.</p>
+          </div>
+          <div className="p-6 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Closing automatically...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
