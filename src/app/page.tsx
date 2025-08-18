@@ -7,6 +7,7 @@ import ResultsPage from '@/components/ResultsPage';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { User } from 'lucide-react';
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
@@ -67,8 +68,27 @@ export default function Home() {
     <AuthProvider>
       <main className="min-h-screen flex flex-col">
         <HeroSection onGetPlan={handleGetPlan} />
-
-      {/* How It Works Section */}
+        
+        {/* Sign In CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Already have an AcePlan?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Sign in to access your saved results and training plan
+            </p>
+            <button
+              onClick={() => window.location.href = '/#quiz'}
+              className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              <User className="h-5 w-5" />
+              <span>Sign In to AcePlan</span>
+            </button>
+          </div>
+        </section>
+        
+        {/* How It Works Section */}
       <section id="how-it-works" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">

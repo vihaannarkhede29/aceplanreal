@@ -66,14 +66,12 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
 
             {/* CTA Buttons */}
             <div className="flex items-center space-x-4">
-              {!currentUser && (
-                <button
-                  onClick={() => window.location.href = '/#quiz'}
-                  className="px-4 py-2 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors"
-                >
-                  Sign In
-                </button>
-              )}
+              <button
+                onClick={() => window.location.href = '/#quiz'}
+                className="px-4 py-2 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors"
+              >
+                Sign In
+              </button>
               <button
                 onClick={onGetPlan}
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
