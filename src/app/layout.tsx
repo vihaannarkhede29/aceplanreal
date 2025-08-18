@@ -10,14 +10,11 @@ export const metadata: Metadata = {
   description: "Get your personalized tennis equipment recommendations and training plan. Take our quiz to find the perfect racket, strings, and gear for your game.",
   keywords: "tennis equipment, tennis racket, tennis strings, tennis training, tennis quiz, personalized tennis",
   authors: [{ name: "AcePlan" }],
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/aceplanlogo.png', type: 'image/png' }
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/aceplanlogo.png',
-  },
+  icons: [
+    { rel: 'icon', url: '/aceplanlogo.png', type: 'image/png' },
+    { rel: 'shortcut icon', url: '/aceplanlogo.png', type: 'image/png' },
+    { rel: 'apple-touch-icon', url: '/aceplanlogo.png' }
+  ],
   openGraph: {
     title: "AcePlan - Practice Hard. Play harder. Get Your Tennis Equipment Plan",
     description: "Get your personalized tennis equipment recommendations and training plan. Take our quiz to find the perfect racket, strings, and gear for your game.",
