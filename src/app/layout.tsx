@@ -36,6 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/aceplanlogo.png" type="image/png" />
+        <link rel="shortcut icon" href="/aceplanlogo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/aceplanlogo.png" />
+      </head>
       <body className={inter.className}>
         {children}
         <Analytics />
