@@ -28,6 +28,7 @@ export default function ResultsPage({ results, onRetakeQuiz }: ResultsPageProps)
       if (!currentUser) {
         console.log('ResultsPage: 15 seconds passed, showing login modal');
         setShowLoginModal(true);
+        console.log('ResultsPage: showLoginModal set to true');
       } else {
         console.log('ResultsPage: User already logged in, not showing modal');
       }
@@ -40,6 +41,11 @@ export default function ResultsPage({ results, onRetakeQuiz }: ResultsPageProps)
   useEffect(() => {
     console.log('ResultsPage: currentUser changed:', currentUser);
   }, [currentUser]);
+
+  // Debug showLoginModal changes
+  useEffect(() => {
+    console.log('ResultsPage: showLoginModal changed:', showLoginModal);
+  }, [showLoginModal]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
