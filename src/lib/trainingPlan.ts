@@ -17,7 +17,7 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
   for (let week = 1; week <= 4; week++) {
     const weekDays: TrainingDay[] = [];
     const weeklyFocus = getWeeklyFocus(week, answers);
-    const progression = getWeeklyProgression(week);
+    const progression = getWeeklyProgression(week, answers);
 
     for (let day = 1; day <= daysPerWeek; day++) {
       const dayName = getDayName(day);
@@ -140,25 +140,51 @@ function getDayNotes(dayFocus: string, intensity: string, answers: QuizAnswer): 
 }
 
 function getWeeklyFocus(week: number, answers: QuizAnswer): string {
-  const focuses = [
-    'Building Foundation - Focus on basic technique and consistency',
-    'Developing Skills - Work on power, control, and shot variety',
-    'Advanced Techniques - Master complex shots and strategies',
-    'Integration & Match Play - Combine all skills in competitive situations'
-  ];
+  const isBeginner = answers.skillLevel.includes('Beginner') || 
+                    (answers.yearsPlaying ? answers.yearsPlaying.includes('Less than 1 year') : false);
   
-  return focuses[week - 1] || focuses[0];
+  if (isBeginner) {
+    const focuses = [
+      'Building Foundation - Focus on basic technique and consistency',
+      'Developing Skills - Work on power, control, and shot variety',
+      'Advanced Techniques - Master complex shots and strategies',
+      'Integration & Match Play - Combine all skills in competitive situations'
+    ];
+    return focuses[week - 1] || focuses[0];
+  } else {
+    // For intermediate and advanced players
+    const focuses = [
+      'Skill Refinement - Polish existing techniques and add new variations',
+      'Performance Enhancement - Increase power, accuracy, and tactical awareness',
+      'Advanced Mastery - Perfect complex shots and strategic thinking',
+      'Competition Preparation - Fine-tune for match play and tournament readiness'
+    ];
+    return focuses[week - 1] || focuses[0];
+  }
 }
 
-function getWeeklyProgression(week: number): string {
-  const progressions = [
-    'Week 1: Establish fundamentals and build confidence',
-    'Week 2: Increase intensity and add complexity to drills',
-    'Week 3: Peak training with maximum challenge and volume',
-    'Week 4: Consolidate gains and prepare for next training cycle'
-  ];
+function getWeeklyProgression(week: number, answers: QuizAnswer): string {
+  const isBeginner = answers.skillLevel.includes('Beginner') || 
+                    (answers.yearsPlaying ? answers.yearsPlaying.includes('Less than 1 year') : false);
   
-  return progressions[week - 1] || progressions[0];
+  if (isBeginner) {
+    const progressions = [
+      'Week 1: Establish fundamentals and build confidence',
+      'Week 2: Increase intensity and add complexity to drills',
+      'Week 3: Peak training with maximum challenge and volume',
+      'Week 4: Consolidate gains and prepare for next training cycle'
+    ];
+    return progressions[week - 1] || progressions[0];
+  } else {
+    // For intermediate and advanced players
+    const progressions = [
+      'Week 1: Technical refinement and skill assessment',
+      'Week 2: Performance optimization and tactical development',
+      'Week 3: High-intensity training and advanced techniques',
+      'Week 4: Competition preparation and skill integration'
+    ];
+    return progressions[week - 1] || progressions[0];
+  }
 }
 
 function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes: number, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill[] {
@@ -172,41 +198,62 @@ function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes
     if (dayFocus.includes('Footwork') && drill.category !== 'footwork') return false;
     if (dayFocus.includes('Strategy') && drill.category !== 'strategy') return false;
     
-    // Filter by skill level
-    if (isBeginner && drill.difficulty !== 'beginner') return false;
-    if (isAdvanced && drill.difficulty === 'beginner') return false;
-    if (isIntermediate && drill.difficulty === 'advanced') return false;
+    // More sophisticated skill level filtering
+    if (isBeginner) {
+      // Beginners can do beginner and some intermediate drills
+      if (drill.difficulty === 'advanced') return false;
+    } else if (isIntermediate) {
+      // Intermediates can do intermediate and some advanced drills, avoid basic beginner drills
+      if (drill.difficulty === 'beginner' && drill.name.toLowerCase().includes('basic')) return false;
+    } else if (isAdvanced) {
+      // Advanced players should focus on intermediate and advanced drills
+      if (drill.difficulty === 'beginner') return false;
+    }
     
     return true;
   });
 
-  // Score drills based on user preferences
+  // Score drills based on user preferences and experience
   const scoredDrills = availableDrills.map(drill => {
     let score = 0;
     
-    // Prioritize drills that match weakest shots
+    // High priority for weakest shots (regardless of skill level)
     if (answers.weakestShots && answers.weakestShots.some(shot => 
       drill.name.toLowerCase().includes(shot.toLowerCase().replace(/^.*? - /, '')) ||
       drill.description.toLowerCase().includes(shot.toLowerCase().replace(/^.*? - /, ''))
     )) {
-      score += 8; // High priority for weakest shots
+      score += 10; // Highest priority
     }
     
-    // Prioritize drills that match improvement areas
+    // Medium priority for improvement areas
     if (answers.improvementAreas && answers.improvementAreas.some(area => 
       drill.name.toLowerCase().includes(area.toLowerCase().replace(/^.*? - /, '')) ||
       drill.description.toLowerCase().includes(area.toLowerCase().replace(/^.*? - /, ''))
     )) {
-      score += 5; // Medium priority for improvement areas
+      score += 6;
     }
     
-    // Skill level scoring
-    if (isBeginner && drill.difficulty === 'beginner') {
-      score += 3;
-    } else if (isIntermediate && drill.difficulty === 'intermediate') {
-      score += 3;
-    } else if (isAdvanced && drill.difficulty === 'advanced') {
-      score += 3;
+    // Skill level scoring - more nuanced
+    if (isBeginner) {
+      if (drill.difficulty === 'beginner') score += 4;
+      else if (drill.difficulty === 'intermediate') score += 2;
+    } else if (isIntermediate) {
+      if (drill.difficulty === 'intermediate') score += 4;
+      else if (drill.difficulty === 'advanced') score += 3;
+      else if (drill.difficulty === 'beginner') score += 1; // Lower priority for basic drills
+    } else if (isAdvanced) {
+      if (drill.difficulty === 'advanced') score += 5;
+      else if (drill.difficulty === 'intermediate') score += 3;
+      // No points for beginner drills for advanced players
+    }
+    
+    // Experience-based scoring
+    if (answers.yearsPlaying) {
+      if (answers.yearsPlaying.includes('5+ years') && drill.difficulty === 'advanced') {
+        score += 3; // Advanced players get bonus for advanced drills
+      } else if (answers.yearsPlaying.includes('3-5 years') && drill.difficulty === 'intermediate') {
+        score += 2; // Intermediate players get bonus for intermediate drills
+      }
     }
     
     // Playing style considerations
@@ -215,6 +262,9 @@ function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes
       score += 2;
     } else if (answers.playingStyle && answers.playingStyle.includes('Defensive') && 
                drill.category === 'footwork') {
+      score += 2;
+    } else if (answers.playingStyle && answers.playingStyle.includes('Serve-volley') && 
+               (drill.category === 'serve' || drill.category === 'volley')) {
       score += 2;
     }
     

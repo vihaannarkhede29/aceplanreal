@@ -76,7 +76,7 @@ export default function UserProfileHeader() {
                 Your Saved AcePlan
               </h4>
               
-              <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-2 gap-3 text-sm mb-4">
                 <div className="bg-blue-50 rounded-lg p-3">
                   <p className="text-blue-900 font-medium">Skill Level</p>
                   <p className="text-blue-700">{savedResults.skillLevel}</p>
@@ -101,6 +101,19 @@ export default function UserProfileHeader() {
                   </p>
                 </div>
               </div>
+
+              {/* View Previous Plan Button */}
+              <button
+                onClick={() => {
+                  // Store the saved results in a way that the main app can access
+                  localStorage.setItem('aceplan_view_previous_plan', 'true');
+                  // Redirect to home page which will show the saved plan
+                  window.location.href = '/';
+                }}
+                className="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-700 transition-all duration-200 font-medium"
+              >
+                View Previous Plan
+              </button>
             </div>
           )}
 

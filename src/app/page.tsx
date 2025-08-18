@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import QuizForm from '@/components/QuizForm';
 import ResultsPage from '@/components/ResultsPage';
@@ -13,25 +13,41 @@ export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [results, setResults] = useState<RecommendationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [viewPreviousPlan, setViewPreviousPlan] = useState(false);
 
-  const handleGetPlan = () => {
-    setShowQuiz(true);
-  };
+  // Check if user wants to view previous plan
+  useEffect(() => {
+    const shouldViewPrevious = localStorage.getItem('aceplan_view_previous_plan');
+    if (shouldViewPrevious === 'true') {
+      const savedResults = localStorage.getItem('aceplan_quiz_results');
+      if (savedResults) {
+        try {
+          setResults(JSON.parse(savedResults));
+          setViewPreviousPlan(true);
+          // Clear the flag
+          localStorage.removeItem('aceplan_view_previous_plan');
+        } catch (error) {
+          console.error('Error parsing saved results:', error);
+        }
+      }
+    }
+  }, []);
 
+  const handleGetPlan = () => { setShowQuiz(true); };
   const handleQuizComplete = (answers: QuizAnswer) => {
     setIsLoading(true);
-    
     // Simulate processing time
     setTimeout(() => {
       const recommendations = generateRecommendations(answers);
       setResults(recommendations);
       setIsLoading(false);
+      setViewPreviousPlan(false);
     }, 2000);
   };
-
-  const handleRetakeQuiz = () => {
-    setShowQuiz(false);
-    setResults(null);
+  const handleRetakeQuiz = () => { 
+    setShowQuiz(false); 
+    setResults(null); 
+    setViewPreviousPlan(false);
   };
 
   if (isLoading) {
@@ -51,7 +67,7 @@ export default function Home() {
   if (results) {
     return (
       <AuthProvider>
-        <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} />
+        <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} isPreviousPlan={viewPreviousPlan} />
       </AuthProvider>
     );
   }
