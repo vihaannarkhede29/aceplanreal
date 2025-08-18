@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { X, Trophy, Star, Calendar, Zap } from 'lucide-react';
+import { analytics } from '@/lib/firebase';
+import { logEvent } from 'firebase/analytics';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -18,15 +20,53 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
     setIsLoading(true);
     try {
       await signInWithGoogle();
+      
+      // Track successful sign-in from modal
+      if (analytics) {
+        logEvent(analytics, 'login_modal_success', {
+          method: 'google',
+          source: 'results_page'
+        });
+      }
+      
       // Store quiz results in localStorage for now
       if (quizResults) {
         localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
       }
     } catch (error) {
       console.error('Sign in error:', error);
+      
+      // Track sign-in error from modal
+      if (analytics) {
+        logEvent(analytics, 'login_modal_error', {
+          method: 'google',
+          source: 'results_page',
+          error: error.message
+        });
+      }
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Track when modal is shown
+  useEffect(() => {
+    if (isOpen && analytics) {
+      logEvent(analytics, 'login_modal_shown', {
+        source: 'results_page',
+        delay: '15_seconds'
+      });
+    }
+  }, [isOpen]);
+
+  // Track when modal is dismissed
+  const handleClose = () => {
+    if (analytics) {
+      logEvent(analytics, 'login_modal_dismissed', {
+        source: 'results_page'
+      });
+    }
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -37,7 +77,7 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
         {/* Header */}
         <div className="bg-gradient-to-r from-green-500 to-blue-600 p-6 text-white relative">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors"
           >
             <X className="h-6 w-6" />
@@ -110,7 +150,7 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
           {/* Skip option */}
           <div className="text-center mt-4">
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-gray-500 hover:text-gray-700 text-sm transition-colors"
             >
               Maybe later

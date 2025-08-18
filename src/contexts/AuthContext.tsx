@@ -8,7 +8,8 @@ import {
   signOut, 
   onAuthStateChanged 
 } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { auth, analytics } from '@/lib/firebase';
+import { logEvent } from 'firebase/analytics';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -35,14 +36,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
+      
+      // Track successful sign-in
+      if (analytics) {
+        logEvent(analytics, 'login', {
+          method: 'google'
+        });
+      }
     } catch (error) {
       console.error('Error signing in with Google:', error);
+      
+      // Track sign-in error
+      if (analytics) {
+        logEvent(analytics, 'login_error', {
+          method: 'google',
+          error: error.message
+        });
+      }
     }
   };
 
   const logout = async () => {
     try {
       await signOut(auth);
+      
+      // Track successful logout
+      if (analytics) {
+        logEvent(analytics, 'logout');
+      }
     } catch (error) {
       console.error('Error signing out:', error);
     }
