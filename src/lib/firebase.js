@@ -15,11 +15,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+console.log('Firebase: App initialized successfully');
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
+console.log('Firebase: Auth initialized successfully');
 
 // Initialize Firebase Analytics (only in browser environment)
 export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+console.log('Firebase: Analytics initialized:', analytics ? 'successfully' : 'not available (SSR)');
 
 export default app;

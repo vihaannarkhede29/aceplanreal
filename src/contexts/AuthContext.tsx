@@ -32,10 +32,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  console.log('AuthProvider: Initializing, loading:', loading);
+
   const signInWithGoogle = async () => {
+    console.log('AuthProvider: signInWithGoogle called');
     try {
       const provider = new GoogleAuthProvider();
+      console.log('AuthProvider: Google provider created, attempting sign-in');
       await signInWithPopup(auth, provider);
+      console.log('AuthProvider: Google sign-in successful');
       
       // Track successful sign-in
       if (analytics) {
@@ -44,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
       }
     } catch (error) {
-      console.error('Error signing in with Google:', error);
+      console.error('AuthProvider: Error signing in with Google:', error);
       
       // Track sign-in error
       if (analytics) {
@@ -57,20 +62,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
+    console.log('AuthProvider: logout called');
     try {
       await signOut(auth);
+      console.log('AuthProvider: Logout successful');
       
       // Track successful logout
       if (analytics) {
         logEvent(analytics, 'logout');
       }
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error('AuthProvider: Error signing out:', error);
     }
   };
 
   useEffect(() => {
+    console.log('AuthProvider: Setting up auth state listener');
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log('AuthProvider: Auth state changed, user:', user);
       setCurrentUser(user);
       setLoading(false);
     });
@@ -84,6 +93,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithGoogle,
     logout
   };
+
+  console.log('AuthProvider: Rendering with value:', value);
 
   return (
     <AuthContext.Provider value={value}>
