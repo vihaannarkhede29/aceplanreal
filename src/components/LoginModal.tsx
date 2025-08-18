@@ -16,7 +16,10 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
   const { currentUser, signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log('LoginModal: isOpen:', isOpen, 'currentUser:', currentUser);
+
   const handleGoogleSignIn = async () => {
+    console.log('LoginModal: Attempting Google sign-in');
     setIsLoading(true);
     try {
       await signInWithGoogle();
@@ -32,9 +35,10 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
       // Store quiz results in localStorage for now
       if (quizResults) {
         localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
+        console.log('LoginModal: Quiz results saved to localStorage');
       }
     } catch (error) {
-      console.error('Sign in error:', error);
+      console.error('LoginModal: Sign in error:', error);
       
       // Track sign-in error from modal
       if (analytics) {
