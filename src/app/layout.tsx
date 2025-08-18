@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   description: "Get your personalized tennis equipment recommendations and training plan. Take our quiz to find the perfect racket, strings, and gear for your game.",
   keywords: "tennis equipment, tennis racket, tennis strings, tennis training, tennis quiz, personalized tennis",
   authors: [{ name: "AcePlan" }],
+  icons: {
+    icon: '/aceplanlogo.png',
+    shortcut: '/aceplanlogo.png',
+    apple: '/aceplanlogo.png',
+  },
   openGraph: {
     title: "AcePlan - Practice Hard. Play harder. Get Your Tennis Equipment Plan",
     description: "Get your personalized tennis equipment recommendations and training plan. Take our quiz to find the perfect racket, strings, and gear for your game.",
@@ -36,11 +41,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/aceplanlogo.png" type="image/png" />
-        <link rel="shortcut icon" href="/aceplanlogo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/aceplanlogo.png" />
-      </head>
       <body className={inter.className}>
         {children}
         <Analytics />
