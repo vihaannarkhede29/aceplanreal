@@ -79,10 +79,19 @@ export default function MonthlyCalendarPage() {
     if (!trainingPlan.length) return null;
     
     const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const weekIndex = Math.floor((date.getDate() - 1) / 7);
     
-    if (trainingPlan[weekIndex] && trainingPlan[weekIndex].days) {
-      return trainingPlan[weekIndex].days.find(day => day.day === dayOfWeek) || null;
+    // Find which week this date falls into based on the training plan
+    // We'll start the training plan from the current week
+    const today = new Date();
+    const daysSinceStart = Math.floor((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    const weekIndex = Math.floor(daysSinceStart / 7);
+    
+    // Only show training for weeks 0-3 (4 weeks of training plan)
+    if (weekIndex >= 0 && weekIndex < trainingPlan.length) {
+      const week = trainingPlan[weekIndex];
+      if (week && week.days) {
+        return week.days.find(day => day.day === dayOfWeek) || null;
+      }
     }
     
     return null;
@@ -146,7 +155,7 @@ export default function MonthlyCalendarPage() {
                       {day.getDate()}
                     </div>
                     
-                    {training && (
+                    {training ? (
                       <div className="space-y-1">
                         <div className={`text-xs px-1 py-0.5 rounded ${getIntensityColor(training.intensity)}`}>
                           {training.intensity}
@@ -157,6 +166,10 @@ export default function MonthlyCalendarPage() {
                         <div className="text-xs text-gray-500">
                           {training.totalDuration} min
                         </div>
+                      </div>
+                    ) : (
+                      <div className="text-xs text-gray-400">
+                        No training
                       </div>
                     )}
                   </>
@@ -321,7 +334,7 @@ export default function MonthlyCalendarPage() {
             </div>
             
             {training.notes && (
-              <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+              <div className="text-sm text-gray-600 bg-yellow-50 p-2 rounded">
                 <h3 className="font-medium text-yellow-900 mb-2">Notes</h3>
                 <p className="text-yellow-800">{training.notes}</p>
               </div>
@@ -356,10 +369,10 @@ export default function MonthlyCalendarPage() {
                 </div>
               )}
               <a
-                href="/"
+                href="/#results"
                 className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
-                Back to Home
+                Back to Weekly Plan
               </a>
             </div>
           </div>
