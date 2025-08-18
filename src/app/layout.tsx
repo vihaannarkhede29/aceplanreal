@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   keywords: "tennis equipment, tennis racket, tennis strings, tennis training, tennis quiz, personalized tennis",
   authors: [{ name: "AcePlan" }],
   icons: {
-    icon: '/aceplanlogo.png',
-    shortcut: '/aceplanlogo.png',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
     apple: '/aceplanlogo.png',
   },
   openGraph: {
