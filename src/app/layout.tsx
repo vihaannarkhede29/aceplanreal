@@ -11,7 +11,10 @@ export const metadata: Metadata = {
   keywords: "tennis equipment, tennis racket, tennis strings, tennis training, tennis quiz, personalized tennis",
   authors: [{ name: "AcePlan" }],
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/aceplanlogo.png', type: 'image/png' }
+    ],
     shortcut: '/favicon.ico',
     apple: '/aceplanlogo.png',
   },
