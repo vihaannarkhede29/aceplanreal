@@ -6,6 +6,7 @@ import QuizForm from '@/components/QuizForm';
 import ResultsPage from '@/components/ResultsPage';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
@@ -34,27 +35,38 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Your AcePlan...</h2>
-          <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
+      <AuthProvider>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Your AcePlan...</h2>
+            <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
+          </div>
         </div>
-      </div>
+      </AuthProvider>
     );
   }
 
   if (results) {
-    return <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} />;
+    return (
+      <AuthProvider>
+        <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} />
+      </AuthProvider>
+    );
   }
 
   if (showQuiz) {
-    return <QuizForm onComplete={handleQuizComplete} />;
+    return (
+      <AuthProvider>
+        <QuizForm onComplete={handleQuizComplete} />
+      </AuthProvider>
+    );
   }
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <HeroSection onGetPlan={handleGetPlan} />
+    <AuthProvider>
+      <main className="min-h-screen flex flex-col">
+        <HeroSection onGetPlan={handleGetPlan} />
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 bg-white">
@@ -375,5 +387,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </AuthProvider>
   );
 }
