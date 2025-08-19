@@ -17,6 +17,25 @@ export default function Home() {
 
   // Check if user wants to view previous plan
   useEffect(() => {
+    // Check for #results hash in URL
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash === '#results') {
+        const savedResults = localStorage.getItem('aceplan_quiz_results');
+        if (savedResults) {
+          try {
+            setResults(JSON.parse(savedResults));
+            setViewPreviousPlan(true);
+            // Remove the hash from URL without page reload
+            window.history.replaceState(null, '', window.location.pathname);
+          } catch (error) {
+            console.error('Error parsing saved results:', error);
+          }
+        }
+      }
+    }
+
+    // Legacy check for localStorage flag
     const shouldViewPrevious = localStorage.getItem('aceplan_view_previous_plan');
     if (shouldViewPrevious === 'true') {
       const savedResults = localStorage.getItem('aceplan_quiz_results');
