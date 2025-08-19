@@ -28,24 +28,24 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
     <>
       {/* Header with Logo */}
       <header className="bg-white/90 backdrop-blur-md border-b border-white/30 shadow-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
+          <div className="flex items-center justify-between h-24">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <Image
                 src="/aceplanlogo.png"
                 alt="AcePlan Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={48}
+                height={48}
+                className="w-12 h-12"
               />
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                 AcePlan
               </span>
             </div>
 
             {/* Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-12">
               <button onClick={() => scrollToSection('features')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 Features
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -69,7 +69,7 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <button
                 onClick={() => window.location.href = '/#quiz'}
                 className="px-4 py-2 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors"
