@@ -36,6 +36,7 @@ export default function MonthlyCalendarPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('month');
   const [trainingPlan, setTrainingPlan] = useState<TrainingWeek[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [completedDrills, setCompletedDrills] = useState<Set<string>>(new Set());
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -51,7 +52,28 @@ export default function MonthlyCalendarPage() {
         console.error('Error parsing saved results:', error);
       }
     }
+    
+    // Load completed drills from localStorage
+    const savedCompleted = localStorage.getItem('aceplan_completed_drills');
+    if (savedCompleted) {
+      try {
+        setCompletedDrills(new Set(JSON.parse(savedCompleted)));
+      } catch (error) {
+        console.error('Error parsing completed drills:', error);
+      }
+    }
   }, []);
+
+  const toggleDrillCompletion = (drillId: string) => {
+    const newCompleted = new Set(completedDrills);
+    if (newCompleted.has(drillId)) {
+      newCompleted.delete(drillId);
+    } else {
+      newCompleted.add(drillId);
+    }
+    setCompletedDrills(newCompleted);
+    localStorage.setItem('aceplan_completed_drills', JSON.stringify([...newCompleted]));
+  };
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -124,6 +146,37 @@ export default function MonthlyCalendarPage() {
     });
   };
 
+  const getHoursPerDay = () => {
+    const saved = localStorage.getItem('aceplan_quiz_results');
+    if (saved) {
+      try {
+        const results = JSON.parse(saved);
+        if (results.trainingDays && results.trainingHours) {
+          const selectedDays = Array.isArray(results.trainingDays) ? results.trainingDays : [];
+          const hoursPerWeek = getHoursPerWeek(results.trainingHours);
+          const daysPerWeek = selectedDays.length;
+          
+          if (daysPerWeek > 0) {
+            return (hoursPerWeek / daysPerWeek).toFixed(1);
+          }
+        }
+      } catch (error) {
+        console.error('Error parsing saved results:', error);
+      }
+    }
+    return '0';
+  };
+
+  const getHoursPerWeek = (trainingHours: string): number => {
+    switch (trainingHours) {
+      case '1-3 hours per week': return 2;
+      case '4-6 hours per week': return 5;
+      case '7-10 hours per week': return 8.5;
+      case '10+ hours per week': return 12;
+      default: return 5;
+    }
+  };
+
   const renderMonthView = () => {
     const days = getDaysInMonth(currentDate);
     const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -184,6 +237,13 @@ export default function MonthlyCalendarPage() {
               </div>
             );
           })}
+        </div>
+        
+        {/* Hours per day calculation */}
+        <div className="text-center mt-6 p-4 bg-blue-50 rounded-lg">
+          <p className="text-sm text-blue-800">
+            <span className="font-medium">Training Schedule:</span> {getHoursPerDay()} hours per day
+          </p>
         </div>
       </div>
     );
@@ -281,6 +341,13 @@ export default function MonthlyCalendarPage() {
             );
           })}
         </div>
+        
+        {/* Hours per day calculation */}
+        <div className="text-center mt-6 p-4 bg-blue-50 rounded-lg">
+          <p className="text-sm text-blue-800">
+            <span className="font-medium">Training Schedule:</span> {getHoursPerDay()} hours per day
+          </p>
+        </div>
       </div>
     );
   };
@@ -319,7 +386,17 @@ export default function MonthlyCalendarPage() {
               {training.drills.map((drill, index) => (
                 <div key={index} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
                   <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-medium text-gray-900">{drill.name}</h4>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          checked={completedDrills.has(drill.id)}
+                          onChange={() => toggleDrillCompletion(drill.id)}
+                          className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                        <h4 className="font-medium text-gray-900">{drill.name}</h4>
+                      </div>
+                    </div>
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center text-sm text-gray-600">
                         <Clock className="h-4 w-4 mr-1" />
@@ -377,12 +454,12 @@ export default function MonthlyCalendarPage() {
                   Welcome, {currentUser.displayName || currentUser.email?.split('@')[0]}!
                 </div>
               )}
-              <button
-                onClick={() => window.history.back()}
+              <a
+                href="/#results"
                 className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Back to Weekly Plan
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { drills } from '@/data/drills';
 export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
   const selectedDays = Array.isArray(answers.trainingDays) ? answers.trainingDays : [];
   const daysPerWeek = selectedDays.length;
-  const hoursPerDay = getHoursPerDay(answers.trainingHours);
+  const hoursPerWeek = getHoursPerWeek(answers.trainingHours);
   const totalDays = 28; // 4 weeks
   const trainingWeeks: TrainingWeek[] = [];
 
@@ -17,13 +17,20 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
                     (answers.yearsPlaying ? answers.yearsPlaying.includes('5+ years') : false);
   const isIntermediate: boolean = !isBeginner && !isAdvanced && !isCompleteBeginner;
 
+  // Sort selected days to ensure proper order (Monday, Tuesday, Wednesday, etc.)
+  const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const sortedDays = selectedDays.sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+
+  // Calculate hours per day based on weekly total and selected days
+  const hoursPerDay = daysPerWeek > 0 ? hoursPerWeek / daysPerWeek : 0;
+
   for (let week = 1; week <= 4; week++) {
     const weekDays: TrainingDay[] = [];
     const weeklyFocus = getWeeklyFocus(week, answers);
     const progression = getWeeklyProgression(week, answers);
 
-    // Create training days for each selected day of the week
-    selectedDays.forEach((dayName, dayIndex) => {
+    // Create training days for each selected day of the week in proper order
+    sortedDays.forEach((dayName, dayIndex) => {
       const dayFocus = getDayFocus(dayIndex + 1, week, answers);
       const intensity = getDayIntensity(dayIndex + 1, week, answers);
       
@@ -58,7 +65,7 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
       weekNumber: week,
       days: weekDays,
       weeklyFocus,
-      totalHours: hoursPerDay * daysPerWeek,
+      totalHours: hoursPerWeek,
       progression
     });
   }
@@ -66,15 +73,13 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
   return trainingWeeks;
 }
 
-function getHoursPerDay(trainingHours: string): number {
+function getHoursPerWeek(trainingHours: string): number {
   switch (trainingHours) {
-    case '0.5-1 hour per day': return 0.75;
-    case '1-1.5 hours per day': return 1.25;
-    case '1.5-2 hours per day': return 1.75;
-    case '2-2.5 hours per day': return 2.25;
-    case '2.5-3 hours per day': return 2.75;
-    case '3+ hours per day': return 3.5;
-    default: return 1.25; // Default to 1-1.5 hours
+    case '1-3 hours per week': return 2;
+    case '4-6 hours per week': return 5;
+    case '7-10 hours per week': return 8.5;
+    case '10+ hours per week': return 12;
+    default: return 5;
   }
 }
 

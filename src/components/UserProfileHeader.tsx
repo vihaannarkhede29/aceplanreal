@@ -107,7 +107,7 @@ export default function UserProfileHeader() {
                 onClick={() => {
                   // Store the saved results in a way that the main app can access
                   localStorage.setItem('aceplan_view_previous_plan', 'true');
-                  // Redirect to home page which will show the saved plan
+                  // Navigate to the home page which will show the saved plan
                   window.location.href = '/';
                 }}
                 className="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-700 transition-all duration-200 font-medium"

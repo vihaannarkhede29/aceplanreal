@@ -132,18 +132,16 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'trainingHours',
-    question: 'How many hours per day do you want to train?',
+    question: 'How many hours per week can you dedicate to tennis training?',
     type: 'select',
     options: [
-      '0.5-1 hour per day',
-      '1-1.5 hours per day',
-      '1.5-2 hours per day',
-      '2-2.5 hours per day',
-      '2.5-3 hours per day',
-      '3+ hours per day'
+      '1-3 hours per week',
+      '4-6 hours per week',
+      '7-10 hours per week',
+      '10+ hours per week'
     ],
     required: true,
-    description: 'This helps determine the number and duration of drills for each training day'
+    description: 'This helps determine the intensity and volume of your training plan'
   },
   {
     id: 'weakestShots',
