@@ -45,7 +45,7 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
         onClose();
       }, 2000);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('LoginModal: Sign in error:', error);
       
       // Track sign-in error from modal

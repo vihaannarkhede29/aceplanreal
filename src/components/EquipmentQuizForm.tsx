@@ -30,7 +30,7 @@ export default function EquipmentQuizForm({ onComplete }: EquipmentQuizFormProps
     if (!currentQuestion.required) return true;
     
     const answer = answers[currentQuestion.id];
-    if (!answer || answer.trim() === '') {
+    if (!answer || (typeof answer === 'string' && answer.trim() === '')) {
       setErrors(prev => ({ ...prev, [currentQuestion.id]: 'This question is required' }));
       return false;
     }
@@ -42,7 +42,7 @@ export default function EquipmentQuizForm({ onComplete }: EquipmentQuizFormProps
     if (!currentQuestion.required) return true;
     
     const answer = answers[currentQuestion.id];
-    return answer && answer.trim() !== '';
+    return typeof answer === 'string' && answer.trim() !== '';
   };
 
   const handleNext = () => {

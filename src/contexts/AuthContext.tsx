@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           method: 'google'
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('AuthProvider: Error signing in with Google:', error);
       
       // Track sign-in error
