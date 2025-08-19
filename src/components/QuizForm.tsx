@@ -225,120 +225,122 @@ export default function QuizForm({ onComplete }: QuizFormProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Progress Section */}
-      <div className="mb-12">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
-              <Target className="h-6 w-6 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Progress Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
+                <Target className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Question {currentStep + 1} of {quizQuestions.length}
+                </h3>
+                <p className="text-sm text-gray-500">
+                  {Math.round(progress)}% Complete
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-700">
-                Question {currentStep + 1} of {quizQuestions.length}
-              </h3>
-              <p className="text-sm text-gray-500">
-                {Math.round(progress)}% Complete
-              </p>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-blue-600">
+                {Math.round(progress)}%
+              </div>
+              <div className="text-sm text-gray-500">Complete</div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-blue-600">
-              {Math.round(progress)}%
-            </div>
-            <div className="text-sm text-gray-500">Complete</div>
+          
+          {/* Progress Bar */}
+          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${progress}%` }}
+            />
           </div>
         </div>
-        
-        {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
 
-      {/* Question Card */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
-            {currentQuestion.question}
-          </h2>
-          {currentQuestion.description && (
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-              <p className="text-blue-800 italic">
-                💡 {currentQuestion.description}
+        {/* Question Card */}
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
+              {currentQuestion.question}
+            </h2>
+            {currentQuestion.description && (
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <p className="text-blue-800 italic">
+                  💡 {currentQuestion.description}
+                </p>
+              </div>
+            )}
+          </div>
+          
+          {renderQuestion()}
+          
+          {errors[currentQuestion.id] && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-600 text-sm flex items-center">
+                <span className="mr-2">⚠️</span>
+                {errors[currentQuestion.id]}
               </p>
             </div>
           )}
         </div>
-        
-        {renderQuestion()}
-        
-        {errors[currentQuestion.id] && (
-          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-600 text-sm flex items-center">
-              <span className="mr-2">⚠️</span>
-              {errors[currentQuestion.id]}
-            </p>
+
+        {/* Navigation */}
+        <div className="flex items-center justify-between">
+          <button
+            onClick={handlePrevious}
+            disabled={currentStep === 0}
+            className="flex items-center space-x-3 px-8 py-4 border-2 border-gray-300 rounded-xl text-gray-700 hover:border-blue-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold"
+          >
+            <ChevronLeft className="h-5 w-5" />
+            <span>Previous</span>
+          </button>
+
+          <button
+            onClick={handleNext}
+            disabled={!canGoNext()}
+            className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-xl hover:from-blue-600 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            {currentStep === quizQuestions.length - 1 ? (
+              <>
+                <CheckCircle className="h-5 w-5" />
+                <span>Get My AcePlan</span>
+              </>
+            ) : (
+              <>
+                <span>Next</span>
+                <ChevronRight className="h-5 w-5" />
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Step Indicators */}
+        <div className="mt-12 flex justify-center space-x-3">
+          {quizQuestions.map((_, index) => (
+            <div
+              key={index}
+              className={`h-3 w-3 rounded-full transition-all duration-300 ${
+                index === currentStep
+                  ? 'bg-gradient-to-r from-blue-500 to-green-500 scale-125'
+                  : index < currentStep
+                  ? 'bg-green-400'
+                  : 'bg-gray-300'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Motivation */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-50 to-green-50 px-6 py-4 rounded-xl border border-blue-100">
+            <Trophy className="h-6 w-6 text-blue-600" />
+            <span className="text-blue-800 font-medium">
+              You&apos;re almost there! Just a few more questions to get your personalized AcePlan.
+            </span>
           </div>
-        )}
-      </div>
-
-      {/* Navigation */}
-      <div className="flex items-center justify-between">
-        <button
-          onClick={handlePrevious}
-          disabled={currentStep === 0}
-          className="flex items-center space-x-3 px-8 py-4 border-2 border-gray-300 rounded-xl text-gray-700 hover:border-blue-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold"
-        >
-          <ChevronLeft className="h-5 w-5" />
-          <span>Previous</span>
-        </button>
-
-        <button
-          onClick={handleNext}
-          disabled={!canGoNext()}
-          className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-xl hover:from-blue-600 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-        >
-          {currentStep === quizQuestions.length - 1 ? (
-            <>
-              <CheckCircle className="h-5 w-5" />
-              <span>Get My AcePlan</span>
-            </>
-          ) : (
-            <>
-              <span>Next</span>
-              <ChevronRight className="h-5 w-5" />
-            </>
-          )}
-        </button>
-      </div>
-
-      {/* Step Indicators */}
-      <div className="mt-12 flex justify-center space-x-3">
-        {quizQuestions.map((_, index) => (
-          <div
-            key={index}
-            className={`h-3 w-3 rounded-full transition-all duration-300 ${
-              index === currentStep
-                ? 'bg-gradient-to-r from-blue-500 to-green-500 scale-125'
-                : index < currentStep
-                ? 'bg-green-400'
-                : 'bg-gray-300'
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Motivation */}
-      <div className="mt-12 text-center">
-        <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-50 to-green-50 px-6 py-4 rounded-xl border border-blue-100">
-          <Trophy className="h-6 w-6 text-blue-600" />
-          <span className="text-blue-800 font-medium">
-            You&apos;re almost there! Just a few more questions to get your personalized AcePlan.
-          </span>
         </div>
       </div>
     </div>
