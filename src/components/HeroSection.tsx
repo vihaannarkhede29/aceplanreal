@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 interface HeroSectionProps {
   onGetPlan: () => void;
+  onGetEquipment: () => void;
 }
 
 export default function HeroSection({ onGetPlan }: HeroSectionProps) {
@@ -57,7 +58,7 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('racket-suggester')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
+              <button onClick={() => onGetEquipment()} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 Equipment
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>

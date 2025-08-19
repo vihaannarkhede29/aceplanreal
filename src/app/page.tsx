@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import QuizForm from '@/components/QuizForm';
+import EquipmentQuizForm from '@/components/EquipmentQuizForm';
+import EquipmentResultsPage from '@/components/EquipmentResultsPage';
 import ResultsPage from '@/components/ResultsPage';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
@@ -11,7 +13,9 @@ import { User, Trophy, Calendar, Target } from 'lucide-react';
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showEquipmentQuiz, setShowEquipmentQuiz] = useState(false);
   const [results, setResults] = useState<RecommendationResult | null>(null);
+  const [equipmentResults, setEquipmentResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [viewPreviousPlan, setViewPreviousPlan] = useState(false);
 
@@ -53,6 +57,8 @@ export default function Home() {
   }, []);
 
   const handleGetPlan = () => { setShowQuiz(true); };
+  const handleGetEquipment = () => { setShowEquipmentQuiz(true); };
+  
   const handleQuizComplete = (answers: QuizAnswer) => {
     setIsLoading(true);
     // Simulate processing time
@@ -63,6 +69,17 @@ export default function Home() {
       setViewPreviousPlan(false);
     }, 2000);
   };
+
+  const handleEquipmentComplete = (answers: any) => {
+    setEquipmentResults(answers);
+    setShowEquipmentQuiz(false);
+  };
+
+  const handleBackToEquipment = () => {
+    setEquipmentResults(null);
+    setShowEquipmentQuiz(true);
+  };
+
   const handleRetakeQuiz = () => { 
     setShowQuiz(false); 
     setResults(null); 
@@ -79,6 +96,22 @@ export default function Home() {
             <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
           </div>
         </div>
+      </AuthProvider>
+    );
+  }
+
+  if (equipmentResults) {
+    return (
+      <AuthProvider>
+        <EquipmentResultsPage answers={equipmentResults} onBackToEquipment={handleBackToEquipment} />
+      </AuthProvider>
+    );
+  }
+
+  if (showEquipmentQuiz) {
+    return (
+      <AuthProvider>
+        <EquipmentQuizForm onComplete={handleEquipmentComplete} />
       </AuthProvider>
     );
   }
@@ -102,7 +135,7 @@ export default function Home() {
   return (
     <AuthProvider>
       <main className="min-h-screen flex flex-col">
-        <HeroSection onGetPlan={handleGetPlan} />
+        <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} />
         
         {/* Sign In CTA Section */}
         <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
@@ -304,13 +337,13 @@ export default function Home() {
               
               <div className="mt-8 text-center">
                 <button
-                  onClick={handleGetPlan}
+                  onClick={handleGetEquipment}
                   className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                 >
-                  Get Full Personalized Equipment Recommendations
+                  Get Your Equipment
                 </button>
                 <p className="text-gray-600 mt-3 text-sm">
-                  Take our comprehensive quiz for detailed, personalized racket and string suggestions
+                  Take our equipment quiz for detailed, personalized racket and string suggestions
                 </p>
               </div>
             </div>
