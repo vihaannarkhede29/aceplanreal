@@ -9,10 +9,11 @@ import ResultsPage from '@/components/ResultsPage';
 import LoginModal from '@/components/LoginModal';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
-import { AuthProvider } from '@/contexts/AuthContext';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { User, Trophy, Calendar, Target } from 'lucide-react';
 
-export default function Home() {
+// Inner component that can use the useAuth hook
+function HomeContent() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showEquipmentQuiz, setShowEquipmentQuiz] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -20,6 +21,7 @@ export default function Home() {
   const [equipmentResults, setEquipmentResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [viewPreviousPlan, setViewPreviousPlan] = useState(false);
+  const { currentUser } = useAuth();
 
   // Check if user wants to view previous plan
   useEffect(() => {
@@ -95,114 +97,103 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <AuthProvider>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Your AcePlan...</h2>
-            <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Your AcePlan...</h2>
+          <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
         </div>
-      </AuthProvider>
+      </div>
     );
   }
 
   if (equipmentResults) {
     return (
-      <AuthProvider>
-        <EquipmentResultsPage answers={equipmentResults} onBackToEquipment={handleBackToEquipment} />
-      </AuthProvider>
+      <EquipmentResultsPage answers={equipmentResults} onBackToEquipment={handleBackToEquipment} />
     );
   }
 
   if (showEquipmentQuiz) {
     return (
-      <AuthProvider>
-        <EquipmentQuizForm onComplete={handleEquipmentComplete} />
-      </AuthProvider>
+      <EquipmentQuizForm onComplete={handleEquipmentComplete} />
     );
   }
 
   if (results) {
     return (
-      <AuthProvider>
-        <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} isPreviousPlan={viewPreviousPlan} />
-      </AuthProvider>
+      <ResultsPage results={results} onRetakeQuiz={handleRetakeQuiz} isPreviousPlan={viewPreviousPlan} />
     );
   }
 
   if (showQuiz) {
     return (
-      <AuthProvider>
-        <QuizForm onComplete={handleQuizComplete} />
-      </AuthProvider>
+      <QuizForm onComplete={handleQuizComplete} />
     );
   }
 
   return (
-    <AuthProvider>
-      <main className="min-h-screen flex flex-col">
-        <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} />
-        
-        {/* Login Modal */}
-        {showLoginModal && (
-          <LoginModal 
-            isOpen={showLoginModal} 
-            onClose={() => setShowLoginModal(false)} 
-            quizResults={null} 
-          />
-        )}
-        
-        {/* Sign In CTA Section - Only show if user is not signed in */}
-        {!currentUser && (
-          <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
-            <div className="max-w-4xl mx-auto text-center px-4">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Already have an AcePlan?
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Sign in to access your saved results and training plan
-              </p>
+    <main className="min-h-screen flex flex-col">
+      <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} />
+      
+      {/* Login Modal */}
+      {showLoginModal && (
+        <LoginModal 
+          isOpen={showLoginModal} 
+          onClose={() => setShowLoginModal(false)} 
+          quizResults={null} 
+        />
+      )}
+      
+      {/* Sign In CTA Section - Only show if user is not signed in */}
+      {!currentUser && (
+        <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Already have an AcePlan?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Sign in to access your saved results and training plan
+            </p>
+            <button
+              onClick={() => setShowLoginModal(true)}
+              className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              <User className="h-5 w-5" />
+              <span>Sign In to AcePlan</span>
+            </button>
+          </div>
+        </section>
+      )}
+      
+      {/* Load Saved Plan Section - Only show if user is signed in */}
+      {currentUser && (
+        <section className="py-16 bg-gradient-to-r from-green-50 to-blue-50">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Welcome back, {currentUser.displayName || currentUser.email?.split('@')[0]}! 🎾
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Ready to continue your tennis journey? Load your saved AcePlan or create a new one.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => setShowLoginModal(true)}
-                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                onClick={() => window.location.href = '/#results'}
+                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
               >
-                <User className="h-5 w-5" />
-                <span>Sign In to AcePlan</span>
+                <Calendar className="h-5 w-5" />
+                <span>Load Saved Plan</span>
+              </button>
+              <button
+                onClick={handleGetPlan}
+                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Trophy className="h-5 w-5" />
+                <span>Create New Plan</span>
               </button>
             </div>
-          </section>
-        )}
-        
-        {/* Load Saved Plan Section - Only show if user is signed in */}
-        {currentUser && (
-          <section className="py-16 bg-gradient-to-r from-green-50 to-blue-50">
-            <div className="max-w-4xl mx-auto text-center px-4">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Welcome back, {currentUser.displayName || currentUser.email?.split('@')[0]}! 🎾
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Ready to continue your tennis journey? Load your saved AcePlan or create a new one.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => window.location.href = '/#results'}
-                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  <Calendar className="h-5 w-5" />
-                  <span>Load Saved Plan</span>
-                </button>
-                <button
-                  onClick={handleGetPlan}
-                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  <Trophy className="h-5 w-5" />
-                  <span>Create New Plan</span>
-                </button>
-              </div>
-            </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
         
         {/* How It Works Section */}
       <section id="how-it-works" className="py-20 bg-white">
@@ -404,7 +395,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6">
-              <span className="text-3xl">🤖</span>
+              <span className="text-3xl">��</span>
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               AI Video Analyzer
@@ -567,6 +558,13 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <AuthProvider>
+      <HomeContent />
     </AuthProvider>
   );
 }
