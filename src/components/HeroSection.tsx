@@ -31,7 +31,7 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
     <>
       {/* Header with Logo */}
       <header className="bg-white/90 backdrop-blur-md border-b border-white/30 shadow-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
+        <div className="max-w-8xl mx-auto px-8 sm:px-12 lg:px-20">
           <div className="flex items-center justify-between h-24">
             {/* Logo */}
             <div className="flex items-center space-x-4">
@@ -48,40 +48,40 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-16">
-              <button onClick={() => scrollToSection('features')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+            <nav className="hidden lg:flex items-center space-x-20">
+              <button onClick={() => scrollToSection('features')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap">
                 Features
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap">
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('racket-suggester')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+              <button onClick={() => scrollToSection('racket-suggester')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap">
                 AI Racket & Strings Generator
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('ai-analyzer')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+              <button onClick={() => scrollToSection('ai-analyzer')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap">
                 AI Video Analyzer
                 <span className="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium">Coming Soon</span>
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+              <button onClick={() => scrollToSection('about')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap">
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
             </nav>
 
             {/* Desktop CTA Buttons */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-10">
               <button
                 onClick={() => window.location.href = '/#quiz'}
-                className="px-6 py-3 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors border border-indigo-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50"
+                className="px-6 py-3 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors border border-indigo-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 whitespace-nowrap"
               >
                 Sign In
               </button>
               <button
                 onClick={onGetPlan}
-                className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg whitespace-nowrap"
               >
                 Get My Free AcePlan
               </button>
