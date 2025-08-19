@@ -54,6 +54,10 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
+              <button onClick={() => scrollToSection('racket-suggester')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
+                Racket & Strings Suggester
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              </button>
               <button onClick={() => scrollToSection('ai-analyzer')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group">
                 AI Video Analyzer
                 <span className="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium">Coming Soon</span>

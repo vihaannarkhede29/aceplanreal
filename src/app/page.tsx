@@ -7,7 +7,7 @@ import ResultsPage from '@/components/ResultsPage';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { User } from 'lucide-react';
+import { User, Trophy, Calendar, Target } from 'lucide-react';
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
@@ -183,73 +183,117 @@ export default function Home() {
       <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              AcePlan Features
-            </h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose AcePlan?</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to take your tennis game to the next level
+              Get personalized tennis equipment recommendations and training plans tailored to your unique playing style and goals.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">🎾</span>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Trophy className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Smart Equipment Matching</h3>
-              <p className="text-gray-600 text-center">
-                AI-powered recommendations for rackets, strings, and accessories tailored to your game
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Personalized Equipment</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Get racket and string recommendations based on your skill level, playing style, and specific needs.
               </p>
             </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">📅</span>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Calendar className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Personalized Training</h3>
-              <p className="text-gray-600 text-center">
-                4-week progressive training plans with drills focused on your weakest areas
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Training Plans</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Receive a 4-week training program designed around your schedule and improvement goals.
               </p>
             </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">🤖</span>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Target className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">AI Video Analysis</h3>
-              <p className="text-gray-600 text-center">
-                Advanced swing analysis with frame-by-frame feedback (Coming Soon)
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Skill Development</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Focus on your weakest shots and areas for improvement with targeted drills and exercises.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">🛒</span>
+      {/* Racket & Strings Suggester Section */}
+      <section id="racket-suggester" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Racket & Strings Suggester</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get instant equipment recommendations without taking the full quiz. Quick suggestions based on your basic preferences.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8 border border-blue-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Quick Equipment Guide
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <Trophy className="h-5 w-5 mr-2 text-blue-600" />
+                    Racket Selection
+                  </h4>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Beginner:</span>
+                      <span className="font-medium">Lightweight, oversized head (105-110 sq in)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Intermediate:</span>
+                      <span className="font-medium">Mid-weight, mid-plus head (100-105 sq in)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Advanced:</span>
+                      <span className="font-medium">Heavier, smaller head (95-100 sq in)</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <Target className="h-5 w-5 mr-2 text-green-600" />
+                    String Selection
+                  </h4>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Power:</span>
+                      <span className="font-medium">Multifilament or synthetic gut</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Control:</span>
+                      <span className="font-medium">Polyester strings</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Comfort:</span>
+                      <span className="font-medium">Natural gut or soft multifilaments</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Gear Recommendations</h3>
-              <p className="text-gray-600 text-center">
-                Complete equipment recommendations including balls, machines, and training aids
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">📊</span>
+              
+              <div className="mt-8 text-center">
+                <button
+                  onClick={handleGetPlan}
+                  className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Get Full Personalized Recommendations
+                </button>
+                <p className="text-gray-600 mt-3 text-sm">
+                  Take our comprehensive quiz for detailed, personalized equipment suggestions
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Progress Tracking</h3>
-              <p className="text-gray-600 text-center">
-                Monitor your improvement with detailed analytics and performance metrics
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                <span className="text-2xl">💡</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Expert Insights</h3>
-              <p className="text-gray-600 text-center">
-                Professional coaching tips and strategies to accelerate your development
-              </p>
             </div>
           </div>
         </div>
