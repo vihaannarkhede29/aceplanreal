@@ -11,7 +11,7 @@ interface HeroSectionProps {
   onSignIn: () => void;
 }
 
-export default function HeroSection({ onGetPlan }: HeroSectionProps) {
+export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: HeroSectionProps) {
   const { currentUser } = useAuth();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
