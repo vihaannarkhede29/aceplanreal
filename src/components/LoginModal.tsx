@@ -5,11 +5,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import { X, Trophy, Star, Calendar, Zap } from 'lucide-react';
 import { analytics } from '@/lib/firebase';
 import { logEvent } from 'firebase/analytics';
+import { saveUserPlan } from '@/lib/userPlans';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  quizResults: any; // You can type this more specifically based on your results structure
+  quizResults?: any; // Make quizResults optional since users might just want to sign in
 }
 
 export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalProps) {
@@ -17,26 +18,37 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  console.log('LoginModal: isOpen:', isOpen, 'currentUser:', currentUser);
+  console.log('LoginModal: isOpen:', isOpen, 'currentUser:', currentUser, 'quizResults:', quizResults);
 
   const handleGoogleSignIn = async () => {
     console.log('LoginModal: Attempting Google sign-in');
     setIsLoading(true);
     try {
-      await signInWithGoogle();
+      const userCredential = await signInWithGoogle();
+      const user = userCredential.user;
       
       // Track successful sign-in from modal
       if (analytics) {
         logEvent(analytics, 'login_modal_success', {
           method: 'google',
-          source: 'results_page'
+          source: quizResults ? 'results_page' : 'landing_page'
         });
       }
       
-      // Store quiz results in localStorage for now
-      if (quizResults) {
-        localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
-        console.log('LoginModal: Quiz results saved to localStorage');
+      // Save quiz results to Firestore if they exist
+      if (quizResults && user) {
+        try {
+          const planId = await saveUserPlan(user.uid, quizResults);
+          console.log('LoginModal: Plan saved to Firestore with ID:', planId);
+          
+          // Also store in localStorage as backup
+          localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
+          localStorage.setItem('aceplan_firestore_id', planId);
+        } catch (error) {
+          console.error('LoginModal: Error saving plan to Firestore:', error);
+          // Fallback to localStorage only
+          localStorage.setItem('aceplan_quiz_results', JSON.stringify(quizResults));
+        }
       }
 
       // Show success message and auto-close
@@ -52,7 +64,7 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
       if (analytics) {
         logEvent(analytics, 'login_modal_error', {
           method: 'google',
-          source: 'results_page',
+          source: quizResults ? 'results_page' : 'landing_page',
           error: error.message
         });
       }
@@ -65,17 +77,17 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
   useEffect(() => {
     if (isOpen && analytics) {
       logEvent(analytics, 'login_modal_shown', {
-        source: 'results_page',
-        delay: '15_seconds'
+        source: quizResults ? 'results_page' : 'landing_page',
+        delay: quizResults ? '15_seconds' : 'immediate'
       });
     }
-  }, [isOpen]);
+  }, [isOpen, quizResults]);
 
   // Track when modal is dismissed
   const handleClose = () => {
     if (analytics) {
       logEvent(analytics, 'login_modal_dismissed', {
-        source: 'results_page'
+        source: quizResults ? 'results_page' : 'landing_page'
       });
     }
     onClose();
@@ -93,7 +105,9 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
           <div className="bg-gradient-to-r from-green-500 to-blue-600 p-6 text-white text-center">
             <div className="text-6xl mb-4">🎉</div>
             <h2 className="text-2xl font-bold mb-2">Welcome to AcePlan!</h2>
-            <p className="text-green-100">Your results have been saved successfully.</p>
+            <p className="text-green-100">
+              {quizResults ? 'Your results have been saved successfully.' : 'You are now signed in to AcePlan!'}
+            </p>
           </div>
           <div className="p-6 text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
@@ -116,8 +130,12 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
             <X className="h-6 w-6" />
           </button>
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-2">🎾 Save Your AcePlan</h2>
-            <p className="text-green-100">Don't lose your personalized recommendations!</p>
+            <h2 className="text-2xl font-bold mb-2">
+              {quizResults ? '🎾 Save Your AcePlan' : '🎾 Sign In to AcePlan'}
+            </h2>
+            <p className="text-green-100">
+              {quizResults ? 'Don\'t lose your personalized recommendations!' : 'Access your saved plans and get updates!'}
+            </p>
           </div>
         </div>
 
@@ -125,18 +143,25 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
         <div className="p-6">
           <div className="text-center mb-6">
             <p className="text-gray-700 mb-4">
-              Want to save your results and get personalized updates?
+              {quizResults 
+                ? 'Want to save your results and get personalized updates?'
+                : 'Sign in to access your saved AcePlans and get new tennis tips!'
+              }
             </p>
             
             {/* Benefits */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
                 <Trophy className="h-4 w-4 text-yellow-500" />
-                <span>Save your equipment recommendations</span>
+                <span>
+                  {quizResults ? 'Save your equipment recommendations' : 'Access your saved equipment recommendations'}
+                </span>
               </div>
               <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
                 <Calendar className="h-4 w-4 text-blue-500" />
-                <span>Access your training calendar anytime</span>
+                <span>
+                  {quizResults ? 'Access your training calendar anytime' : 'View your training calendar anytime'}
+                </span>
               </div>
               <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
                 <Zap className="h-4 w-4 text-green-500" />

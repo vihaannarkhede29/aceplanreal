@@ -6,6 +6,7 @@ import QuizForm from '@/components/QuizForm';
 import EquipmentQuizForm from '@/components/EquipmentQuizForm';
 import EquipmentResultsPage from '@/components/EquipmentResultsPage';
 import ResultsPage from '@/components/ResultsPage';
+import LoginModal from '@/components/LoginModal';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -14,6 +15,7 @@ import { User, Trophy, Calendar, Target } from 'lucide-react';
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showEquipmentQuiz, setShowEquipmentQuiz] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [results, setResults] = useState<RecommendationResult | null>(null);
   const [equipmentResults, setEquipmentResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,12 +83,8 @@ export default function Home() {
   };
 
   const handleSignIn = () => {
-    // For now, just scroll to the sign in CTA section
-    // Later this can be enhanced to show a login modal
-    const signInSection = document.getElementById('sign-in-cta');
-    if (signInSection) {
-      signInSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Show the login modal instead of just scrolling
+    setShowLoginModal(true);
   };
 
   const handleRetakeQuiz = () => { 
@@ -146,6 +144,15 @@ export default function Home() {
       <main className="min-h-screen flex flex-col">
         <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} />
         
+        {/* Login Modal */}
+        {showLoginModal && (
+          <LoginModal 
+            isOpen={showLoginModal} 
+            onClose={() => setShowLoginModal(false)} 
+            quizResults={null} 
+          />
+        )}
+        
         {/* Sign In CTA Section */}
         <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
           <div className="max-w-4xl mx-auto text-center px-4">
@@ -156,7 +163,7 @@ export default function Home() {
               Sign in to access your saved results and training plan
             </p>
             <button
-              onClick={() => window.location.href = '/#quiz'}
+              onClick={() => setShowLoginModal(true)}
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               <User className="h-5 w-5" />

@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import LoginModal from './LoginModal';
 import UserProfile from './UserProfile';
 import UserProfileHeader from './UserProfileHeader';
+import { saveUserPlan } from '@/lib/userPlans';
 
 interface ResultsPageProps {
   results: RecommendationResult;
@@ -21,7 +22,35 @@ export default function ResultsPage({ results, onRetakeQuiz, isPreviousPlan = fa
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveOptions, setShowSaveOptions] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [planSaved, setPlanSaved] = useState(false);
   const { currentUser } = useAuth();
+
+  // Save plan to Firestore when user is signed in and has results
+  useEffect(() => {
+    const savePlanToFirestore = async () => {
+      if (currentUser && results && !isPreviousPlan && !planSaved) {
+        try {
+          setIsSaving(true);
+          const planId = await saveUserPlan(currentUser.uid, results);
+          console.log('ResultsPage: Plan saved to Firestore with ID:', planId);
+          
+          // Store in localStorage as backup
+          localStorage.setItem('aceplan_quiz_results', JSON.stringify(results));
+          localStorage.setItem('aceplan_firestore_id', planId);
+          
+          setPlanSaved(true);
+        } catch (error) {
+          console.error('ResultsPage: Error saving plan to Firestore:', error);
+          // Fallback to localStorage only
+          localStorage.setItem('aceplan_quiz_results', JSON.stringify(results));
+        } finally {
+          setIsSaving(false);
+        }
+      }
+    };
+
+    savePlanToFirestore();
+  }, [currentUser, results, isPreviousPlan, planSaved]);
 
   // Show login modal after 15 seconds
   useEffect(() => {
