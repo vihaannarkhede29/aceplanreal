@@ -14,6 +14,7 @@ export const quizQuestions: QuizQuestion[] = [
     question: 'What is your current tennis skill level?',
     type: 'radio',
     options: [
+      'Complete Beginner - I have never played tennis before',
       'Beginner - I\'m new to tennis or have been playing for less than 1 year',
       'Intermediate - I can rally consistently and understand basic tactics',
       'Advanced - I play competitively and have refined technique'
@@ -26,6 +27,7 @@ export const quizQuestions: QuizQuestion[] = [
     question: 'How many years have you been playing tennis?',
     type: 'select',
     options: [
+      'Never played',
       'Less than 1 year',
       '1-3 years',
       '3-5 years',

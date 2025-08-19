@@ -1,6 +1,27 @@
 import { Drill } from '@/types';
 
 export const drills: Drill[] = [
+  // COMPLETE BEGINNER DRILLS
+  {
+    id: 'tennis-basics-intro',
+    name: 'Tennis Basics Introduction',
+    category: 'footwork',
+    difficulty: 'beginner',
+    duration: 45,
+    description: 'Learn the fundamentals of tennis including court awareness, basic rules, and how to play',
+    instructions: [
+      'Watch the introduction video to understand tennis basics',
+      'Learn about court dimensions and scoring',
+      'Understand basic rules and etiquette',
+      'Practice basic movements and positioning'
+    ],
+    focus: ['Court Awareness', 'Basic Rules', 'Fundamentals'],
+    equipment: ['Tennis racket', 'Tennis balls', 'Tennis court'],
+    courtSetup: 'Full court introduction',
+    variations: ['Court walkthrough', 'Rule explanation', 'Basic positioning'],
+    videoUrl: 'https://www.youtube.com/watch?v=RGTGDCGDQrw&pp=0gcJCfwAo7VqN5tD'
+  },
+  
   // FOREHAND DRILLS
   {
     id: 'forehand-consistency',

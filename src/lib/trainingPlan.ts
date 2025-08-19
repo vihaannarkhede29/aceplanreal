@@ -9,38 +9,33 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
   const trainingWeeks: TrainingWeek[] = [];
 
   // Determine skill level for drill selection
+  const isCompleteBeginner: boolean = answers.skillLevel.includes('Complete Beginner') || 
+                    (answers.yearsPlaying ? answers.yearsPlaying.includes('Never played') : false);
   const isBeginner: boolean = answers.skillLevel.includes('Beginner') || 
                     (answers.yearsPlaying ? answers.yearsPlaying.includes('Less than 1 year') : false);
   const isAdvanced: boolean = answers.skillLevel.includes('Advanced') || 
                     (answers.yearsPlaying ? answers.yearsPlaying.includes('5+ years') : false);
-  const isIntermediate: boolean = !isBeginner && !isAdvanced;
+  const isIntermediate: boolean = !isBeginner && !isAdvanced && !isCompleteBeginner;
 
   for (let week = 1; week <= 4; week++) {
     const weekDays: TrainingDay[] = [];
     const weeklyFocus = getWeeklyFocus(week, answers);
     const progression = getWeeklyProgression(week, answers);
 
-    // Only create training days for the days the user selected
+    // Create training days for each selected day of the week
     selectedDays.forEach((dayName, dayIndex) => {
       const dayFocus = getDayFocus(dayIndex + 1, week, answers);
       const intensity = getDayIntensity(dayIndex + 1, week, answers);
       
-      // Calculate target minutes based on hours per day
-      let targetMinutes = Math.floor(hoursPerDay * 60);
-      
-      // Adjust for skill level - beginners need more time for fundamentals
-      if (isBeginner) {
-        targetMinutes = Math.floor(targetMinutes * 1.2); // 20% more time for basics
-      } else if (isAdvanced) {
-        targetMinutes = Math.floor(targetMinutes * 0.9); // 10% less time, more intense
-      }
+      // Calculate target minutes using the new helper function
+      const targetMinutes = calculateTargetMinutes(hoursPerDay, isCompleteBeginner, isBeginner, isAdvanced);
 
       // Select drills based on skill level and focus
-      const selectedDrills = selectDrillsForDay(dayFocus, answers, targetMinutes, isBeginner, isIntermediate, isAdvanced);
+      const selectedDrills = selectDrillsForDay(dayFocus, answers, targetMinutes, isCompleteBeginner, isBeginner, isIntermediate, isAdvanced);
       
       // Ensure at least 1 drill per day
       if (selectedDrills.length === 0) {
-        const fallbackDrill = getFallbackDrill(dayFocus, isBeginner, isIntermediate, isAdvanced);
+        const fallbackDrill = getFallbackDrill(dayFocus, isCompleteBeginner, isBeginner, isIntermediate, isAdvanced);
         if (fallbackDrill) {
           selectedDrills.push(fallbackDrill);
         }
@@ -79,11 +74,31 @@ function getHoursPerDay(trainingHours: string): number {
     case '2-2.5 hours per day': return 2.25;
     case '2.5-3 hours per day': return 2.75;
     case '3+ hours per day': return 3.5;
-    default: return 1.5;
+    default: return 1.25; // Default to 1-1.5 hours
   }
 }
 
-function getFallbackDrill(dayFocus: string, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill | null {
+// Helper function to convert hours to minutes with reasonable limits
+function calculateTargetMinutes(hoursPerDay: number, isCompleteBeginner: boolean, isBeginner: boolean, isAdvanced: boolean): number {
+  let targetMinutes = Math.floor(hoursPerDay * 60);
+  
+  // Adjust for skill level
+  if (isCompleteBeginner) {
+    targetMinutes = Math.floor(targetMinutes * 1.3); // 30% more time for fundamentals
+  } else if (isBeginner) {
+    targetMinutes = Math.floor(targetMinutes * 1.1); // 10% more time for basics
+  } else if (isAdvanced) {
+    targetMinutes = Math.floor(targetMinutes * 0.9); // 10% less time, more intense
+  }
+  
+  // Ensure reasonable limits
+  if (targetMinutes < 30) targetMinutes = 30; // Minimum 30 minutes
+  if (targetMinutes > 180) targetMinutes = 180; // Maximum 3 hours
+  
+  return targetMinutes;
+}
+
+function getFallbackDrill(dayFocus: string, isCompleteBeginner: boolean, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill | null {
   // Find a suitable fallback drill based on the day focus and skill level
   const availableDrills = drills.filter(drill => {
     // Filter by day focus
@@ -95,7 +110,8 @@ function getFallbackDrill(dayFocus: string, isBeginner: boolean, isIntermediate:
     if (dayFocus.includes('Footwork') && drill.category !== 'footwork') return false;
     if (dayFocus.includes('Strategy') && drill.category !== 'strategy') return false;
     
-    // Filter by skill level
+    // Filter by skill level - complete beginners get very basic drills
+    if (isCompleteBeginner && drill.difficulty !== 'beginner') return false;
     if (isBeginner && drill.difficulty === 'advanced') return false;
     if (isAdvanced && drill.difficulty === 'beginner') return false;
     
@@ -109,6 +125,7 @@ function getFallbackDrill(dayFocus: string, isBeginner: boolean, isIntermediate:
   
   // If no specific drill found, return a generic one based on skill level
   const genericDrills = drills.filter(drill => {
+    if (isCompleteBeginner && drill.difficulty === 'beginner') return true;
     if (isBeginner && drill.difficulty === 'beginner') return true;
     if (isIntermediate && drill.difficulty === 'intermediate') return true;
     if (isAdvanced && drill.difficulty === 'advanced') return true;
@@ -176,10 +193,20 @@ function getDayNotes(dayFocus: string, intensity: string, answers: QuizAnswer): 
 }
 
 function getWeeklyFocus(week: number, answers: QuizAnswer): string {
+  const isCompleteBeginner = answers.skillLevel.includes('Complete Beginner') || 
+                    (answers.yearsPlaying ? answers.yearsPlaying.includes('Never played') : false);
   const isBeginner = answers.skillLevel.includes('Beginner') || 
                     (answers.yearsPlaying ? answers.yearsPlaying.includes('Less than 1 year') : false);
   
-  if (isBeginner) {
+  if (isCompleteBeginner) {
+    const focuses = [
+      'Learning Tennis Basics - Understanding the court, rules, and basic movements',
+      'Fundamental Skills - Learning proper grip, stance, and basic strokes',
+      'Basic Coordination - Developing hand-eye coordination and footwork',
+      'First Steps to Playing - Combining basic skills for simple rallies'
+    ];
+    return focuses[week - 1] || focuses[0];
+  } else if (isBeginner) {
     const focuses = [
       'Building Foundation - Focus on basic technique and consistency',
       'Developing Skills - Work on power, control, and shot variety',
@@ -200,10 +227,20 @@ function getWeeklyFocus(week: number, answers: QuizAnswer): string {
 }
 
 function getWeeklyProgression(week: number, answers: QuizAnswer): string {
+  const isCompleteBeginner = answers.skillLevel.includes('Complete Beginner') || 
+                    (answers.yearsPlaying ? answers.yearsPlaying.includes('Never played') : false);
   const isBeginner = answers.skillLevel.includes('Beginner') || 
                     (answers.yearsPlaying ? answers.yearsPlaying.includes('Less than 1 year') : false);
   
-  if (isBeginner) {
+  if (isCompleteBeginner) {
+    const progressions = [
+      'Week 1: Learn tennis fundamentals and court awareness',
+      'Week 2: Master basic grips and stance positions',
+      'Week 3: Develop basic stroke mechanics and coordination',
+      'Week 4: Practice simple rallies and basic game situations'
+    ];
+    return progressions[week - 1] || progressions[0];
+  } else if (isBeginner) {
     const progressions = [
       'Week 1: Establish fundamentals and build confidence',
       'Week 2: Increase intensity and add complexity to drills',
@@ -223,7 +260,7 @@ function getWeeklyProgression(week: number, answers: QuizAnswer): string {
   }
 }
 
-function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes: number, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill[] {
+function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes: number, isCompleteBeginner: boolean, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill[] {
   let availableDrills = drills.filter(drill => {
     // Filter by day focus
     if (dayFocus.includes('Forehand') && drill.category !== 'forehand') return false;
@@ -235,7 +272,10 @@ function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes
     if (dayFocus.includes('Strategy') && drill.category !== 'strategy') return false;
     
     // More sophisticated skill level filtering
-    if (isBeginner) {
+    if (isCompleteBeginner) {
+      // Complete beginners can do only beginner drills
+      if (drill.difficulty !== 'beginner') return false;
+    } else if (isBeginner) {
       // Beginners can do beginner and some intermediate drills
       if (drill.difficulty === 'advanced') return false;
     } else if (isIntermediate) {
@@ -270,7 +310,9 @@ function selectDrillsForDay(dayFocus: string, answers: QuizAnswer, targetMinutes
     }
     
     // Skill level scoring - more nuanced
-    if (isBeginner) {
+    if (isCompleteBeginner) {
+      if (drill.difficulty === 'beginner') score += 4;
+    } else if (isBeginner) {
       if (drill.difficulty === 'beginner') score += 4;
       else if (drill.difficulty === 'intermediate') score += 2;
     } else if (isIntermediate) {
