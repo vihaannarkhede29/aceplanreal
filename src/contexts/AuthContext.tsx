@@ -14,7 +14,7 @@ import { logEvent } from 'firebase/analytics';
 interface AuthContextType {
   currentUser: User | null;
   loading: boolean;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: () => Promise<any>; // Change return type to allow UserCredential
   logout: () => Promise<void>;
 }
 
@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const provider = new GoogleAuthProvider();
       console.log('AuthProvider: Google provider created, attempting sign-in');
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
       console.log('AuthProvider: Google sign-in successful');
       
       // Track successful sign-in
@@ -48,6 +48,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           method: 'google'
         });
       }
+      
+      return result; // Return the UserCredential object
     } catch (error: any) {
       console.error('AuthProvider: Error signing in with Google:', error);
       
@@ -58,6 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           error: error.message
         });
       }
+      throw error; // Re-throw the error so the caller can handle it
     }
   };
 

@@ -6,6 +6,7 @@ import { X, Trophy, Star, Calendar, Zap } from 'lucide-react';
 import { analytics } from '@/lib/firebase';
 import { logEvent } from 'firebase/analytics';
 import { saveUserPlan } from '@/lib/userPlans';
+import { UserCredential } from 'firebase/auth';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export default function LoginModal({ isOpen, onClose, quizResults }: LoginModalP
     console.log('LoginModal: Attempting Google sign-in');
     setIsLoading(true);
     try {
-      const userCredential = await signInWithGoogle();
+      const userCredential: UserCredential = await signInWithGoogle();
       const user = userCredential.user;
       
       // Track successful sign-in from modal
