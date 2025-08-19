@@ -2,35 +2,72 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { User, LogOut, Trophy, Calendar, Settings, ChevronDown } from 'lucide-react';
+import { User, LogOut, Trophy, Calendar, Settings, ChevronDown, Clock, Plus } from 'lucide-react';
+import { getUserPlans, UserPlan } from '@/lib/userPlans';
 
 export default function UserProfileHeader() {
   const { currentUser, logout } = useAuth();
-  const [savedResults, setSavedResults] = useState<any>(null);
+  const [savedPlans, setSavedPlans] = useState<UserPlan[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Load saved quiz results from localStorage
-    const saved = localStorage.getItem('aceplan_quiz_results');
-    if (saved) {
-      try {
-        setSavedResults(JSON.parse(saved));
-      } catch (error) {
-        console.error('Error parsing saved results:', error);
+    const loadUserPlans = async () => {
+      if (currentUser) {
+        try {
+          setLoading(true);
+          const plans = await getUserPlans(currentUser.uid);
+          setSavedPlans(plans);
+        } catch (error) {
+          console.error('Error loading user plans:', error);
+          // Fallback to localStorage
+          const saved = localStorage.getItem('aceplan_quiz_results');
+          if (saved) {
+            try {
+              const parsedResults = JSON.parse(saved);
+              setSavedPlans([{
+                id: 'local',
+                userId: currentUser.uid,
+                planData: parsedResults,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                name: 'Local AcePlan',
+                description: 'Plan saved locally'
+              }]);
+            } catch (error) {
+              console.error('Error parsing saved results:', error);
+            }
+          }
+        } finally {
+          setLoading(false);
+        }
       }
-    }
-  }, []);
+    };
+
+    loadUserPlans();
+  }, [currentUser]);
 
   const handleLogout = async () => {
     try {
       await logout();
-      // Clear saved results on logout
+      // Clear saved plans on logout
+      setSavedPlans([]);
       localStorage.removeItem('aceplan_quiz_results');
-      setSavedResults(null);
+      localStorage.removeItem('aceplan_firestore_id');
       setShowDropdown(false);
     } catch (error) {
       console.error('Error logging out:', error);
     }
+  };
+
+  const loadPlan = (plan: UserPlan) => {
+    // Store this plan as the current results and navigate to results page
+    localStorage.setItem('aceplan_quiz_results', JSON.stringify(plan.planData));
+    if (plan.id !== 'local') {
+      localStorage.setItem('aceplan_firestore_id', plan.id);
+    }
+    window.location.href = '/#results';
+    setShowDropdown(false);
   };
 
   if (!currentUser) return null;
@@ -69,50 +106,62 @@ export default function UserProfileHeader() {
             </div>
           </div>
 
-          {savedResults && (
+          {loading ? (
+            <div className="p-4 border-b border-gray-100">
+              <div className="flex items-center justify-center py-4">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                <span className="ml-2 text-gray-600">Loading plans...</span>
+              </div>
+            </div>
+          ) : savedPlans.length > 0 ? (
             <div className="p-4 border-b border-gray-100">
               <h4 className="font-medium text-gray-900 mb-3 flex items-center">
                 <Trophy className="h-4 w-4 mr-2 text-yellow-500" />
-                Your Saved AcePlan
+                Your Saved AcePlans ({savedPlans.length})
               </h4>
               
-              <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-                <div className="bg-blue-50 rounded-lg p-3">
-                  <p className="text-blue-900 font-medium">Skill Level</p>
-                  <p className="text-blue-700">{savedResults.skillLevel}</p>
-                </div>
-                
-                <div className="bg-green-50 rounded-lg p-3">
-                  <p className="text-green-900 font-medium">Playing Style</p>
-                  <p className="text-green-700">{savedResults.playingStyle}</p>
-                </div>
-                
-                <div className="bg-purple-50 rounded-lg p-3">
-                  <p className="text-purple-900 font-medium">Top Racket</p>
-                  <p className="text-purple-700">
-                    {savedResults.rackets?.[0]?.name || 'Not available'}
-                  </p>
-                </div>
-                
-                <div className="bg-orange-50 rounded-lg p-3">
-                  <p className="text-orange-900 font-medium">Training Plan</p>
-                  <p className="text-orange-700">
-                    {savedResults.trainingPlan?.length || 0} weeks
-                  </p>
-                </div>
-              </div>
+              <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
+                {savedPlans.map((plan, index) => (
+                  <div key={plan.id} className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-3 border border-blue-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h5 className="font-medium text-gray-900 text-sm">{plan.name || `AcePlan ${index + 1}`}</h5>
+                      <div className="flex items-center space-x-1 text-xs text-gray-500">
+                        <Clock className="h-3 w-3" />
+                        <span>{plan.createdAt?.toDate?.() ? plan.createdAt.toDate().toLocaleDateString() : 'Recently'}</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-xs text-gray-600 mb-2">{plan.description}</p>
+                    
+                    <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                      <div className="bg-white/70 rounded p-2">
+                        <p className="text-blue-900 font-medium">Skill</p>
+                        <p className="text-blue-700">{plan.planData.skillLevel}</p>
+                      </div>
+                      
+                      <div className="bg-white/70 rounded p-2">
+                        <p className="text-green-900 font-medium">Style</p>
+                        <p className="text-green-700">{plan.planData.playingStyle}</p>
+                      </div>
+                    </div>
 
-              {/* View Previous Plan Button */}
-              <button
-                onClick={() => {
-                  // Navigate directly to the results page with saved plan
-                  // This will bypass the quiz and show the saved results
-                  window.location.href = '/#results';
-                }}
-                className="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-700 transition-all duration-200 font-medium"
-              >
-                View Previous Plan
-              </button>
+                    <button
+                      onClick={() => loadPlan(plan)}
+                      className="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-lg hover:from-green-600 hover:to-blue-700 transition-all duration-200 text-xs font-medium"
+                    >
+                      Load This Plan
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="p-4 border-b border-gray-100">
+              <div className="text-center text-gray-500">
+                <Trophy className="h-8 w-8 mx-auto mb-2 text-gray-300" />
+                <p className="text-sm">No saved plans yet</p>
+                <p className="text-xs">Take the quiz to save your first AcePlan!</p>
+              </div>
             </div>
           )}
 

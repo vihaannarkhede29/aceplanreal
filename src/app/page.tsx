@@ -153,24 +153,56 @@ export default function Home() {
           />
         )}
         
-        {/* Sign In CTA Section */}
-        <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
-          <div className="max-w-4xl mx-auto text-center px-4">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Already have an AcePlan?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Sign in to access your saved results and training plan
-            </p>
-            <button
-              onClick={() => setShowLoginModal(true)}
-              className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-            >
-              <User className="h-5 w-5" />
-              <span>Sign In to AcePlan</span>
-            </button>
-          </div>
-        </section>
+        {/* Sign In CTA Section - Only show if user is not signed in */}
+        {!currentUser && (
+          <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+            <div className="max-w-4xl mx-auto text-center px-4">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Already have an AcePlan?
+              </h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Sign in to access your saved results and training plan
+              </p>
+              <button
+                onClick={() => setShowLoginModal(true)}
+                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <User className="h-5 w-5" />
+                <span>Sign In to AcePlan</span>
+              </button>
+            </div>
+          </section>
+        )}
+        
+        {/* Load Saved Plan Section - Only show if user is signed in */}
+        {currentUser && (
+          <section className="py-16 bg-gradient-to-r from-green-50 to-blue-50">
+            <div className="max-w-4xl mx-auto text-center px-4">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Welcome back, {currentUser.displayName || currentUser.email?.split('@')[0]}! 🎾
+              </h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Ready to continue your tennis journey? Load your saved AcePlan or create a new one.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => window.location.href = '/#results'}
+                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Load Saved Plan</span>
+                </button>
+                <button
+                  onClick={handleGetPlan}
+                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <Trophy className="h-5 w-5" />
+                  <span>Create New Plan</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
         
         {/* How It Works Section */}
       <section id="how-it-works" className="py-20 bg-white">

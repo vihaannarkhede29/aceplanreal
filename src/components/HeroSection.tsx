@@ -1,9 +1,10 @@
 'use client';
 
-import { Trophy, Target, Zap, ArrowRight, Calendar, Users, Star } from 'lucide-react';
+import { Trophy, Target, Zap, ArrowRight, Calendar, Users, Star, User } from 'lucide-react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
+import UserProfileHeader from './UserProfileHeader';
 
 interface HeroSectionProps {
   onGetPlan: () => void;
@@ -55,7 +56,7 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
                 Features
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
+              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-0">
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
@@ -73,14 +74,18 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
               </button>
             </nav>
 
-            {/* Desktop CTA Buttons */}
+            {/* Desktop CTA Buttons - Show User Profile if signed in, otherwise show Sign In */}
             <div className="hidden lg:flex items-center space-x-6">
-              <button
-                onClick={onSignIn}
-                className="px-6 py-3 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors border border-indigo-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 whitespace-nowrap"
-              >
-                Sign In
-              </button>
+              {currentUser ? (
+                <UserProfileHeader />
+              ) : (
+                <button
+                  onClick={onSignIn}
+                  className="px-6 py-3 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors border border-indigo-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 whitespace-nowrap"
+                >
+                  Sign In
+                </button>
+              )}
               <button
                 onClick={onGetPlan}
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg whitespace-nowrap"
@@ -114,8 +119,8 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
                 <button onClick={() => scrollToSection('how-it-works')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   How It Works
                 </button>
-                <button onClick={() => scrollToSection('racket-suggester')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
-                  AI Racket & Strings Generator
+                <button onClick={() => onGetEquipment()} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
+                  Equipment
                 </button>
                 <button onClick={() => scrollToSection('ai-analyzer')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   AI Video Analyzer
@@ -124,18 +129,42 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
                   About
                 </button>
                 <div className="border-t border-gray-200 pt-4 mt-4">
-                  <button
-                    onClick={onSignIn}
-                    className="w-full text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg"
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    onClick={onGetPlan}
-                    className="w-full mt-2 px-4 py-2 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg font-semibold"
-                  >
-                    Get My Free AcePlan
-                  </button>
+                  {currentUser ? (
+                    <div className="px-4 py-2">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                          <User className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            {currentUser.displayName || currentUser.email?.split('@')[0]}
+                          </p>
+                          <p className="text-xs text-gray-500">{currentUser.email}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => window.location.href = '/#results'}
+                        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                      >
+                        Load Saved Plan
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        onClick={onSignIn}
+                        className="w-full text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg"
+                      >
+                        Sign In
+                      </button>
+                      <button
+                        onClick={onGetPlan}
+                        className="w-full mt-2 px-4 py-2 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg font-semibold"
+                      >
+                        Get My Free AcePlan
+                      </button>
+                    </>
+                  )}
                 </div>
               </nav>
             </div>
