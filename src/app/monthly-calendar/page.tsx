@@ -35,6 +35,7 @@ export default function MonthlyCalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewMode, setViewMode] = useState<ViewMode>('month');
   const [trainingPlan, setTrainingPlan] = useState<TrainingWeek[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -97,6 +98,11 @@ export default function MonthlyCalendarPage() {
     return null;
   };
 
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(date);
+    setViewMode('day');
+  };
+
   const getIntensityColor = (intensity: string) => {
     switch (intensity) {
       case 'low': return 'bg-green-100 text-green-800';
@@ -146,8 +152,9 @@ export default function MonthlyCalendarPage() {
               <div
                 key={index}
                 className={`min-h-[120px] p-2 border border-gray-200 ${
-                  day ? 'bg-white hover:bg-gray-50' : 'bg-gray-100'
-                }`}
+                  day ? 'bg-white hover:bg-gray-50 cursor-pointer' : 'bg-gray-100'
+                } ${day && training ? 'border-green-300' : ''}`}
+                onClick={() => day && handleDateClick(day)}
               >
                 {day && (
                   <>
@@ -210,9 +217,10 @@ export default function MonthlyCalendarPage() {
             return (
               <div
                 key={index}
-                className={`p-4 rounded-lg border-2 ${
+                className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
                   isToday ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'
                 }`}
+                onClick={() => handleDateClick(day)}
               >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className={`font-semibold ${isToday ? 'text-blue-900' : 'text-gray-900'}`}>
@@ -278,9 +286,10 @@ export default function MonthlyCalendarPage() {
   };
 
   const renderDayView = () => {
-    const training = getTrainingForDate(currentDate);
-    const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
-    const dateString = currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const dateToShow = selectedDate || currentDate;
+    const training = getTrainingForDate(dateToShow);
+    const dayName = dateToShow.toLocaleDateString('en-US', { weekday: 'long' });
+    const dateString = dateToShow.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     
     return (
       <div className="space-y-6">
@@ -368,12 +377,12 @@ export default function MonthlyCalendarPage() {
                   Welcome, {currentUser.displayName || currentUser.email?.split('@')[0]}!
                 </div>
               )}
-              <a
-                href="/#results"
+              <button
+                onClick={() => window.history.back()}
                 className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Back to Weekly Plan
-              </a>
+              </button>
             </div>
           </div>
         </div>

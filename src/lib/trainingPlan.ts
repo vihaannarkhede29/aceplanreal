@@ -2,8 +2,9 @@ import { QuizAnswer, Drill, TrainingDay, TrainingWeek } from '@/types';
 import { drills } from '@/data/drills';
 
 export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
-  const daysPerWeek = getDaysPerWeek(answers.trainingDays);
-  const hoursPerWeek = getHoursPerWeek(answers.trainingHours);
+  const selectedDays = Array.isArray(answers.trainingDays) ? answers.trainingDays : [];
+  const daysPerWeek = selectedDays.length;
+  const hoursPerDay = getHoursPerDay(answers.trainingHours);
   const totalDays = 28; // 4 weeks
   const trainingWeeks: TrainingWeek[] = [];
 
@@ -19,13 +20,13 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
     const weeklyFocus = getWeeklyFocus(week, answers);
     const progression = getWeeklyProgression(week, answers);
 
-    for (let day = 1; day <= daysPerWeek; day++) {
-      const dayName = getDayName(day);
-      const dayFocus = getDayFocus(day, week, answers);
-      const intensity = getDayIntensity(day, week, answers);
+    // Only create training days for the days the user selected
+    selectedDays.forEach((dayName, dayIndex) => {
+      const dayFocus = getDayFocus(dayIndex + 1, week, answers);
+      const intensity = getDayIntensity(dayIndex + 1, week, answers);
       
-      // Calculate target minutes based on hours per week and skill level
-      let targetMinutes = Math.floor((hoursPerWeek * 60) / daysPerWeek);
+      // Calculate target minutes based on hours per day
+      let targetMinutes = Math.floor(hoursPerDay * 60);
       
       // Adjust for skill level - beginners need more time for fundamentals
       if (isBeginner) {
@@ -36,6 +37,14 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
 
       // Select drills based on skill level and focus
       const selectedDrills = selectDrillsForDay(dayFocus, answers, targetMinutes, isBeginner, isIntermediate, isAdvanced);
+      
+      // Ensure at least 1 drill per day
+      if (selectedDrills.length === 0) {
+        const fallbackDrill = getFallbackDrill(dayFocus, isBeginner, isIntermediate, isAdvanced);
+        if (fallbackDrill) {
+          selectedDrills.push(fallbackDrill);
+        }
+      }
       
       const totalDuration = selectedDrills.reduce((sum, drill) => sum + drill.duration, 0);
       const notes = getDayNotes(dayFocus, intensity, answers);
@@ -48,13 +57,13 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
         intensity,
         notes
       });
-    }
+    });
 
     trainingWeeks.push({
       weekNumber: week,
       days: weekDays,
       weeklyFocus,
-      totalHours: hoursPerWeek,
+      totalHours: hoursPerDay * daysPerWeek,
       progression
     });
   }
@@ -62,24 +71,51 @@ export function generateTrainingPlan(answers: QuizAnswer): TrainingWeek[] {
   return trainingWeeks;
 }
 
-function getDaysPerWeek(trainingDays: string): number {
-  switch (trainingDays) {
-    case '1-2 days per week': return 2;
-    case '3-4 days per week': return 4;
-    case '5-6 days per week': return 6;
-    case '7 days per week': return 7;
-    default: return 3;
+function getHoursPerDay(trainingHours: string): number {
+  switch (trainingHours) {
+    case '0.5-1 hour per day': return 0.75;
+    case '1-1.5 hours per day': return 1.25;
+    case '1.5-2 hours per day': return 1.75;
+    case '2-2.5 hours per day': return 2.25;
+    case '2.5-3 hours per day': return 2.75;
+    case '3+ hours per day': return 3.5;
+    default: return 1.5;
   }
 }
 
-function getHoursPerWeek(trainingHours: string): number {
-  switch (trainingHours) {
-    case '1-3 hours per week': return 2;
-    case '4-6 hours per week': return 5;
-    case '7-10 hours per week': return 8;
-    case '10+ hours per week': return 12;
-    default: return 4;
+function getFallbackDrill(dayFocus: string, isBeginner: boolean, isIntermediate: boolean, isAdvanced: boolean): Drill | null {
+  // Find a suitable fallback drill based on the day focus and skill level
+  const availableDrills = drills.filter(drill => {
+    // Filter by day focus
+    if (dayFocus.includes('Forehand') && drill.category !== 'forehand') return false;
+    if (dayFocus.includes('Backhand') && drill.category !== 'backhand') return false;
+    if (dayFocus.includes('Serve') && drill.category !== 'serve') return false;
+    if (dayFocus.includes('Volley') && drill.category !== 'volley') return false;
+    if (dayFocus.includes('Return') && drill.category !== 'return') return false;
+    if (dayFocus.includes('Footwork') && drill.category !== 'footwork') return false;
+    if (dayFocus.includes('Strategy') && drill.category !== 'strategy') return false;
+    
+    // Filter by skill level
+    if (isBeginner && drill.difficulty === 'advanced') return false;
+    if (isAdvanced && drill.difficulty === 'beginner') return false;
+    
+    return true;
+  });
+  
+  // Return the first available drill or a generic one
+  if (availableDrills.length > 0) {
+    return availableDrills[0];
   }
+  
+  // If no specific drill found, return a generic one based on skill level
+  const genericDrills = drills.filter(drill => {
+    if (isBeginner && drill.difficulty === 'beginner') return true;
+    if (isIntermediate && drill.difficulty === 'intermediate') return true;
+    if (isAdvanced && drill.difficulty === 'advanced') return true;
+    return false;
+  });
+  
+  return genericDrills.length > 0 ? genericDrills[0] : null;
 }
 
 function getDayName(dayNumber: number): string {
