@@ -61,13 +61,45 @@ export default function UserProfileHeader() {
   };
 
   const loadPlan = (plan: UserPlan) => {
-    // Store this plan as the current results and navigate to results page
-    localStorage.setItem('aceplan_quiz_results', JSON.stringify(plan.planData));
-    if (plan.id !== 'local') {
-      localStorage.setItem('aceplan_firestore_id', plan.id);
+    try {
+      console.log('Loading plan:', plan);
+      console.log('Plan data:', plan.planData);
+      
+      // Verify all required data is present
+      if (!plan.planData) {
+        console.error('Plan data is missing');
+        alert('Error: Plan data is missing. Please try again.');
+        return;
+      }
+      
+      // Check if all required sections are present
+      const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
+      const missingSections = requiredSections.filter(section => !plan.planData[section]);
+      
+      if (missingSections.length > 0) {
+        console.warn('Missing plan sections:', missingSections);
+        console.log('Available sections:', Object.keys(plan.planData));
+      }
+      
+      // Store this plan as the current results and navigate to results page
+      localStorage.setItem('aceplan_quiz_results', JSON.stringify(plan.planData));
+      if (plan.id !== 'local') {
+        localStorage.setItem('aceplan_firestore_id', plan.id);
+      }
+      
+      // Set a flag to indicate this is a loaded plan
+      localStorage.setItem('aceplan_loaded_plan', 'true');
+      
+      console.log('Plan loaded successfully, navigating to results...');
+      
+      // Navigate to results page
+      window.location.href = '/#results';
+      setShowDropdown(false);
+      
+    } catch (error) {
+      console.error('Error loading plan:', error);
+      alert('Error loading plan. Please try again.');
     }
-    window.location.href = '/#results';
-    setShowDropdown(false);
   };
 
   if (!currentUser) return null;
@@ -142,6 +174,19 @@ export default function UserProfileHeader() {
                       <div className="bg-white/70 rounded p-2">
                         <p className="text-green-900 font-medium">Style</p>
                         <p className="text-green-700">{plan.planData.playingStyle}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Plan Contents Preview */}
+                    <div className="bg-white/70 rounded p-2 mb-3">
+                      <p className="text-purple-900 font-medium text-xs mb-1">Plan Includes:</p>
+                      <div className="grid grid-cols-2 gap-1 text-xs text-gray-600">
+                        <div>🎾 {plan.planData.rackets?.length || 0} Rackets</div>
+                        <div>🧵 {plan.planData.strings?.length || 0} Strings</div>
+                        <div>📅 {plan.planData.trainingPlan?.length || 0} Weeks</div>
+                        <div>⚡ {plan.planData.trainingPlan?.reduce((total, week) => 
+                          total + week.days.reduce((dayTotal, day) => dayTotal + day.drills.length, 0), 0
+                        ) || 0} Drills</div>
                       </div>
                     </div>
 

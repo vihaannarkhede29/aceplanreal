@@ -29,16 +29,46 @@ function HomeContent() {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
       if (hash === '#results') {
+        console.log('Detected #results hash, loading saved plan...');
         const savedResults = localStorage.getItem('aceplan_quiz_results');
         if (savedResults) {
           try {
-            setResults(JSON.parse(savedResults));
+            const parsedResults = JSON.parse(savedResults);
+            console.log('Loaded saved results:', parsedResults);
+            
+            // Verify all required data is present
+            const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
+            const missingSections = requiredSections.filter(section => !parsedResults[section]);
+            
+            if (missingSections.length > 0) {
+              console.warn('Missing sections in saved plan:', missingSections);
+              console.log('Available sections:', Object.keys(parsedResults));
+            }
+            
+            // Check if training plan has proper structure
+            if (parsedResults.trainingPlan) {
+              console.log('Training plan structure:', {
+                weeks: parsedResults.trainingPlan.length,
+                firstWeek: parsedResults.trainingPlan[0],
+                totalDrills: parsedResults.trainingPlan.reduce((total, week) => 
+                  total + week.days.reduce((dayTotal, day) => dayTotal + day.drills.length, 0), 0
+                )
+              });
+            }
+            
+            setResults(parsedResults);
             setViewPreviousPlan(true);
+            
             // Remove the hash from URL without page reload
             window.history.replaceState(null, '', window.location.pathname);
+            console.log('Plan loaded successfully, navigating to results page');
+            
           } catch (error) {
             console.error('Error parsing saved results:', error);
+            alert('Error loading saved plan. Please try taking the quiz again.');
           }
+        } else {
+          console.log('No saved results found in localStorage');
         }
       }
     }
@@ -46,15 +76,18 @@ function HomeContent() {
     // Legacy check for localStorage flag
     const shouldViewPrevious = localStorage.getItem('aceplan_view_previous_plan');
     if (shouldViewPrevious === 'true') {
+      console.log('Legacy flag detected, loading saved plan...');
       const savedResults = localStorage.getItem('aceplan_quiz_results');
       if (savedResults) {
         try {
-          setResults(JSON.parse(savedResults));
+          const parsedResults = JSON.parse(savedResults);
+          console.log('Loaded saved results from legacy flag:', parsedResults);
+          setResults(parsedResults);
           setViewPreviousPlan(true);
           // Clear the flag
           localStorage.removeItem('aceplan_view_previous_plan');
         } catch (error) {
-          console.error('Error parsing saved results:', error);
+          console.error('Error parsing saved results from legacy flag:', error);
         }
       }
     }
