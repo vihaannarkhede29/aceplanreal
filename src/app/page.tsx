@@ -80,6 +80,15 @@ export default function Home() {
     setShowEquipmentQuiz(true);
   };
 
+  const handleSignIn = () => {
+    // For now, just scroll to the sign in CTA section
+    // Later this can be enhanced to show a login modal
+    const signInSection = document.getElementById('sign-in-cta');
+    if (signInSection) {
+      signInSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleRetakeQuiz = () => { 
     setShowQuiz(false); 
     setResults(null); 
@@ -135,10 +144,10 @@ export default function Home() {
   return (
     <AuthProvider>
       <main className="min-h-screen flex flex-col">
-        <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} />
+        <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} />
         
         {/* Sign In CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+        <section id="sign-in-cta" className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
           <div className="max-w-4xl mx-auto text-center px-4">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Already have an AcePlan?

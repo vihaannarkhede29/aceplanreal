@@ -8,6 +8,7 @@ import { useState } from 'react';
 interface HeroSectionProps {
   onGetPlan: () => void;
   onGetEquipment: () => void;
+  onSignIn: () => void;
 }
 
 export default function HeroSection({ onGetPlan }: HeroSectionProps) {
@@ -75,7 +76,7 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
             {/* Desktop CTA Buttons */}
             <div className="hidden lg:flex items-center space-x-6">
               <button
-                onClick={() => window.location.href = '/#quiz'}
+                onClick={onSignIn}
                 className="px-6 py-3 text-indigo-700 hover:text-indigo-900 font-semibold transition-colors border border-indigo-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 whitespace-nowrap"
               >
                 Sign In
@@ -124,7 +125,7 @@ export default function HeroSection({ onGetPlan }: HeroSectionProps) {
                 </button>
                 <div className="border-t border-gray-200 pt-4 mt-4">
                   <button
-                    onClick={() => window.location.href = '/#quiz'}
+                    onClick={onSignIn}
                     className="w-full text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg"
                   >
                     Sign In
