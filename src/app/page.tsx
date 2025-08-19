@@ -223,11 +223,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Racket & Strings Suggester Section */}
+      {/* AI Racket & Strings Generator Section */}
       <section id="racket-suggester" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Racket & Strings Suggester</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">AI Racket & Strings Generator</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Get instant equipment recommendations without taking the full quiz. Quick suggestions based on your basic preferences.
             </p>
@@ -288,10 +288,10 @@ export default function Home() {
                   onClick={handleGetPlan}
                   className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                 >
-                  Get Full Personalized Recommendations
+                  Get Full Personalized Equipment Recommendations
                 </button>
                 <p className="text-gray-600 mt-3 text-sm">
-                  Take our comprehensive quiz for detailed, personalized equipment suggestions
+                  Take our comprehensive quiz for detailed, personalized racket and string suggestions
                 </p>
               </div>
             </div>
