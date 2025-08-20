@@ -73,8 +73,8 @@ export default function UserProfileHeader() {
       }
       
       // Check if all required sections are present
-      const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
-      const missingSections = requiredSections.filter(section => !plan.planData[section]);
+      const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'] as const;
+      const missingSections = requiredSections.filter(section => !(plan.planData as any)[section]);
       
       if (missingSections.length > 0) {
         console.warn('Missing plan sections:', missingSections);
