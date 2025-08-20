@@ -1,8 +1,12 @@
-'use client';
-
 import { Shield, Lock, Eye, Database, Globe, User, Bell, ShieldCheck } from 'lucide-react';
 
 export default function PrivacyPolicy() {
+  const currentDate = new Date().toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12">
       <div className="max-w-4xl mx-auto px-4">
@@ -13,11 +17,7 @@ export default function PrivacyPolicy() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
           <p className="text-xl text-gray-600">
-            Last updated: {new Date().toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+            Last updated: {currentDate}
           </p>
           <p className="text-lg text-gray-500 mt-2">
             AcePlan ("we," "our," or "us") is committed to protecting your privacy
@@ -285,11 +285,7 @@ export default function PrivacyPolicy() {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-gray-600">
-            This Privacy Policy is effective as of {new Date().toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })} and applies to all users of AcePlan services.
+            This Privacy Policy is effective as of {currentDate} and applies to all users of AcePlan services.
           </p>
         </div>
       </div>

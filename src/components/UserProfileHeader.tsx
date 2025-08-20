@@ -184,8 +184,8 @@ export default function UserProfileHeader() {
                         <div>🎾 {plan.planData.rackets?.length || 0} Rackets</div>
                         <div>🧵 {plan.planData.strings?.length || 0} Strings</div>
                         <div>📅 {plan.planData.trainingPlan?.length || 0} Weeks</div>
-                        <div>⚡ {plan.planData.trainingPlan?.reduce((total, week) => 
-                          total + week.days.reduce((dayTotal, day) => dayTotal + day.drills.length, 0), 0
+                        <div>⚡ {plan.planData.trainingPlan?.reduce((total: number, week: any) => 
+                          total + week.days.reduce((dayTotal: number, day: any) => dayTotal + day.drills.length, 0), 0
                         ) || 0} Drills</div>
                       </div>
                     </div>

@@ -1,8 +1,12 @@
-'use client';
-
 import { FileText, AlertTriangle, Shield, Users, CreditCard, Gavel, Scale, CheckCircle } from 'lucide-react';
 
 export default function TermsOfService() {
+  const currentDate = new Date().toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12">
       <div className="max-w-4xl mx-auto px-4">
@@ -13,11 +17,7 @@ export default function TermsOfService() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
           <p className="text-xl text-gray-600">
-            Last updated: {new Date().toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+            Last updated: {currentDate}
           </p>
           <p className="text-lg text-gray-500 mt-2">
             Please read these terms carefully before using AcePlan services
@@ -316,11 +316,7 @@ export default function TermsOfService() {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-gray-600">
-            These Terms of Service are effective as of {new Date().toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })} and apply to all users of AcePlan services.
+            These Terms of Service are effective as of {currentDate} and apply to all users of AcePlan services.
           </p>
         </div>
       </div>
