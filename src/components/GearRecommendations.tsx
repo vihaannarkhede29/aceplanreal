@@ -20,29 +20,29 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
   const gearItems: GearItem[] = [
     // Tennis Balls
     {
-      name: "Wilson Championship Tennis Balls (Case of 24)",
+      name: "Wilson Championship Tennis Balls (72 Balls - 24 Cans)",
       description: "Professional-grade tennis balls perfect for practice and matches",
       price: "$89.99",
       category: "Tennis Balls",
-      affiliateLink: "https://www.amazon.com/s?k=Wilson+Championship+Tennis+Balls+case",
+      affiliateLink: "https://amzn.to/41JwNiu",
       bestFor: ["All skill levels", "Practice sessions", "Match play"]
     },
     {
-      name: "Penn Championship Tennis Balls (Case of 24)",
+      name: "Penn Championship Tennis Balls (72 Balls - 24 Cans)",
       description: "Durable tennis balls with excellent bounce and feel",
       price: "$79.99",
       category: "Tennis Balls",
-      affiliateLink: "https://www.amazon.com/s?k=Penn+Championship+Tennis+Balls+case",
+      affiliateLink: "https://amzn.to/476LZtK",
       bestFor: ["Beginners", "Practice", "Cost-effective"]
     },
     
     // Ball Machines
     {
-      name: "Spinshot Player Tennis Ball Machine",
+      name: "Spinshot Player Tennis Ball Machine (Best Seller Ball Machine in the World)",
       description: "Portable ball machine with adjustable speed, spin, and elevation",
       price: "$599.99",
       category: "Ball Machine",
-      affiliateLink: "https://www.amazon.com/s?k=Spinshot+Player+Tennis+Ball+Machine",
+      affiliateLink: "https://amzn.to/41OavvW",
       bestFor: ["Intermediate to Advanced", "Solo practice", "Consistent training"]
     },
     {
@@ -50,7 +50,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Professional ball machine with remote control and programmable drills",
       price: "$1,299.99",
       category: "Ball Machine",
-      affiliateLink: "https://www.amazon.com/s?k=Lobster+Elite+Two+Tennis+Ball+Machine",
+      affiliateLink: "https://amzn.to/3HtOID3",
       bestFor: ["Advanced players", "Serious training", "Club use"]
     },
     
@@ -60,7 +60,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Bright orange cones for footwork drills and court positioning",
       price: "$24.99",
       category: "Training Aids",
-      affiliateLink: "https://www.amazon.com/s?k=Tennis+Training+Cones+Set+of+10",
+      affiliateLink: "https://amzn.to/3V6UQEj",
       bestFor: ["Footwork drills", "Agility training", "All skill levels"]
     },
     {
@@ -68,7 +68,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Elastic bands for strength training and warm-up exercises",
       price: "$19.99",
       category: "Training Aids",
-      affiliateLink: "https://www.amazon.com/s?k=Tennis+Resistance+Bands+Set",
+      affiliateLink: "https://amzn.to/41Jx1Gm",
       bestFor: ["Strength training", "Warm-up", "Injury prevention"]
     },
     {
@@ -76,7 +76,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Large capacity ball hopper for easy ball collection and storage",
       price: "$89.99",
       category: "Training Aids",
-      affiliateLink: "https://www.amazon.com/s?k=Tennis+Ball+Hopper+150+Ball+Capacity",
+      affiliateLink: "https://amzn.to/41d9kWM",
       bestFor: ["Ball collection", "Practice sessions", "Coaching"]
     },
     
@@ -86,7 +86,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Premium overgrips for enhanced grip and comfort",
       price: "$34.99",
       category: "Grips",
-      affiliateLink: "https://www.amazon.com/s?k=Wilson+Pro+Overgrip+30+Pack",
+      affiliateLink: "https://amzn.to/41d9kWM",
       bestFor: ["Grip enhancement", "Sweat absorption", "All players"]
     },
     {
@@ -94,7 +94,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Vibration dampeners to reduce racket vibration and improve feel",
       price: "$12.99",
       category: "Accessories",
-      affiliateLink: "https://www.amazon.com/s?k=Tennis+Dampener+Set+10+Pack",
+      affiliateLink: "https://amzn.to/3Jri19L",
       bestFor: ["Vibration reduction", "Comfort", "All skill levels"]
     },
     
@@ -104,7 +104,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "Easy-to-setup portable net for practice anywhere",
       price: "$149.99",
       category: "Court Equipment",
-      affiliateLink: "https://www.amazon.com/s?k=Portable+Tennis+Net",
+      affiliateLink: "https://amzn.to/45FZeyT",
       bestFor: ["Home practice", "Backyard tennis", "Portable setup"]
     },
     {
@@ -112,7 +112,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
       description: "High-visibility tape for marking court lines and targets",
       price: "$29.99",
       category: "Court Equipment",
-      affiliateLink: "https://www.amazon.com/s?k=Tennis+Court+Tape",
+      affiliateLink: "https://amzn.to/3UF8Chk",
       bestFor: ["Court marking", "Target practice", "Training drills"]
     }
   ];

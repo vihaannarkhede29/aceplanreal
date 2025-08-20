@@ -14,7 +14,7 @@ export const rackets: Racket[] = [
     description: 'Perfect for new players with its oversized head and lightweight design for easy maneuverability.',
     pros: ['Lightweight and easy to swing', 'Oversized head for larger sweet spot', 'Affordable price point', 'Great for learning proper technique'],
     cons: ['Limited power for advanced players', 'May feel too light for some', 'Less control than smaller heads'],
-    affiliateLink: 'https://www.amazon.com/s?k=Wilson+Tour+Slam+Tennis+Racket',
+    affiliateLink: 'https://amzn.to/4mhvq2O',
     imageUrl: '/images/wilson-beginner.jpg',
     category: 'good'
   },
@@ -30,7 +30,7 @@ export const rackets: Racket[] = [
     description: 'Ultra-lightweight racket with maximum power and forgiveness for beginners.',
     pros: ['Extremely lightweight', 'Maximum power potential', 'Very forgiving on off-center hits', 'Great for developing players'],
     cons: ['May feel unstable on hard shots', 'Limited control', 'Not suitable for advanced play'],
-    affiliateLink: 'https://www.amazon.com/s?k=HEAD+Ti.S6+Tennis+Racquet',
+    affiliateLink: 'https://amzn.to/45sXF8M',
     imageUrl: '/images/head-beginner.jpg',
     category: 'better'
   },
@@ -46,7 +46,7 @@ export const rackets: Racket[] = [
     description: 'Premium beginner racket with excellent power and control balance.',
     pros: ['Great power-control balance', 'Quality construction', 'Good for advancing players', 'Professional feel'],
     cons: ['Higher price point', 'May be too advanced for complete beginners'],
-    affiliateLink: 'https://www.amazon.com/s?k=Babolat+Pure+Drive+110',
+    affiliateLink: 'https://amzn.to/3UCUUf0',
     imageUrl: '/images/babolat-beginner.jpg',
     category: 'best'
   },
@@ -64,7 +64,7 @@ export const rackets: Racket[] = [
     description: 'Balanced racket offering good control and power for developing players.',
     pros: ['Balanced power and control', 'Good for all playing styles', 'Quality construction', 'Versatile performance'],
     cons: ['May lack power for some players', 'Not specialized for any particular style'],
-    affiliateLink: 'https://www.amazon.com/s?k=Wilson+Pro+Staff+100',
+    affiliateLink: 'https://amzn.to/4mOU8HJ',
     imageUrl: '/images/wilson-intermediate.jpg',
     category: 'good'
   },
@@ -80,7 +80,7 @@ export const rackets: Racket[] = [
     description: 'Advanced intermediate racket with excellent feel and control.',
     pros: ['Excellent feel and touch', 'Good control', 'Quality materials', 'Professional grade'],
     cons: ['Higher price point', 'May require more skill to use effectively'],
-    affiliateLink: 'https://www.amazon.com/s?k=Yonex+EZONE+100',
+    affiliateLink: 'https://www.amazon.com/YONEX-EZONE-Blast-Blue-Racquet/dp/B0DSR9DG42/ref=sr_1_1?crid=2S2OXL8V7R531&dib=eyJ2IjoiMSJ9.uNBdEaWXMdpLdN5AFopyhe2Yct_jVSNYU7v4-4FzweD7uCvVSCKhOiQngeEK0EsvOiPdGlbpYqe0zM2wiLEiM30la5CYc62s__H5wiqXOHbJT0LXnjaK-lv5wmOSHDPzLQlSKIiVRgOyAemfe4a38JGYWCJoVSMkXOY6F5Om02pEQJmnXbnvdqccToh7iIpyeak_wTSCGQZbWYkLAMkOVYwtM22fpEvhe7L7h6BWkBXPTW7BFF2rZUkGcnR_RqCr8MWHSrlA7FHO-kPrwspawi7ugMP_8XIm0SU8VDrVyq4.fpyzikEyRveR5jxRxELsA4Nz6ezKJ-D3shitE2_O56w&dib_tag=se&keywords=Yonex%2BEZONE%2B100&qid=1755652708&sprefix=yonex%2Bezone%2B100%2Caps%2C213&sr=8-1&th=1',
     imageUrl: '/images/yonex-intermediate.jpg',
     category: 'better'
   },
@@ -96,7 +96,7 @@ export const rackets: Racket[] = [
     description: 'Spin-focused racket perfect for aggressive baseline players.',
     pros: ['Excellent spin potential', 'Good power', 'Professional quality', 'Great for aggressive play'],
     cons: ['Stiff feel may not suit everyone', 'Higher price', 'Requires good technique'],
-    affiliateLink: 'https://www.amazon.com/s?k=Babolat+Pure+Aero+100',
+    affiliateLink: 'https://amzn.to/3Jrhm8h',
     imageUrl: '/images/babolat-intermediate.jpg',
     category: 'best'
   },
@@ -114,7 +114,7 @@ export const rackets: Racket[] = [
     description: 'Roger Federer\'s signature racket with exceptional control and precision.',
     pros: ['Exceptional control and precision', 'Professional quality', 'Great for advanced players', 'Excellent feel'],
     cons: ['Heavy weight requires strength', 'Small head size', 'High price point', 'Not forgiving on off-center hits'],
-    affiliateLink: 'https://www.amazon.com/s?k=Wilson+Pro+Staff+RF97',
+    affiliateLink: 'https://amzn.to/4muEr90',
     imageUrl: '/images/wilson-advanced.jpg',
     category: 'good'
   },
@@ -130,7 +130,7 @@ export const rackets: Racket[] = [
     description: 'Control-focused racket for players who want precision and feel.',
     pros: ['Excellent control', 'Great feel and touch', 'Professional quality', 'Precise shot placement'],
     cons: ['Requires advanced technique', 'Less power than some rackets', 'High price point'],
-    affiliateLink: 'https://www.amazon.com/s?k=Babolat+Pure+Strike+98',
+    affiliateLink: 'https://amzn.to/41h4kAy',
     imageUrl: '/images/babolat-advanced.jpg',
     category: 'better'
   },
@@ -146,7 +146,7 @@ export const rackets: Racket[] = [
     description: 'Premium racket with exceptional feel and control for advanced players.',
     pros: ['Exceptional feel and control', 'Premium materials', 'Professional grade', 'Excellent precision'],
     cons: ['Very high price point', 'Requires advanced skills', 'Less forgiving'],
-    affiliateLink: 'https://www.amazon.com/s?k=Yonex+VCORE+Pro+97',
+    affiliateLink: 'https://amzn.to/4ltV0QR',
     imageUrl: '/images/yonex-advanced.jpg',
     category: 'best'
   }
