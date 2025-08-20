@@ -90,11 +90,15 @@ export default function UserProfileHeader() {
       // Set a flag to indicate this is a loaded plan
       localStorage.setItem('aceplan_loaded_plan', 'true');
       
-      console.log('Plan loaded successfully, navigating to results...');
+      console.log('Plan loaded successfully, reloading page to show new plan...');
       
-      // Navigate to results page
-      window.location.href = '/#results';
+      // Close dropdown first
       setShowDropdown(false);
+      
+      // Use a small delay to ensure localStorage is set, then reload the page
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
       
     } catch (error) {
       console.error('Error loading plan:', error);

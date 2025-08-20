@@ -25,19 +25,52 @@ function HomeContent() {
 
   // Check if user wants to view previous plan
   useEffect(() => {
+    // First, check if we're loading a saved plan (this takes priority)
+    const isLoadedPlan = localStorage.getItem('aceplan_loaded_plan') === 'true';
+    if (isLoadedPlan) {
+      console.log('Detected loaded plan flag, loading saved plan...');
+      const savedResults = localStorage.getItem('aceplan_quiz_results');
+      if (savedResults) {
+        try {
+          const parsedResults = JSON.parse(savedResults);
+          console.log('Loaded saved plan from localStorage:', parsedResults);
+          
+          // Verify all required data is present
+          const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
+          const missingSections = requiredSections.filter(section => !parsedResults[section]);
+          
+          if (missingSections.length > 0) {
+            console.warn('Missing sections in loaded plan:', missingSections);
+            console.log('Available sections:', Object.keys(parsedResults));
+          }
+          
+          setResults(parsedResults);
+          setViewPreviousPlan(false); // This is a loaded plan, not a previous one
+          
+          // Clear the loaded plan flag
+          localStorage.removeItem('aceplan_loaded_plan');
+          
+          console.log('Loaded plan set successfully');
+          return; // Exit early since we've handled the loaded plan
+          
+        } catch (error) {
+          console.error('Error parsing loaded plan:', error);
+          localStorage.removeItem('aceplan_loaded_plan');
+        }
+      }
+    }
+    
     // Check for #results hash in URL
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
       if (hash === '#results') {
         console.log('Detected #results hash, loading saved plan...');
         const savedResults = localStorage.getItem('aceplan_quiz_results');
-        const isLoadedPlan = localStorage.getItem('aceplan_loaded_plan') === 'true';
         
         if (savedResults) {
           try {
             const parsedResults = JSON.parse(savedResults);
-            console.log('Loaded saved results:', parsedResults);
-            console.log('Is loaded plan:', isLoadedPlan);
+            console.log('Loaded saved results from hash:', parsedResults);
             
             // Verify all required data is present
             const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
@@ -60,22 +93,14 @@ function HomeContent() {
             }
             
             setResults(parsedResults);
-            
-            // Set the correct flag based on whether this is a loaded plan or previous plan
-            if (isLoadedPlan) {
-              setViewPreviousPlan(false); // This is a newly loaded plan, not a previous one
-              // Clear the loaded plan flag
-              localStorage.removeItem('aceplan_loaded_plan');
-            } else {
-              setViewPreviousPlan(true); // This is a previous plan from current session
-            }
+            setViewPreviousPlan(true); // This is a previous plan from current session
             
             // Remove the hash from URL without page reload
             window.history.replaceState(null, '', window.location.pathname);
-            console.log('Plan loaded successfully, navigating to results page');
+            console.log('Plan loaded successfully from hash, navigating to results page');
             
           } catch (error) {
-            console.error('Error parsing saved results:', error);
+            console.error('Error parsing saved results from hash:', error);
             alert('Error loading saved plan. Please try taking the quiz again.');
           }
         } else {
