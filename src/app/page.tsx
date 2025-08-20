@@ -31,10 +31,13 @@ function HomeContent() {
       if (hash === '#results') {
         console.log('Detected #results hash, loading saved plan...');
         const savedResults = localStorage.getItem('aceplan_quiz_results');
+        const isLoadedPlan = localStorage.getItem('aceplan_loaded_plan') === 'true';
+        
         if (savedResults) {
           try {
             const parsedResults = JSON.parse(savedResults);
             console.log('Loaded saved results:', parsedResults);
+            console.log('Is loaded plan:', isLoadedPlan);
             
             // Verify all required data is present
             const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
@@ -57,7 +60,15 @@ function HomeContent() {
             }
             
             setResults(parsedResults);
-            setViewPreviousPlan(true);
+            
+            // Set the correct flag based on whether this is a loaded plan or previous plan
+            if (isLoadedPlan) {
+              setViewPreviousPlan(false); // This is a newly loaded plan, not a previous one
+              // Clear the loaded plan flag
+              localStorage.removeItem('aceplan_loaded_plan');
+            } else {
+              setViewPreviousPlan(true); // This is a previous plan from current session
+            }
             
             // Remove the hash from URL without page reload
             window.history.replaceState(null, '', window.location.pathname);
