@@ -224,7 +224,7 @@ export default function PrivacyPolicy() {
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">How to Exercise Your Rights</h3>
             <p className="text-gray-700 leading-relaxed">
-              To exercise any of these rights, contact us at <strong>privacy@aceplan.com</strong> or use the account settings in your profile. We will respond to your request within 30 days.
+              To exercise any of these rights, contact us at <strong>aceplan711@gmail.com</strong> or use the account settings in your profile. We will respond to your request within 30 days.
             </p>
           </div>
         </div>
@@ -278,7 +278,6 @@ export default function PrivacyPolicy() {
           </p>
           <div className="space-y-2 text-blue-100">
             <p><strong>Email:</strong> aceplan711@gmail.com</p>
-            <p><strong>Address:</strong> AcePlan Privacy Team, [Your Business Address]</p>
             <p><strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours</p>
           </div>
         </div>

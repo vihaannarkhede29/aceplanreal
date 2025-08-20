@@ -309,7 +309,6 @@ export default function TermsOfService() {
           </p>
           <div className="space-y-2 text-blue-100">
             <p><strong>Email:</strong> aceplan711@gmail.com</p>
-            <p><strong>Address:</strong> AcePlan Legal Team, [Your Business Address]</p>
             <p><strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours</p>
           </div>
         </div>
