@@ -22,7 +22,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Wilson Championship Tennis Balls (72 Balls - 24 Cans)",
       description: "Professional-grade tennis balls perfect for practice and matches",
-      price: "$89.99",
+      price: "$79.99",
       category: "Tennis Balls",
       affiliateLink: "https://amzn.to/41JwNiu",
       bestFor: ["All skill levels", "Practice sessions", "Match play"]
@@ -30,7 +30,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Penn Championship Tennis Balls (72 Balls - 24 Cans)",
       description: "Durable tennis balls with excellent bounce and feel",
-      price: "$79.99",
+      price: "$69.99",
       category: "Tennis Balls",
       affiliateLink: "https://amzn.to/476LZtK",
       bestFor: ["Beginners", "Practice", "Cost-effective"]
@@ -40,7 +40,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Spinshot Player Tennis Ball Machine (Best Seller Ball Machine in the World)",
       description: "Portable ball machine with adjustable speed, spin, and elevation",
-      price: "$599.99",
+      price: "$549.99",
       category: "Ball Machine",
       affiliateLink: "https://amzn.to/41OavvW",
       bestFor: ["Intermediate to Advanced", "Solo practice", "Consistent training"]
@@ -48,7 +48,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Lobster Elite Two Tennis Ball Machine",
       description: "Professional ball machine with remote control and programmable drills",
-      price: "$1,299.99",
+      price: "$1,199.99",
       category: "Ball Machine",
       affiliateLink: "https://amzn.to/3HtOID3",
       bestFor: ["Advanced players", "Serious training", "Club use"]
@@ -58,7 +58,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Tennis Training Cones (Set of 10)",
       description: "Bright orange cones for footwork drills and court positioning",
-      price: "$24.99",
+      price: "$19.99",
       category: "Training Aids",
       affiliateLink: "https://amzn.to/3V6UQEj",
       bestFor: ["Footwork drills", "Agility training", "All skill levels"]
@@ -66,7 +66,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Tennis Resistance Bands Set",
       description: "Elastic bands for strength training and warm-up exercises",
-      price: "$19.99",
+      price: "$16.99",
       category: "Training Aids",
       affiliateLink: "https://amzn.to/41Jx1Gm",
       bestFor: ["Strength training", "Warm-up", "Injury prevention"]
@@ -74,7 +74,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Tennis Ball Hopper (150 Ball Capacity)",
       description: "Large capacity ball hopper for easy ball collection and storage",
-      price: "$89.99",
+      price: "$79.99",
       category: "Training Aids",
       affiliateLink: "https://amzn.to/41d9kWM",
       bestFor: ["Ball collection", "Practice sessions", "Coaching"]
@@ -84,7 +84,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Wilson Pro Overgrip (30 Pack)",
       description: "Premium overgrips for enhanced grip and comfort",
-      price: "$34.99",
+      price: "$29.99",
       category: "Grips",
       affiliateLink: "https://amzn.to/41d9kWM",
       bestFor: ["Grip enhancement", "Sweat absorption", "All players"]
@@ -92,7 +92,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Tennis Dampener Set (10 Pack)",
       description: "Vibration dampeners to reduce racket vibration and improve feel",
-      price: "$12.99",
+      price: "$9.99",
       category: "Accessories",
       affiliateLink: "https://amzn.to/3Jri19L",
       bestFor: ["Vibration reduction", "Comfort", "All skill levels"]
@@ -102,7 +102,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Portable Tennis Net",
       description: "Easy-to-setup portable net for practice anywhere",
-      price: "$149.99",
+      price: "$129.99",
       category: "Court Equipment",
       affiliateLink: "https://amzn.to/45FZeyT",
       bestFor: ["Home practice", "Backyard tennis", "Portable setup"]
@@ -110,7 +110,7 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
     {
       name: "Tennis Court Tape",
       description: "High-visibility tape for marking court lines and targets",
-      price: "$29.99",
+      price: "$24.99",
       category: "Court Equipment",
       affiliateLink: "https://amzn.to/3UF8Chk",
       bestFor: ["Court marking", "Target practice", "Training drills"]
