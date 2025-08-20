@@ -275,10 +275,10 @@ export default function TermsOfService() {
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Governing Law and Disputes</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            These Terms are governed by the laws of [Your State/Country]. Any disputes arising from these Terms or your use of the Service shall be resolved through binding arbitration in accordance with the rules of [Arbitration Organization].
+            These Terms are governed by applicable laws. Any disputes arising from these Terms or your use of the Service should be resolved through good faith discussions between the parties.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            You agree to resolve disputes individually and waive any right to participate in class action lawsuits.
+            We encourage users to contact us directly to resolve any issues before pursuing other options.
           </p>
         </div>
 
@@ -308,7 +308,7 @@ export default function TermsOfService() {
             If you have any questions about these Terms of Service, please contact us:
           </p>
           <div className="space-y-2 text-blue-100">
-            <p><strong>Email:</strong> legal@aceplan.com</p>
+            <p><strong>Email:</strong> aceplan711@gmail.com</p>
             <p><strong>Address:</strong> AcePlan Legal Team, [Your Business Address]</p>
             <p><strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours</p>
           </div>

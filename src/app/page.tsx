@@ -50,8 +50,8 @@ function HomeContent() {
               console.log('Training plan structure:', {
                 weeks: parsedResults.trainingPlan.length,
                 firstWeek: parsedResults.trainingPlan[0],
-                totalDrills: parsedResults.trainingPlan.reduce((total, week) => 
-                  total + week.days.reduce((dayTotal, day) => dayTotal + day.drills.length, 0), 0
+                totalDrills: parsedResults.trainingPlan.reduce((total: number, week: any) => 
+                  total + week.days.reduce((dayTotal: number, day: any) => dayTotal + day.drills.length, 0), 0
                 )
               });
             }
@@ -598,7 +598,7 @@ function HomeContent() {
               Terms of Service
             </a>
             <a 
-              href="mailto:support@aceplan.com" 
+              href="mailto:aceplan711@gmail.com" 
               className="hover:text-white transition-colors duration-200 underline"
             >
               Support

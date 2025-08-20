@@ -277,7 +277,7 @@ export default function PrivacyPolicy() {
             If you have any questions about this Privacy Policy or our data practices, please contact us:
           </p>
           <div className="space-y-2 text-blue-100">
-            <p><strong>Email:</strong> privacy@aceplan.com</p>
+            <p><strong>Email:</strong> aceplan711@gmail.com</p>
             <p><strong>Address:</strong> AcePlan Privacy Team, [Your Business Address]</p>
             <p><strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours</p>
           </div>
