@@ -582,6 +582,29 @@ function HomeContent() {
           <p className="text-xl text-blue-200 mb-8">
             Practice hard. Play harder. Get your personalized tennis equipment plan today.
           </p>
+          
+          {/* Legal Links */}
+          <div className="flex justify-center space-x-8 mb-8 text-blue-200">
+            <a 
+              href="/privacy-policy" 
+              className="hover:text-white transition-colors duration-200 underline"
+            >
+              Privacy Policy
+            </a>
+            <a 
+              href="/terms" 
+              className="hover:text-white transition-colors duration-200 underline"
+            >
+              Terms of Service
+            </a>
+            <a 
+              href="mailto:support@aceplan.com" 
+              className="hover:text-white transition-colors duration-200 underline"
+            >
+              Support
+            </a>
+          </div>
+          
           <div className="text-sm text-blue-300">
             <p>© 2025 AcePlan. All rights reserved.</p>
             <p className="mt-2">
