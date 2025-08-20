@@ -19,7 +19,6 @@ export interface Racket {
   id: string;
   name: string;
   brand: string;
-  price: number;
   weight: string;
   headSize: string;
   stiffness: string;
@@ -37,9 +36,18 @@ export interface StringRecommendation {
   name: string;
   description: string;
   tension: string;
-  price: number;
   affiliateLink: string;
   bestFor: string[];
+}
+
+export interface Equipment {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  features: string[];
+  affiliateLink: string;
+  imageUrl: string;
 }
 
 export interface Drill {
@@ -77,6 +85,7 @@ export interface TrainingWeek {
 export interface RecommendationResult {
   rackets: Racket[];
   strings: StringRecommendation[];
+  equipment: Equipment[];
   trainingPlan: TrainingWeek[];
   explanation: string;
   skillLevel: string;

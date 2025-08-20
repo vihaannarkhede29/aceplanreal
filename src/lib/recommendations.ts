@@ -1,29 +1,12 @@
-import { QuizAnswer, Racket, StringRecommendation, RecommendationResult } from '@/types';
+import { QuizAnswer, Racket, StringRecommendation, Equipment, RecommendationResult } from '@/types';
 import { rackets } from '@/data/rackets';
 import { strings } from '@/data/strings';
+import { equipment } from '@/data/equipment';
 import { generateTrainingPlan } from './trainingPlan';
 
 export function generateRecommendations(answers: QuizAnswer): RecommendationResult {
-  // Filter rackets based on budget first
-  let budgetFilteredRackets = rackets.filter(racket => {
-    const racketPrice = racket.price;
-    
-    switch (answers.budget) {
-      case 'Budget - $50-100':
-        return racketPrice >= 50 && racketPrice <= 120; // Allow slight overage
-      case 'Mid-range - $100-200':
-        return racketPrice >= 90 && racketPrice <= 220; // Allow slight overage
-      case 'Premium - $200-300':
-        return racketPrice >= 180 && racketPrice <= 320; // Allow slight overage
-      case 'High-end - $300+':
-        return racketPrice >= 280; // Allow slight underage
-      default:
-        return true;
-    }
-  });
-
   // Filter rackets based on skill level
-  let skillFilteredRackets = budgetFilteredRackets.filter(racket => {
+  let skillFilteredRackets = rackets.filter(racket => {
     if (answers.skillLevel.includes('Beginner')) {
       return racket.level === 'Beginner' || racket.level === 'Beginner-Intermediate';
     } else if (answers.skillLevel.includes('Intermediate')) {
@@ -46,23 +29,6 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   const scoredRackets = skillFilteredRackets.map(racket => {
     let score = 0;
     
-    // Budget scoring (prefer rackets closer to budget center)
-    const racketPrice = racket.price;
-    switch (answers.budget) {
-      case 'Budget - $50-100':
-        score += Math.max(0, 10 - Math.abs(racketPrice - 75) / 10);
-        break;
-      case 'Mid-range - $100-200':
-        score += Math.max(0, 10 - Math.abs(racketPrice - 150) / 15);
-        break;
-      case 'Premium - $200-300':
-        score += Math.max(0, 10 - Math.abs(racketPrice - 250) / 20);
-        break;
-      case 'High-end - $300+':
-        score += Math.max(0, 10 - (racketPrice - 300) / 50);
-        break;
-    }
-
     // Skill level scoring
     if (answers.skillLevel.includes('Beginner') && racket.level === 'Beginner') {
       score += 5;
@@ -102,7 +68,6 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   if (recommendedRackets.length === 0) {
     console.log('No rackets matched criteria, using fallback recommendations');
     recommendedRackets = rackets
-      .sort((a, b) => a.price - b.price) // Sort by price for budget-friendly options
       .slice(0, 3)
       .map((racket, index) => ({
         ...racket,
@@ -169,7 +134,6 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   if (recommendedStrings.length === 0) {
     console.log('No strings matched criteria, using fallback recommendations');
     recommendedStrings = strings
-      .sort((a, b) => a.price - b.price) // Sort by price for budget-friendly options
       .slice(0, 3)
       .map((string, index) => ({
         ...string,
@@ -185,9 +149,13 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   const trainingPlan = generateTrainingPlan(answers);
   const trainingSummary = generateTrainingSummary(answers, trainingPlan);
 
+  // Select equipment recommendations based on skill level and goals
+  const recommendedEquipment = equipment.slice(0, 5); // Top 5 equipment items
+
   return {
     rackets: recommendedRackets,
     strings: recommendedStrings,
+    equipment: recommendedEquipment,
     trainingPlan,
     explanation,
     skillLevel: answers.skillLevel,
