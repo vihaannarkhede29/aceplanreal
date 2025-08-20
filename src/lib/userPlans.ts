@@ -81,21 +81,52 @@ export const getUserPlan = async (planId: string): Promise<UserPlan | null> => {
 export const getUserPlans = async (userId: string): Promise<UserPlan[]> => {
   try {
     const plansRef = collection(db, 'userPlans');
-    const q = query(
-      plansRef,
-      where('userId', '==', userId),
-      orderBy('createdAt', 'desc')
-    );
     
-    const querySnapshot = await getDocs(q);
-    const plans: UserPlan[] = [];
+    // First try with ordering (requires composite index)
+    try {
+      const q = query(
+        plansRef,
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc')
+      );
+      
+      const querySnapshot = await getDocs(q);
+      const plans: UserPlan[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        plans.push(doc.data() as UserPlan);
+      });
+      
+      console.log('UserPlan: Retrieved', plans.length, 'plans for user:', userId);
+      return plans;
+      
+    } catch (indexError: any) {
+      // If index error occurs, fall back to simple query without ordering
+      console.warn('UserPlan: Composite index not available, falling back to simple query:', indexError.message);
+      
+      const simpleQuery = query(
+        plansRef,
+        where('userId', '==', userId)
+      );
+      
+      const querySnapshot = await getDocs(simpleQuery);
+      const plans: UserPlan[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        plans.push(doc.data() as UserPlan);
+      });
+      
+      // Sort in memory as fallback
+      plans.sort((a, b) => {
+        const aTime = a.createdAt?.toDate?.() || new Date(0);
+        const bTime = b.createdAt?.toDate?.() || new Date(0);
+        return bTime.getTime() - aTime.getTime();
+      });
+      
+      console.log('UserPlan: Retrieved', plans.length, 'plans for user (fallback):', userId);
+      return plans;
+    }
     
-    querySnapshot.forEach((doc) => {
-      plans.push(doc.data() as UserPlan);
-    });
-    
-    console.log('UserPlan: Retrieved', plans.length, 'plans for user:', userId);
-    return plans;
   } catch (error) {
     console.error('UserPlan: Error getting user plans:', error);
     throw error;
@@ -108,23 +139,61 @@ export const getUserPlans = async (userId: string): Promise<UserPlan[]> => {
 export const getLatestUserPlan = async (userId: string): Promise<UserPlan | null> => {
   try {
     const plansRef = collection(db, 'userPlans');
-    const q = query(
-      plansRef,
-      where('userId', '==', userId),
-      orderBy('createdAt', 'desc'),
-      limit(1)
-    );
     
-    const querySnapshot = await getDocs(q);
-    
-    if (!querySnapshot.empty) {
-      const plan = querySnapshot.docs[0].data() as UserPlan;
-      console.log('UserPlan: Retrieved latest plan for user:', userId);
-      return plan;
-    } else {
-      console.log('UserPlan: No plans found for user:', userId);
-      return null;
+    // First try with ordering and limit (requires composite index)
+    try {
+      const q = query(
+        plansRef,
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      );
+      
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        const plan = querySnapshot.docs[0].data() as UserPlan;
+        console.log('UserPlan: Retrieved latest plan for user:', userId);
+        return plan;
+      } else {
+        console.log('UserPlan: No plans found for user:', userId);
+        return null;
+      }
+      
+    } catch (indexError: any) {
+      // If index error occurs, fall back to simple query and get latest in memory
+      console.warn('UserPlan: Composite index not available, falling back to simple query:', indexError.message);
+      
+      const simpleQuery = query(
+        plansRef,
+        where('userId', '==', userId)
+      );
+      
+      const querySnapshot = await getDocs(simpleQuery);
+      
+      if (!querySnapshot.empty) {
+        // Find the latest plan by sorting in memory
+        let latestPlan: UserPlan | null = null;
+        let latestTime = new Date(0);
+        
+        querySnapshot.forEach((doc) => {
+          const plan = doc.data() as UserPlan;
+          const planTime = plan.createdAt?.toDate?.() || new Date(0);
+          
+          if (planTime.getTime() > latestTime.getTime()) {
+            latestPlan = plan;
+            latestTime = planTime;
+          }
+        });
+        
+        console.log('UserPlan: Retrieved latest plan for user (fallback):', userId);
+        return latestPlan;
+      } else {
+        console.log('UserPlan: No plans found for user:', userId);
+        return null;
+      }
     }
+    
   } catch (error) {
     console.error('UserPlan: Error getting latest plan:', error);
     throw error;
