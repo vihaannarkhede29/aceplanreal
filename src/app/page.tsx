@@ -9,6 +9,7 @@ import ResultsPage from '@/components/ResultsPage';
 import HeroSection from '@/components/HeroSection';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
+import { getLatestUserPlan } from '@/lib/userPlans';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { User, Trophy, Calendar, Target } from 'lucide-react';
 
@@ -31,6 +32,26 @@ function HomeContent() {
       // You can add logic here to load the previous plan
     }
   }, []);
+
+  // Auto-load previous plan when user signs in
+  useEffect(() => {
+    if (currentUser && !results && !equipmentResults) {
+      const loadPreviousPlan = async () => {
+        try {
+          const previousPlan = await getLatestUserPlan(currentUser.uid);
+          if (previousPlan) {
+            setResults(previousPlan.planData);
+            setViewPreviousPlan(true);
+            console.log('Auto-loaded previous plan for user:', currentUser.uid);
+          }
+        } catch (error) {
+          console.error('Error loading previous plan:', error);
+        }
+      };
+      
+      loadPreviousPlan();
+    }
+  }, [currentUser, results, equipmentResults]);
 
   const handleGetPlan = () => {
     setShowQuiz(true);
@@ -153,13 +174,26 @@ function HomeContent() {
               Ready to continue your tennis journey? Load your saved AcePlan or create a new one.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => window.location.href = '/#results'}
-                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                <Calendar className="h-5 w-5" />
-                <span>Load Saved Plan</span>
-              </button>
+                              <button
+                  onClick={async () => {
+                    try {
+                      const previousPlan = await getLatestUserPlan(currentUser.uid);
+                      if (previousPlan) {
+                        setResults(previousPlan.planData);
+                        setViewPreviousPlan(true);
+                      } else {
+                        alert('No saved plan found. Please create a new plan first.');
+                      }
+                    } catch (error) {
+                      console.error('Error loading saved plan:', error);
+                      alert('Error loading saved plan. Please try again.');
+                    }
+                  }}
+                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Load Saved Plan</span>
+                </button>
               <button
                 onClick={handleGetPlan}
                 className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"

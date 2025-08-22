@@ -25,6 +25,7 @@ export interface UserPlan {
 
 /**
  * Save a user's plan to Firestore
+ * Only keeps the 2 most recent plans (current + previous)
  */
 export const saveUserPlan = async (
   userId: string, 
@@ -45,8 +46,33 @@ export const saveUserPlan = async (
       description: `Personalized tennis plan for ${planData.skillLevel} ${planData.playingStyle} player`
     };
 
+    // Save the new plan
     await setDoc(planRef, plan);
     console.log('UserPlan: Plan saved successfully with ID:', planId);
+    
+    // Get all existing plans for this user
+    const existingPlans = await getUserPlans(userId);
+    
+    // If we have more than 2 plans, delete the oldest ones
+    if (existingPlans.length > 2) {
+      // Sort by creation time (newest first)
+      const sortedPlans = existingPlans.sort((a, b) => {
+        const aTime = a.createdAt?.toDate?.() || new Date(0);
+        const bTime = b.createdAt?.toDate?.() || new Date(0);
+        return bTime.getTime() - aTime.getTime();
+      });
+      
+      // Keep only the 2 most recent plans (excluding the one we just saved)
+      const plansToKeep = sortedPlans.slice(0, 1); // Keep only the most recent existing plan
+      
+      // Delete all other plans
+      for (const oldPlan of existingPlans) {
+        if (!plansToKeep.find(p => p.id === oldPlan.id) && oldPlan.id !== planId) {
+          await deleteUserPlan(oldPlan.id);
+          console.log('UserPlan: Deleted old plan:', oldPlan.id);
+        }
+      }
+    }
     
     return planId;
   } catch (error) {
@@ -196,6 +222,75 @@ export const getLatestUserPlan = async (userId: string): Promise<UserPlan | null
     
   } catch (error) {
     console.error('UserPlan: Error getting latest plan:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get the previous plan for a user (the one before the current one)
+ */
+export const getPreviousUserPlan = async (userId: string): Promise<UserPlan | null> => {
+  try {
+    const plansRef = collection(db, 'userPlans');
+    
+    // First try with ordering and limit (requires composite index)
+    try {
+      const q = query(
+        plansRef,
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc'),
+        limit(2)
+      );
+      
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.docs.length > 1) {
+        // Return the second most recent plan (index 1)
+        const previousPlan = querySnapshot.docs[1].data() as UserPlan;
+        console.log('UserPlan: Retrieved previous plan for user:', userId);
+        return previousPlan;
+      } else {
+        console.log('UserPlan: No previous plan found for user:', userId);
+        return null;
+      }
+      
+    } catch (indexError: any) {
+      // If index error occurs, fall back to simple query and get previous in memory
+      console.warn('UserPlan: Composite index not available, falling back to simple query:', indexError.message);
+      
+      const simpleQuery = query(
+        plansRef,
+        where('userId', '==', userId)
+      );
+      
+      const querySnapshot = await getDocs(simpleQuery);
+      
+      if (querySnapshot.docs.length > 1) {
+        // Sort by creation time and get the second most recent
+        const plans: UserPlan[] = [];
+        querySnapshot.forEach((doc) => {
+          plans.push(doc.data() as UserPlan);
+        });
+        
+        // Sort by creation time (newest first)
+        plans.sort((a, b) => {
+          const aTime = a.createdAt?.toDate?.() || new Date(0);
+          const bTime = b.createdAt?.toDate?.() || new Date(0);
+          return bTime.getTime() - aTime.getTime();
+        });
+        
+        // Return the second most recent plan
+        const previousPlan = plans[1];
+        console.log('UserPlan: Retrieved previous plan for user (fallback):', userId);
+        return previousPlan;
+      } else {
+        console.log('UserPlan: No previous plan found for user:', userId);
+        return null;
+      }
+    }
+    
+  } catch (error) {
+    console.error('UserPlan: Error getting previous plan:', error);
     throw error;
   }
 };

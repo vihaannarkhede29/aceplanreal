@@ -20,6 +20,14 @@ export const strings: StringRecommendation[] = [
   },
   {
     type: 'Natural Gut',
+    name: 'Babolat VS Natural Gut',
+    description: 'Premium natural gut string with exceptional feel and power.',
+    tension: '50-60 lbs',
+    affiliateLink: 'https://amzn.to/3Vamgcq',
+    bestFor: ['Professional players', 'Maximum performance', 'Feel seekers']
+  },
+  {
+    type: 'Natural Gut',
     name: 'Wilson Natural Gut Tennis String – Set, White',
     description: 'Premium natural gut string with unmatched feel and power.',
     tension: '50-60 lbs',
@@ -97,13 +105,5 @@ export const strings: StringRecommendation[] = [
     tension: '55-65 lbs',
     affiliateLink: 'https://amzn.to/3UCVwkO',
     bestFor: ['Beginners', 'Budget players', 'Casual players']
-  },
-  {
-    type: 'Polyester',
-    name: 'Babolat VS Natural Gut',
-    description: 'Premium natural gut string with exceptional feel and power.',
-    tension: '50-60 lbs',
-    affiliateLink: 'https://amzn.to/3Vamgcq',
-    bestFor: ['Professional players', 'Maximum performance', 'Feel seekers']
   }
 ];
