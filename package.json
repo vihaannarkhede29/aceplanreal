@@ -26,7 +26,6 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "firebase": "^12.1.0",
-    "firebaseui": "^6.1.0",
     "jspdf": "^3.0.1",
     "lucide-react": "^0.460.0",
     "next": "^15.4.7",
