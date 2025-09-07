@@ -1,6 +1,53 @@
 import { Equipment } from '@/types';
 
 export const equipment: Equipment[] = [
+  // TOP RACKET RECOMMENDATIONS
+  {
+    id: 'babolat-pure-aero-2023-equipment',
+    name: 'Babolat Pure Aero 2023',
+    category: 'Tennis Rackets',
+    description: 'Revolutionary spin racket with AeroModular technology for maximum spin and power. Perfect for aggressive baseline players.',
+    features: ['AeroModular technology', 'Exceptional spin potential', '100 sq in head size', 'Professional quality'],
+    affiliateLink: 'https://amzn.to/3JOKGWA',
+    imageUrl: '/images/babolat-pure-aero-2023.jpg'
+  },
+  {
+    id: 'wilson-pro-staff-rf97-v14-equipment',
+    name: 'Wilson Pro Staff RF97 v14',
+    category: 'Tennis Rackets',
+    description: 'Roger Federer\'s signature racket with Braided Graphite technology for exceptional precision and control.',
+    features: ['Braided Graphite technology', 'Exceptional control', '97 sq in head size', 'Professional quality'],
+    affiliateLink: 'https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/',
+    imageUrl: '/images/wilson-pro-staff-rf97-v14.jpg'
+  },
+  {
+    id: 'yonex-ezone-100-equipment',
+    name: 'Yonex EZONE 100',
+    category: 'Tennis Rackets',
+    description: 'Versatile power racket with Isometric design for enhanced sweet spot and comfort. Great for intermediate players.',
+    features: ['Isometric design', 'Enhanced sweet spot', '100 sq in head size', 'Great comfort'],
+    affiliateLink: 'https://amzn.to/46aFhRn',
+    imageUrl: '/images/yonex-ezone-100.jpg'
+  },
+  {
+    id: 'head-radical-mp-2021-equipment',
+    name: 'Head Radical MP 2021',
+    category: 'Tennis Rackets',
+    description: 'Versatile all-around racket with Graphene 360+ technology for balanced performance across all playing styles.',
+    features: ['Graphene 360+ technology', 'Excellent versatility', '98 sq in head size', 'Balanced performance'],
+    affiliateLink: 'https://amzn.to/4659MrL',
+    imageUrl: '/images/head-radical-mp-2021.jpg'
+  },
+  {
+    id: 'wilson-clash-100ul-v4-equipment',
+    name: 'Wilson Clash 100UL v4',
+    category: 'Tennis Rackets',
+    description: 'Ultra-lightweight beginner racket with FreeFlex technology for maximum comfort and arm-friendly play.',
+    features: ['FreeFlex technology', 'Ultra-lightweight', '100 sq in head size', 'Maximum comfort'],
+    affiliateLink: 'https://amzn.to/3I7kUfL',
+    imageUrl: '/images/wilson-clash-100ul-v4.jpg'
+  },
+
   // TENNIS BALLS
   {
     id: 'wilson-championship-balls',

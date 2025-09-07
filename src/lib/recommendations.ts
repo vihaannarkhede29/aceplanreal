@@ -20,8 +20,8 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   // Filter based on arm injuries
   if (answers.armInjuries && answers.armInjuries.includes('Yes')) {
     skillFilteredRackets = skillFilteredRackets.filter(racket => {
-      const stiffness = parseInt(racket.stiffness);
-      return stiffness <= 65; // Prefer more flexible frames for arm issues
+      // Prefer flexible frames for arm issues
+      return racket.stiffness === 'Flexible' || racket.stiffness === 'Medium';
     });
   }
 
@@ -30,26 +30,82 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
     let score = 0;
     
     // Skill level scoring
-    if (answers.skillLevel.includes('Beginner') && racket.level === 'Beginner') {
+    if (answers.skillLevel.includes('Beginner') && racket.level.includes('Beginner')) {
       score += 5;
-    } else if (answers.skillLevel.includes('Intermediate') && racket.level === 'Intermediate') {
+    } else if (answers.skillLevel.includes('Intermediate') && racket.level.includes('Intermediate')) {
       score += 5;
-    } else if (answers.skillLevel.includes('Advanced') && racket.level === 'Advanced') {
+    } else if (answers.skillLevel.includes('Advanced') && racket.level.includes('Advanced')) {
       score += 5;
     }
 
-    // Playing style scoring
-    if (answers.playingStyle && answers.playingStyle.includes('Aggressive') && racket.weight.includes('11')) {
-      score += 3;
-    } else if (answers.playingStyle && answers.playingStyle.includes('Defensive') && racket.weight.includes('10')) {
-      score += 3;
+    // Playing style scoring based on racket characteristics
+    if (answers.playingStyle && answers.playingStyle.includes('Aggressive')) {
+      // Prefer power rackets for aggressive players
+      if (racket.name.includes('Pure Aero') || racket.name.includes('Pure Drive') || racket.name.includes('VCORE')) {
+        score += 4;
+      }
+      // Prefer heavier rackets for aggressive players
+      if (racket.weight.includes('11') || racket.weight.includes('12')) {
+        score += 2;
+      }
+    } else if (answers.playingStyle && answers.playingStyle.includes('Defensive')) {
+      // Prefer control rackets for defensive players
+      if (racket.name.includes('Pro Staff') || racket.name.includes('Blade') || racket.name.includes('Phantom')) {
+        score += 4;
+      }
+      // Prefer lighter rackets for defensive players
+      if (racket.weight.includes('10') || racket.weight.includes('9')) {
+        score += 2;
+      }
+    } else if (answers.playingStyle && answers.playingStyle.includes('All-court')) {
+      // Prefer all-around rackets
+      if (racket.name.includes('Radical') || racket.name.includes('Speed') || racket.name.includes('Clash')) {
+        score += 4;
+      }
     }
 
     // Primary goals scoring
-    if (answers.primaryGoals && answers.primaryGoals.includes('Power') && racket.headSize.includes('105')) {
-      score += 2;
-    } else if (answers.primaryGoals && answers.primaryGoals.includes('Control') && racket.headSize.includes('100')) {
-      score += 2;
+    if (answers.primaryGoals && answers.primaryGoals.includes('Power')) {
+      // Prefer power rackets
+      if (racket.name.includes('Pure Aero') || racket.name.includes('Pure Drive') || racket.name.includes('VCORE')) {
+        score += 3;
+      }
+      // Prefer larger head sizes for power
+      if (racket.headSize.includes('100') || racket.headSize.includes('104')) {
+        score += 2;
+      }
+    } else if (answers.primaryGoals && answers.primaryGoals.includes('Control')) {
+      // Prefer control rackets
+      if (racket.name.includes('Pro Staff') || racket.name.includes('Blade') || racket.name.includes('Phantom')) {
+        score += 3;
+      }
+      // Prefer smaller head sizes for control
+      if (racket.headSize.includes('97') || racket.headSize.includes('98')) {
+        score += 2;
+      }
+    } else if (answers.primaryGoals && answers.primaryGoals.includes('Spin')) {
+      // Prefer spin rackets
+      if (racket.name.includes('Pure Aero') || racket.name.includes('VCORE')) {
+        score += 3;
+      }
+    } else if (answers.primaryGoals && answers.primaryGoals.includes('Comfort')) {
+      // Prefer comfortable rackets
+      if (racket.name.includes('Clash') || racket.name.includes('EZONE') || racket.stiffness === 'Flexible') {
+        score += 3;
+      }
+    }
+
+    // Arm injury considerations
+    if (answers.armInjuries && answers.armInjuries.includes('Yes')) {
+      if (racket.stiffness === 'Flexible') {
+        score += 3;
+      } else if (racket.stiffness === 'Medium') {
+        score += 1;
+      }
+      // Prefer arm-friendly rackets
+      if (racket.name.includes('Clash') || racket.name.includes('EZONE')) {
+        score += 2;
+      }
     }
 
     return { ...racket, score };
@@ -150,7 +206,23 @@ export function generateRecommendations(answers: QuizAnswer): RecommendationResu
   const trainingSummary = generateTrainingSummary(answers, trainingPlan);
 
   // Select equipment recommendations based on skill level and goals
-  const recommendedEquipment = equipment.slice(0, 5); // Top 5 equipment items
+  let recommendedEquipment = equipment;
+  
+  // Prioritize racket equipment for the user's skill level
+  if (answers.skillLevel.includes('Beginner')) {
+    recommendedEquipment = equipment.filter(item => 
+      item.category === 'Tennis Rackets' && 
+      (item.name.includes('Clash') || item.name.includes('Lite') || item.name.includes('UL'))
+    ).concat(equipment.filter(item => item.category !== 'Tennis Rackets'));
+  } else if (answers.skillLevel.includes('Advanced')) {
+    recommendedEquipment = equipment.filter(item => 
+      item.category === 'Tennis Rackets' && 
+      (item.name.includes('Pro Staff') || item.name.includes('Pure Aero') || item.name.includes('Radical'))
+    ).concat(equipment.filter(item => item.category !== 'Tennis Rackets'));
+  }
+  
+  // Take top 5 equipment items
+  recommendedEquipment = recommendedEquipment.slice(0, 5);
 
   return {
     rackets: recommendedRackets,
