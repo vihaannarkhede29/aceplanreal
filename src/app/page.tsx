@@ -1,15 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import LoginModal from '@/components/LoginModal';
+import { useState, useEffect } from 'react';
+import HeroSection from '@/components/HeroSection';
+import QuizForm from '@/components/QuizForm';
 import EquipmentQuizForm from '@/components/EquipmentQuizForm';
 import EquipmentResultsPage from '@/components/EquipmentResultsPage';
-import QuizForm from '@/components/QuizForm';
 import ResultsPage from '@/components/ResultsPage';
-import HeroSection from '@/components/HeroSection';
+import LoginModal from '@/components/LoginModal';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
-import { getLatestUserPlan } from '@/lib/userPlans';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { User, Trophy, Calendar, Target } from 'lucide-react';
 
@@ -26,56 +25,122 @@ function HomeContent() {
 
   // Check if user wants to view previous plan
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash === '#results') {
-      setViewPreviousPlan(true);
-      // You can add logic here to load the previous plan
+    // First, check if we're loading a saved plan (this takes priority)
+    const isLoadedPlan = localStorage.getItem('aceplan_loaded_plan') === 'true';
+    if (isLoadedPlan) {
+      console.log('Detected loaded plan flag, loading saved plan...');
+      const savedResults = localStorage.getItem('aceplan_quiz_results');
+      if (savedResults) {
+        try {
+          const parsedResults = JSON.parse(savedResults);
+          console.log('Loaded saved plan from localStorage:', parsedResults);
+          
+          // Verify all required data is present
+          const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
+          const missingSections = requiredSections.filter(section => !parsedResults[section]);
+          
+          if (missingSections.length > 0) {
+            console.warn('Missing sections in loaded plan:', missingSections);
+            console.log('Available sections:', Object.keys(parsedResults));
+          }
+          
+          setResults(parsedResults);
+          setViewPreviousPlan(false); // This is a loaded plan, not a previous one
+          
+          // Clear the loaded plan flag
+          localStorage.removeItem('aceplan_loaded_plan');
+          
+          console.log('Loaded plan set successfully');
+          return; // Exit early since we've handled the loaded plan
+          
+        } catch (error) {
+          console.error('Error parsing loaded plan:', error);
+          localStorage.removeItem('aceplan_loaded_plan');
+        }
+      }
+    }
+    
+    // Check for #results hash in URL
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash === '#results') {
+        console.log('Detected #results hash, loading saved plan...');
+        const savedResults = localStorage.getItem('aceplan_quiz_results');
+        
+        if (savedResults) {
+          try {
+            const parsedResults = JSON.parse(savedResults);
+            console.log('Loaded saved results from hash:', parsedResults);
+            
+            // Verify all required data is present
+            const requiredSections = ['rackets', 'strings', 'trainingPlan', 'skillLevel', 'playingStyle'];
+            const missingSections = requiredSections.filter(section => !parsedResults[section]);
+            
+            if (missingSections.length > 0) {
+              console.warn('Missing sections in saved plan:', missingSections);
+              console.log('Available sections:', Object.keys(parsedResults));
+            }
+            
+            // Check if training plan has proper structure
+            if (parsedResults.trainingPlan) {
+              console.log('Training plan structure:', {
+                weeks: parsedResults.trainingPlan.length,
+                firstWeek: parsedResults.trainingPlan[0],
+                totalDrills: parsedResults.trainingPlan.reduce((total: number, week: any) => 
+                  total + week.days.reduce((dayTotal: number, day: any) => dayTotal + day.drills.length, 0), 0
+                )
+              });
+            }
+            
+            setResults(parsedResults);
+            setViewPreviousPlan(true); // This is a previous plan from current session
+            
+            // Remove the hash from URL without page reload
+            window.history.replaceState(null, '', window.location.pathname);
+            console.log('Plan loaded successfully from hash, navigating to results page');
+            
+          } catch (error) {
+            console.error('Error parsing saved results from hash:', error);
+            alert('Error loading saved plan. Please try taking the quiz again.');
+          }
+        } else {
+          console.log('No saved results found in localStorage');
+        }
+      }
+    }
+
+    // Legacy check for localStorage flag
+    const shouldViewPrevious = localStorage.getItem('aceplan_view_previous_plan');
+    if (shouldViewPrevious === 'true') {
+      console.log('Legacy flag detected, loading saved plan...');
+      const savedResults = localStorage.getItem('aceplan_quiz_results');
+      if (savedResults) {
+        try {
+          const parsedResults = JSON.parse(savedResults);
+          console.log('Loaded saved results from legacy flag:', parsedResults);
+          setResults(parsedResults);
+          setViewPreviousPlan(true);
+          // Clear the flag
+          localStorage.removeItem('aceplan_view_previous_plan');
+        } catch (error) {
+          console.error('Error parsing saved results from legacy flag:', error);
+        }
+      }
     }
   }, []);
 
-  // Auto-load previous plan when user signs in
-  useEffect(() => {
-    if (currentUser && !results && !equipmentResults) {
-      const loadPreviousPlan = async () => {
-        try {
-          const previousPlan = await getLatestUserPlan(currentUser.uid);
-          if (previousPlan) {
-            setResults(previousPlan.planData);
-            setViewPreviousPlan(true);
-            console.log('Auto-loaded previous plan for user:', currentUser.uid);
-          }
-        } catch (error) {
-          console.error('Error loading previous plan:', error);
-        }
-      };
-      
-      loadPreviousPlan();
-    }
-  }, [currentUser, results, equipmentResults]);
-
-  const handleGetPlan = () => {
-    setShowQuiz(true);
-  };
-
-  const handleGetEquipment = () => {
-    setShowEquipmentQuiz(true);
-  };
-
-  const handleSignIn = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleQuizComplete = async (answers: QuizAnswer) => {
+  const handleGetPlan = () => { setShowQuiz(true); };
+  const handleGetEquipment = () => { setShowEquipmentQuiz(true); };
+  
+  const handleQuizComplete = (answers: QuizAnswer) => {
     setIsLoading(true);
-    try {
+    // Simulate processing time
+    setTimeout(() => {
       const recommendations = generateRecommendations(answers);
       setResults(recommendations);
-      setShowQuiz(false);
-    } catch (error) {
-      console.error('Error generating recommendations:', error);
-    } finally {
       setIsLoading(false);
-    }
+      setViewPreviousPlan(false);
+    }, 2000);
   };
 
   const handleEquipmentComplete = (answers: any) => {
@@ -83,14 +148,20 @@ function HomeContent() {
     setShowEquipmentQuiz(false);
   };
 
-  const handleRetakeQuiz = () => {
-    setResults(null);
-    setEquipmentResults(null);
-    setViewPreviousPlan(false);
-  };
-
   const handleBackToEquipment = () => {
     setEquipmentResults(null);
+    setShowEquipmentQuiz(true);
+  };
+
+  const handleSignIn = () => {
+    // Show the login modal instead of just scrolling
+    setShowLoginModal(true);
+  };
+
+  const handleRetakeQuiz = () => { 
+    setShowQuiz(false); 
+    setResults(null); 
+    setViewPreviousPlan(false);
   };
 
   if (isLoading) {
@@ -174,26 +245,13 @@ function HomeContent() {
               Ready to continue your tennis journey? Load your saved AcePlan or create a new one.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                              <button
-                  onClick={async () => {
-                    try {
-                      const previousPlan = await getLatestUserPlan(currentUser.uid);
-                      if (previousPlan) {
-                        setResults(previousPlan.planData);
-                        setViewPreviousPlan(true);
-                      } else {
-                        alert('No saved plan found. Please create a new plan first.');
-                      }
-                    } catch (error) {
-                      console.error('Error loading saved plan:', error);
-                      alert('Error loading saved plan. Please try again.');
-                    }
-                  }}
-                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  <Calendar className="h-5 w-5" />
-                  <span>Load Saved Plan</span>
-                </button>
+              <button
+                onClick={() => window.location.href = '/#results'}
+                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Calendar className="h-5 w-5" />
+                <span>Load Saved Plan</span>
+              </button>
               <button
                 onClick={handleGetPlan}
                 className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
@@ -205,8 +263,8 @@ function HomeContent() {
           </div>
         </section>
       )}
-
-      {/* How It Works Section */}
+        
+        {/* How It Works Section */}
       <section id="how-it-works" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -214,155 +272,341 @@ function HomeContent() {
               How AcePlan Works
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get your personalized tennis equipment recommendations and training plan in just a few minutes
+              Get your complete tennis improvement plan in just 3 simple steps
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Target className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-white">1</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Take the Quiz</h3>
-              <p className="text-gray-600">
-                Answer a few questions about your skill level, playing style, and goals
+              <p className="text-gray-600 leading-relaxed">
+                Answer questions about your skill level, playing style, training schedule, and improvement goals. Our AI analyzes your responses to create a personalized profile.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Trophy className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Get Recommendations</h3>
-              <p className="text-gray-600">
-                Receive personalized equipment suggestions and a custom training plan
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Get Your AcePlan</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Receive your complete plan including top 3 racket recommendations, personalized string choices, and a 4-week training calendar with drills tailored to your needs.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Calendar className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Start Training</h3>
-              <p className="text-gray-600">
-                Follow your 4-week progressive training program and track your progress
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Transform Your Game</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Follow your training schedule, practice with the right equipment, and watch your tennis skills improve week by week with our proven progressive system.
               </p>
+            </div>
+          </div>
+
+          {/* Additional Features */}
+          <div className="mt-16 grid md:grid-cols-2 gap-12">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">🎾 Smart Equipment Matching</h3>
+              <p className="text-blue-800 mb-6">
+                Our AI considers your skill level, playing style, budget, and physical concerns to recommend the perfect racket and strings for your game.
+              </p>
+              <ul className="text-blue-700 space-y-2">
+                <li>• Budget-appropriate options</li>
+                <li>• Arm-friendly alternatives</li>
+                <li>• Performance vs. comfort balance</li>
+                <li>• Direct purchase links</li>
+              </ul>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-green-900 mb-4">📅 Personalized Training Program</h3>
+              <p className="text-green-800 mb-6">
+                Get a complete 4-week training plan that focuses on your weakest shots and improvement goals, with progressive difficulty building.
+              </p>
+              <ul className="text-green-700 space-y-2">
+                <li>• Daily drill schedules</li>
+                <li>• Skill-appropriate difficulty</li>
+                <li>• Focus on weak areas</li>
+                <li>• Progressive improvement</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+      <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Why Choose AcePlan?
-            </h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose AcePlan?</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Professional-grade recommendations backed by tennis expertise and AI-powered analysis
+              Get personalized tennis equipment recommendations and training plans tailored to your unique playing style and goals.
             </p>
           </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Trophy className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Personalized Equipment</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Get racket and string recommendations based on your skill level, playing style, and specific needs.
+              </p>
+            </div>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Calendar className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Training Plans</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Receive a 4-week training program designed around your schedule and improvement goals.
+              </p>
+            </div>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Target className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Skill Development</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Focus on your weakest shots and areas for improvement with targeted drills and exercises.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                AI-Powered Equipment Analysis
+      {/* AI Racket & Strings Generator Section */}
+      <section id="racket-suggester" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">AI Racket & Strings Generator</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get instant equipment recommendations without taking the full quiz. Quick suggestions based on your basic preferences.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8 border border-blue-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Quick Equipment Guide
               </h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">1</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Smart Matching</h4>
-                    <p className="text-gray-600 text-sm">Our AI analyzes your profile to find the perfect equipment match</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <Trophy className="h-5 w-5 mr-2 text-blue-600" />
+                    Racket Selection
+                  </h4>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Beginner:</span>
+                      <span className="font-medium">Lightweight, oversized head (105-110 sq in)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Intermediate:</span>
+                      <span className="font-medium">Mid-weight, mid-plus head (100-105 sq in)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Advanced:</span>
+                      <span className="font-medium">Heavier, smaller head (95-100 sq in)</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">2</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Expert Validation</h4>
-                    <p className="text-gray-600 text-sm">All recommendations are validated by tennis professionals</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">3</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Real-time Updates</h4>
-                    <p className="text-gray-600 text-sm">Equipment database is constantly updated with latest products</p>
+                
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <Target className="h-5 w-5 mr-2 text-green-600" />
+                    String Selection
+                  </h4>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Power:</span>
+                      <span className="font-medium">Multifilament or synthetic gut</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Control:</span>
+                      <span className="font-medium">Polyester strings</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Comfort:</span>
+                      <span className="font-medium">Natural gut or soft multifilaments</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Comprehensive Training Plans
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">1</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Progressive Difficulty</h4>
-                    <p className="text-gray-600 text-sm">4-week programs that gradually increase in complexity</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">2</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Skill-Focused Drills</h4>
-                    <p className="text-gray-600 text-sm">Targeted exercises for your specific improvement areas</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-sm">3</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Progress Tracking</h4>
-                    <p className="text-gray-600 text-sm">Monitor your improvement and adjust plans accordingly</p>
-                  </div>
-                </div>
+              
+              <div className="mt-8 text-center">
+                <button
+                  onClick={handleGetEquipment}
+                  className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Get Your Equipment
+                </button>
+                <p className="text-gray-600 mt-3 text-sm">
+                  Take our equipment quiz for detailed, personalized racket and string suggestions
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Coming Soon Section */}
-      <section className="py-20 bg-white">
+      {/* AI Video Analyzer Section */}
+      <section id="ai-analyzer" className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6">
-              <span className="text-3xl">🤖</span>
+              <span className="text-3xl">��</span>
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               AI Video Analyzer
             </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Advanced swing analysis powered by artificial intelligence to perfect your technique
+            </p>
+            <div className="inline-flex items-center px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full font-semibold">
+              <span className="animate-pulse mr-2">🚀</span>
+              Coming Soon
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <span className="text-2xl">📹</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Upload Your Swing</h3>
+              <p className="text-gray-600 text-center">
+                Record your tennis strokes and upload them for instant AI-powered analysis
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <span className="text-2xl">🔍</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">AI Analysis</h3>
+              <p className="text-gray-600 text-center">
+                Get detailed feedback on your form, timing, and technique with frame-by-frame analysis
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <span className="text-2xl">📈</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Track Progress</h3>
+              <p className="text-gray-600 text-center">
+                Monitor your improvement over time with detailed progress reports and comparisons
+              </p>
+            </div>
+          </div>
+
+          {/* SwingVision Integration */}
+          <div className="mt-16 text-center">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">SwingVision Integration</h3>
+              <p className="text-gray-600 mb-6">
+                Seamless integration with SwingVision for professional-grade tennis analysis and coaching
+              </p>
+              <button className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                <span className="mr-2">🎾</span>
+                SwingVision - Coming Soon
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              About AcePlan
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Coming soon! Upload videos of your tennis strokes and get instant feedback on your technique
+              Revolutionizing tennis improvement through AI-powered personalization
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Get Notified When It's Ready
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Be the first to know when our AI video analysis feature launches
-            </p>
-            <button className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
-              <span>Notify Me</span>
-            </button>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Our Mission
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                AcePlan was created to democratize professional tennis coaching and equipment selection. 
+                We believe every player deserves access to personalized training plans and equipment 
+                recommendations that match their unique needs and goals.
+              </p>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Our AI-powered platform analyzes your playing style, skill level, physical attributes, 
+                and training schedule to create a comprehensive improvement plan that actually works.
+              </p>
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-700 font-medium">Data-Driven Recommendations</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  <span className="text-gray-700 font-medium">Proven Results</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Why Choose AcePlan?
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white font-bold text-sm">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Personalized Approach</h4>
+                    <p className="text-gray-600 text-sm">Every recommendation is tailored to your specific needs and goals</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white font-bold text-sm">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Comprehensive Training</h4>
+                    <p className="text-gray-600 text-sm">Complete 4-week programs with progressive difficulty</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white font-bold text-sm">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Expert Equipment</h4>
+                    <p className="text-gray-600 text-sm">Professional-grade equipment recommendations with direct purchase links</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white font-bold text-sm">4</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Continuous Innovation</h4>
+                    <p className="text-gray-600 text-sm">AI video analysis and advanced features coming soon</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

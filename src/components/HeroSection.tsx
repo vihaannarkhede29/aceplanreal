@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import UserProfileHeader from './UserProfileHeader';
+import RacketOfTheWeek from './RacketOfTheWeek';
 
 interface HeroSectionProps {
   onGetPlan: () => void;
@@ -50,13 +51,13 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
               </span>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-12 flex-shrink-0">
+            {/* Desktop Navigation - Hidden on iPad, shown only on large screens */}
+            <nav className="hidden xl:flex items-center space-x-8 flex-shrink-0">
               <button onClick={() => scrollToSection('features')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 Features
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-0">
+              <button onClick={() => scrollToSection('how-it-works')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 How It Works
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
@@ -64,10 +65,10 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
                 Equipment
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
-              <button onClick={() => scrollToSection('ai-analyzer')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
-                Video Analyzer
-                <span className="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium">Soon</span>
-              </button>
+              <a href="/monthly-calendar" className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
+                Calendar
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              </a>
               <button onClick={() => scrollToSection('about')} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -222,6 +223,54 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
               </button>
             </div>
 
+            {/* Mini Toolbar - Perfect for iPad and tablet access */}
+            <div className="mb-12">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30 max-w-4xl mx-auto">
+                <h3 className="text-lg font-bold text-white mb-4 text-center">Quick Access</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <button 
+                    onClick={onGetPlan}
+                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <Target className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-white font-semibold text-sm">Get AcePlan</span>
+                  </button>
+                  
+                  <button 
+                    onClick={onGetEquipment}
+                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                      <Trophy className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-white font-semibold text-sm">Equipment</span>
+                  </button>
+                  
+                  <a 
+                    href="/monthly-calendar"
+                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
+                      <Calendar className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-white font-semibold text-sm">Calendar</span>
+                  </a>
+                  
+                  <button 
+                    onClick={onSignIn}
+                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <User className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-white font-semibold text-sm">Sign In</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Features Grid */}
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20">
@@ -317,6 +366,9 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn }: Her
           </div>
         </div>
       </div>
+
+      {/* Racket of the Week Section */}
+      <RacketOfTheWeek onGetEquipment={onGetEquipment} />
     </>
   );
 }
