@@ -46,13 +46,21 @@ export default function RacketOfTheWeek({ onGetEquipment }: RacketOfTheWeekProps
             {/* Racket Image */}
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <Trophy className="h-16 w-16 text-white" />
+                <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
+                  {racket.imageUrl ? (
+                    <img 
+                      src={racket.imageUrl} 
+                      alt={racket.name}
+                      className="w-full h-full object-contain p-4"
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <Trophy className="h-16 w-16 text-white" />
+                      </div>
+                      <p className="text-gray-500 text-sm">{racket.name}</p>
                     </div>
-                    <p className="text-gray-500 text-sm">Racket Image</p>
-                  </div>
+                  )}
                 </div>
               </div>
               {/* Badge */}
@@ -85,20 +93,16 @@ export default function RacketOfTheWeek({ onGetEquipment }: RacketOfTheWeekProps
                 })}
               </div>
 
-              {/* Price and CTA */}
+              {/* Rating and CTA */}
               <div className="bg-white rounded-xl p-6 border border-gray-200">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-500">Starting at</p>
-                    <p className="text-2xl font-bold text-gray-900">$249</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm text-gray-500">Rating</p>
-                    <div className="flex items-center space-x-1">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="text-center">
+                    <p className="text-sm text-gray-500 mb-2">Expert Rating</p>
+                    <div className="flex items-center justify-center space-x-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                       ))}
-                      <span className="text-sm text-gray-600 ml-1">(4.9)</span>
+                      <span className="text-lg font-semibold text-gray-700 ml-2">4.9/5</span>
                     </div>
                   </div>
                 </div>

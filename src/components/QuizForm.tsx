@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import { QuizAnswer } from '@/types';
 import { quizQuestions } from '@/data/quizQuestions';
-import { ChevronLeft, ChevronRight, CheckCircle, Trophy, Target } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, Trophy, Target, Home } from 'lucide-react';
 
 interface QuizFormProps {
   onComplete: (answers: QuizAnswer) => void;
+  onBackToHome?: () => void;
 }
 
-export default function QuizForm({ onComplete }: QuizFormProps) {
+export default function QuizForm({ onComplete, onBackToHome }: QuizFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Partial<QuizAnswer>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -289,14 +290,26 @@ export default function QuizForm({ onComplete }: QuizFormProps) {
 
         {/* Navigation */}
         <div className="flex items-center justify-between">
-          <button
-            onClick={handlePrevious}
-            disabled={currentStep === 0}
-            className="flex items-center space-x-3 px-8 py-4 border-2 border-gray-300 rounded-xl text-gray-700 hover:border-blue-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            <span>Previous</span>
-          </button>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handlePrevious}
+              disabled={currentStep === 0}
+              className="flex items-center space-x-3 px-8 py-4 border-2 border-gray-300 rounded-xl text-gray-700 hover:border-blue-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold"
+            >
+              <ChevronLeft className="h-5 w-5" />
+              <span>Previous</span>
+            </button>
+            
+            {onBackToHome && (
+              <button
+                onClick={onBackToHome}
+                className="flex items-center space-x-3 px-6 py-4 border-2 border-gray-300 rounded-xl text-gray-700 hover:border-gray-400 hover:text-gray-800 transition-all duration-200 font-semibold"
+              >
+                <Home className="h-5 w-5" />
+                <span>Back to Home</span>
+              </button>
+            )}
+          </div>
 
           <button
             onClick={handleNext}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, Home } from 'lucide-react';
 import { equipmentQuestions, EquipmentQuestion } from '@/data/equipmentQuestions';
 
 interface EquipmentAnswer {
@@ -10,9 +10,10 @@ interface EquipmentAnswer {
 
 interface EquipmentQuizFormProps {
   onComplete: (answers: EquipmentAnswer) => void;
+  onBackToHome?: () => void;
 }
 
-export default function EquipmentQuizForm({ onComplete }: EquipmentQuizFormProps) {
+export default function EquipmentQuizForm({ onComplete, onBackToHome }: EquipmentQuizFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<EquipmentAnswer>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -177,18 +178,30 @@ export default function EquipmentQuizForm({ onComplete }: EquipmentQuizFormProps
 
           {/* Navigation Buttons */}
           <div className="flex justify-between items-center">
-            <button
-              onClick={handlePrevious}
-              disabled={currentStep === 0}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
-                currentStep === 0
-                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Previous</span>
-            </button>
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={handlePrevious}
+                disabled={currentStep === 0}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                  currentStep === 0
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Previous</span>
+              </button>
+              
+              {onBackToHome && (
+                <button
+                  onClick={onBackToHome}
+                  className="flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                >
+                  <Home className="h-4 w-4" />
+                  <span>Back to Home</span>
+                </button>
+              )}
+            </div>
 
             <button
               onClick={handleNext}

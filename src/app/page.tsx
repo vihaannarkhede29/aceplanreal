@@ -7,6 +7,7 @@ import EquipmentQuizForm from '@/components/EquipmentQuizForm';
 import EquipmentResultsPage from '@/components/EquipmentResultsPage';
 import ResultsPage from '@/components/ResultsPage';
 import LoginModal from '@/components/LoginModal';
+import RacketDatabase from '@/components/RacketDatabase';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
@@ -17,6 +18,7 @@ function HomeContent() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showEquipmentQuiz, setShowEquipmentQuiz] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRacketDatabase, setShowRacketDatabase] = useState(false);
   const [results, setResults] = useState<RecommendationResult | null>(null);
   const [equipmentResults, setEquipmentResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -164,6 +166,19 @@ function HomeContent() {
     setViewPreviousPlan(false);
   };
 
+  const handleBackToHome = () => {
+    setShowQuiz(false);
+    setShowEquipmentQuiz(false);
+    setShowRacketDatabase(false);
+    setResults(null);
+    setEquipmentResults(null);
+    setViewPreviousPlan(false);
+  };
+
+  const handleViewRacketDatabase = () => {
+    setShowRacketDatabase(true);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
@@ -184,7 +199,7 @@ function HomeContent() {
 
   if (showEquipmentQuiz) {
     return (
-      <EquipmentQuizForm onComplete={handleEquipmentComplete} />
+      <EquipmentQuizForm onComplete={handleEquipmentComplete} onBackToHome={handleBackToHome} />
     );
   }
 
@@ -194,15 +209,21 @@ function HomeContent() {
     );
   }
 
+  if (showRacketDatabase) {
+    return (
+      <RacketDatabase onBackToHome={handleBackToHome} />
+    );
+  }
+
   if (showQuiz) {
     return (
-      <QuizForm onComplete={handleQuizComplete} />
+      <QuizForm onComplete={handleQuizComplete} onBackToHome={handleBackToHome} />
     );
   }
 
   return (
     <main className="min-h-screen flex flex-col">
-      <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} />
+      <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} onViewRacketDatabase={handleViewRacketDatabase} />
       
       {/* Login Modal */}
       {showLoginModal && (
