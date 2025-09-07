@@ -12,6 +12,15 @@ export const equipment: Equipment[] = [
     imageUrl: '/images/babolat-pure-aero-2023.svg'
   },
   {
+    id: 'yonex-vcore-100-equipment',
+    name: 'Yonex VCORE 100',
+    category: 'Tennis Rackets',
+    description: 'Spin-focused racket with Aero Fin Technology for enhanced aerodynamics and spin. Great for aggressive players.',
+    features: ['Aero Fin Technology', 'Excellent spin and power', 'Professional quality', 'Great aerodynamics'],
+    affiliateLink: 'https://amzn.to/42dZBjn',
+    imageUrl: '/images/yonex-vcore-100.svg'
+  },
+  {
     id: 'wilson-pro-staff-rf97-v14-equipment',
     name: 'Wilson Pro Staff RF97 v14',
     category: 'Tennis Rackets',
@@ -21,22 +30,22 @@ export const equipment: Equipment[] = [
     imageUrl: '/images/wilson-pro-staff-rf97-v14.svg'
   },
   {
-    id: 'yonex-ezone-100-equipment',
-    name: 'Yonex EZONE 100',
-    category: 'Tennis Rackets',
-    description: 'Versatile power racket with Isometric design for enhanced sweet spot and comfort. Great for intermediate players.',
-    features: ['Isometric design', 'Enhanced sweet spot', '100 sq in head size', 'Great comfort'],
-    affiliateLink: 'https://www.amazon.com/Yonex-EZONE-Tennis-Racket-Intermediate/dp/B0BQZQZQZR/',
-    imageUrl: '/images/yonex-ezone-100.svg'
-  },
-  {
     id: 'head-radical-mp-2021-equipment',
     name: 'Head Radical MP 2021',
     category: 'Tennis Rackets',
     description: 'Versatile all-around racket with Graphene 360+ technology for balanced performance across all playing styles.',
     features: ['Graphene 360+ technology', 'Excellent versatility', '98 sq in head size', 'Balanced performance'],
-    affiliateLink: 'https://www.amazon.com/Head-Radical-Tennis-Racket-Intermediate/dp/B0BQZQZQZS/',
+    affiliateLink: 'https://amzn.to/4659MrL',
     imageUrl: '/images/head-radical-mp-2021.svg'
+  },
+  {
+    id: 'head-extreme-lite-mp-2023-equipment',
+    name: 'Head Extreme Lite MP 2023',
+    category: 'Tennis Rackets',
+    description: 'Lightweight beginner racket with Auxetic Technology for enhanced comfort and spin.',
+    features: ['Auxetic Technology', 'Lightweight design', 'Great spin and comfort', 'Quality construction'],
+    affiliateLink: 'https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html',
+    imageUrl: '/images/head-extreme-lite-mp-2023-v3.svg'
   },
   {
     id: 'wilson-clash-100ul-v4-equipment',
@@ -44,8 +53,44 @@ export const equipment: Equipment[] = [
     category: 'Tennis Rackets',
     description: 'Ultra-lightweight beginner racket with FreeFlex technology for maximum comfort and arm-friendly play.',
     features: ['FreeFlex technology', 'Ultra-lightweight', '100 sq in head size', 'Maximum comfort'],
-    affiliateLink: 'https://www.amazon.com/Wilson-Clash-Ultra-Light-Tennis-Racket/dp/B0BQZQZQZT/',
+    affiliateLink: 'https://amzn.to/3I7kUfL',
     imageUrl: '/images/wilson-clash-100ul-v4.svg'
+  },
+  {
+    id: 'yonex-vcore-100ul-v7-equipment',
+    name: 'Yonex VCORE 100UL v7',
+    category: 'Tennis Rackets',
+    description: 'Ultra-lightweight beginner racket with Aero Fin Technology for enhanced spin.',
+    features: ['Aero Fin Technology', 'Ultra-lightweight', 'Great spin and power', 'Quality construction'],
+    affiliateLink: 'https://amzn.to/4mZ9zha',
+    imageUrl: '/images/yonex-vcore-100ul-v7.svg'
+  },
+  {
+    id: 'yonex-ezone-100ul-v4-equipment',
+    name: 'Yonex EZONE 100UL v4',
+    category: 'Tennis Rackets',
+    description: 'Ultra-lightweight beginner racket with Isometric Design for enhanced spin and comfort.',
+    features: ['Isometric Design', 'Ultra-lightweight', 'Great spin and comfort', 'Quality construction'],
+    affiliateLink: 'https://amzn.to/4pc9dFg',
+    imageUrl: '/images/yonex-ezone-100ul-v4.svg'
+  },
+  {
+    id: 'babolat-pure-aero-vs-equipment',
+    name: 'Babolat Pure Aero VS',
+    category: 'Tennis Rackets',
+    description: 'Advanced spin racket with AeroModular technology for maximum precision and spin.',
+    features: ['AeroModular technology', 'Exceptional spin potential', 'Professional quality', 'Great for advanced players'],
+    affiliateLink: 'https://amzn.to/3JOKGWA',
+    imageUrl: '/images/babolat-pure-aero-vs.svg'
+  },
+  {
+    id: 'head-prestige-mp-2023-equipment',
+    name: 'Head Prestige MP 2023',
+    category: 'Tennis Rackets',
+    description: 'Precision control racket with Graphene 360+ technology for exceptional feel.',
+    features: ['Graphene 360+ technology', 'Exceptional control', 'Great feel', 'Professional quality'],
+    affiliateLink: 'https://amzn.to/4659MrL',
+    imageUrl: '/images/head-prestige-mp-2023.svg'
   },
 
   // TENNIS BALLS

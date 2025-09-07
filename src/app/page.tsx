@@ -138,18 +138,23 @@ function HomeContent() {
   
   const handleQuizComplete = (answers: QuizAnswer) => {
     setIsLoading(true);
-    // Simulate processing time
+    // Simulate processing time with 1 second delay
     setTimeout(() => {
       const recommendations = generateRecommendations(answers);
       setResults(recommendations);
       setIsLoading(false);
       setViewPreviousPlan(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handleEquipmentComplete = (answers: any) => {
-    setEquipmentResults(answers);
-    setShowEquipmentQuiz(false);
+    setIsLoading(true);
+    // Add 1 second delay before showing equipment results
+    setTimeout(() => {
+      setEquipmentResults(answers);
+      setShowEquipmentQuiz(false);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleBackToEquipment = () => {
@@ -191,7 +196,7 @@ function HomeContent() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Your AcePlan...</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Processing Your Results...</h2>
           <p className="text-gray-600">Analyzing your profile and generating personalized recommendations</p>
         </div>
       </div>

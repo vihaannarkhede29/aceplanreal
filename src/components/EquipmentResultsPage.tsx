@@ -147,7 +147,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
       yPosition += 8;
       
       doc.setFontSize(10);
-      doc.text(`Price: $${racket.price}`, 30, yPosition);
       yPosition += 6;
       doc.text(`Head Size: ${racket.headSize}`, 30, yPosition);
       yPosition += 6;
@@ -175,7 +174,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
       yPosition += 8;
       
       doc.setFontSize(10);
-      doc.text(`Price: $${string.price}`, 30, yPosition);
       yPosition += 6;
       doc.text(`Type: ${string.type}`, 30, yPosition);
       yPosition += 6;
@@ -221,7 +219,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
       content += '\nRecommended Rackets:\n';
       recommendedRackets.forEach((racket, index) => {
         content += `\n${index + 1}. ${racket.name}\n`;
-        content += `   Price: $${racket.price}\n`;
         content += `   Head Size: ${racket.headSize}\n`;
         content += `   Weight: ${racket.weight}\n`;
         content += `   Stiffness: ${racket.stiffness}\n`;
@@ -231,7 +228,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
       content += '\nRecommended Strings:\n';
       recommendedStrings.forEach((string, index) => {
         content += `\n${index + 1}. ${string.name}\n`;
-        content += `   Price: $${string.price}\n`;
         content += `   Type: ${string.type}\n`;
         content += `   Gauge: ${string.gauge}\n`;
         content += `   Description: ${string.description}\n`;
@@ -316,7 +312,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
                     <Star key={i} className={`h-4 w-4 ${i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
                   ))}
                 </div>
-                <p className="text-2xl font-bold text-blue-600">${racket.price}</p>
               </div>
               
               <div className="space-y-3 mb-6">
@@ -363,7 +358,6 @@ export default function EquipmentResultsPage({ answers, onBackToEquipment }: Equ
                     <Star key={i} className={`h-4 w-4 ${i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
                   ))}
                 </div>
-                <p className="text-2xl font-bold text-green-600">${string.price}</p>
               </div>
               
               <div className="space-y-3 mb-6">

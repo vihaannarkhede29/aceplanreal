@@ -184,9 +184,6 @@ export default function GearRecommendations({ skillLevel, trainingDays }: GearRe
             <h3 className="text-lg font-bold text-gray-900 mb-2">{item.name}</h3>
             <p className="text-gray-600 text-sm mb-4">{item.description}</p>
             
-            <div className="mb-4">
-              <span className="text-2xl font-bold text-green-600">{item.price}</span>
-            </div>
             
             <div className="mb-4">
               <h4 className="font-semibold text-gray-900 mb-2">Best For:</h4>
