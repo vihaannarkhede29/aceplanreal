@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import UserProfileHeader from './UserProfileHeader';
-import RacketOfTheWeek from './RacketOfTheWeek';
+import RacketOfTheDay from './RacketOfTheWeek';
 
 interface HeroSectionProps {
   onGetPlan: () => void;
@@ -378,8 +378,8 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
         </div>
       </div>
 
-      {/* Racket of the Week Section */}
-      <RacketOfTheWeek onGetEquipment={onGetEquipment} />
+      {/* Racket of the Day Section */}
+      <RacketOfTheDay onGetEquipment={onGetEquipment} />
     </>
   );
 }

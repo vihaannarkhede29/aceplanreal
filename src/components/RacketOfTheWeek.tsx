@@ -3,24 +3,24 @@
 import { Trophy, Star, ExternalLink, ArrowRight, Award } from 'lucide-react';
 import { rackets } from '@/data/rackets';
 
-interface RacketOfTheWeekProps {
+interface RacketOfTheDayProps {
   onGetEquipment: () => void;
 }
 
-export default function RacketOfTheWeek({ onGetEquipment }: RacketOfTheWeekProps) {
-  // Get current week number to rotate rackets
-  const getCurrentWeek = () => {
+export default function RacketOfTheDay({ onGetEquipment }: RacketOfTheDayProps) {
+  // Get current day number to rotate rackets
+  const getCurrentDay = () => {
     const now = new Date();
     const start = new Date(now.getFullYear(), 0, 1);
     const diff = now.getTime() - start.getTime();
-    const oneWeek = 1000 * 60 * 60 * 24 * 7;
-    return Math.floor(diff / oneWeek);
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
   };
 
-  // Select racket based on current week (cycles through top rackets)
+  // Select racket based on current day (cycles through top rackets)
   const topRackets = rackets.filter(racket => racket.category === 'best');
-  const currentWeek = getCurrentWeek();
-  const selectedRacket = topRackets[currentWeek % topRackets.length];
+  const currentDay = getCurrentDay();
+  const selectedRacket = topRackets[currentDay % topRackets.length];
 
   // Fallback to first racket if none found
   const racket = selectedRacket || rackets[0];
@@ -29,16 +29,16 @@ export default function RacketOfTheWeek({ onGetEquipment }: RacketOfTheWeekProps
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            <Award className="h-4 w-4" />
-            <span>Featured This Week</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Racket of the Week
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our expert pick for the best racket this week, chosen for its exceptional performance and value
-          </p>
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Award className="h-4 w-4" />
+              <span>Featured Today</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Racket of the Day
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our expert pick for the best racket today, chosen for its exceptional performance and value
+            </p>
         </div>
 
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 md:p-12 border border-blue-100">
@@ -126,17 +126,17 @@ export default function RacketOfTheWeek({ onGetEquipment }: RacketOfTheWeekProps
                 </div>
               </div>
 
-              {/* Why This Week */}
-              <div className="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl p-4 border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2">Why This Week?</h4>
-                <p className="text-blue-800 text-sm">
-                  {racket.level === 'Beginner-Intermediate' && "Perfect for players looking to improve their game with professional-quality equipment."}
-                  {racket.level === 'Intermediate-Advanced' && "Ideal for serious players who want to take their game to the next level."}
-                  {racket.level === 'Advanced' && "The choice of professionals and advanced players seeking maximum performance."}
-                  {racket.level === 'Intermediate' && "Great balance of performance and accessibility for developing players."}
-                  {racket.level === 'Beginner' && "Excellent starting point for new players with room to grow."}
-                </p>
-              </div>
+                {/* Why Today */}
+                <div className="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl p-4 border border-blue-200">
+                  <h4 className="font-semibold text-blue-900 mb-2">Why Today?</h4>
+                  <p className="text-blue-800 text-sm">
+                    {racket.level === 'Beginner-Intermediate' && "Perfect for players looking to improve their game with professional-quality equipment."}
+                    {racket.level === 'Intermediate-Advanced' && "Ideal for serious players who want to take their game to the next level."}
+                    {racket.level === 'Advanced' && "The choice of professionals and advanced players seeking maximum performance."}
+                    {racket.level === 'Intermediate' && "Great balance of performance and accessibility for developing players."}
+                    {racket.level === 'Beginner' && "Excellent starting point for new players with room to grow."}
+                  </p>
+                </div>
             </div>
           </div>
         </div>

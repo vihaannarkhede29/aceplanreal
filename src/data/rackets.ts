@@ -14,7 +14,7 @@ export const rackets: Racket[] = [
     pros: ['Exceptional spin potential', 'AeroModular technology', 'Great for aggressive players', 'Professional quality'],
     cons: ['Stiff feel may not suit everyone', 'Higher price point', 'Requires good technique'],
     affiliateLink: 'https://amzn.to/3JOKGWA',
-    imageUrl: '/images/babolat-pure-aero-2023.jpg',
+    imageUrl: '/images/babolat-pure-aero-2023.svg',
     category: 'best'
   },
   {
@@ -29,7 +29,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design for larger sweet spot', 'Great spin and comfort', 'Versatile performance', 'Quality construction'],
     cons: ['May lack power for some players', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46aFhRn',
-    imageUrl: '/images/yonex-ezone-100.jpg',
+    imageUrl: '/images/yonex-ezone-100.svg',
     category: 'better'
   },
   {
@@ -44,7 +44,7 @@ export const rackets: Racket[] = [
     pros: ['Excellent power and spin', 'FSI Power technology', 'Professional quality', 'Great for aggressive play'],
     cons: ['Stiff feel', 'Higher price', 'Requires good technique'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/babolat-pure-drive.jpg',
+    imageUrl: '/images/babolat-pure-drive.svg',
     category: 'good'
   },
   {
@@ -59,7 +59,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Excellent spin and power', 'Professional quality', 'Great aerodynamics'],
     cons: ['Higher price point', 'May require advanced technique'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-100.jpg',
+    imageUrl: '/images/yonex-vcore-100.svg',
     category: 'best'
   },
 
@@ -76,7 +76,7 @@ export const rackets: Racket[] = [
     pros: ['Exceptional control and precision', 'Braided Graphite technology', 'Professional quality', 'Great for advanced players'],
     cons: ['Heavy weight requires strength', 'Small head size', 'High price point', 'Not forgiving'],
     affiliateLink: 'https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/',
-    imageUrl: '/images/wilson-pro-staff-rf97-v14.jpg',
+    imageUrl: '/images/wilson-pro-staff-rf97-v14.svg',
     category: 'best'
   },
   {
@@ -91,7 +91,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Excellent precision', 'Great feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'Higher price point', 'Less power'],
     affiliateLink: 'https://princetennis.com/tour-100p',
-    imageUrl: '/images/prince-textreme-tour-100p.jpg',
+    imageUrl: '/images/prince-textreme-tour-100p.svg',
     category: 'better'
   },
   {
@@ -106,7 +106,7 @@ export const rackets: Racket[] = [
     pros: ['FeelFlex technology', 'Excellent precision', 'Great feel', 'Versatile performance'],
     cons: ['May lack power for some', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4g66wAR',
-    imageUrl: '/images/wilson-blade-98-v8.jpg',
+    imageUrl: '/images/wilson-blade-98-v8.svg',
     category: 'good'
   },
   {
@@ -121,7 +121,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Flexible feel', 'Excellent precision', 'Arm-friendly'],
     cons: ['Requires advanced technique', 'Less power', 'Higher price'],
     affiliateLink: 'https://www.tennis-warehouse.com/Prince_Phantom_100X_305g/descpageRCTWABG-PHNX5.html',
-    imageUrl: '/images/prince-phantom-100x.jpg',
+    imageUrl: '/images/prince-phantom-100x.svg',
     category: 'better'
   },
 
@@ -138,7 +138,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Excellent versatility', 'Balanced performance', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-radical-mp-2021.jpg',
+    imageUrl: '/images/head-radical-mp-2021.svg',
     category: 'best'
   },
   {
@@ -153,7 +153,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great versatility', 'Balanced power and control', 'Professional quality'],
     cons: ['Stiff feel', 'Higher price', 'May require good technique'],
     affiliateLink: 'https://amzn.to/46bXq15',
-    imageUrl: '/images/babolat-pure-strike-16x19.jpg',
+    imageUrl: '/images/babolat-pure-strike-16x19.svg',
     category: 'better'
   },
   {
@@ -168,7 +168,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-speed-mp.jpg',
+    imageUrl: '/images/head-speed-mp.svg',
     category: 'good'
   },
   {
@@ -183,7 +183,7 @@ export const rackets: Racket[] = [
     pros: ['FreeFlex technology', 'Excellent flexibility', 'Great comfort', 'Arm-friendly'],
     cons: ['May lack power for some', 'Higher price point'],
     affiliateLink: 'https://amzn.to/47wU9f1',
-    imageUrl: '/images/wilson-clash-100-v2.jpg',
+    imageUrl: '/images/wilson-clash-100-v2.svg',
     category: 'better'
   },
 
@@ -200,7 +200,7 @@ export const rackets: Racket[] = [
     pros: ['Power Rib technology', 'Lightweight and easy to swing', 'Great for beginners', 'Comfortable feel'],
     cons: ['Limited power for advanced players', 'May feel too light for some'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-ultra-100ul-v5.jpg',
+    imageUrl: '/images/wilson-ultra-100ul-v5.svg',
     category: 'good'
   },
   {
@@ -215,7 +215,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight design', 'Great for beginners', 'Good power and spin'],
     cons: ['May feel unstable on hard shots', 'Limited control'],
     affiliateLink: 'https://amzn.to/3V4ls96',
-    imageUrl: '/images/babolat-pure-drive-lite-100ul-v2.jpg',
+    imageUrl: '/images/babolat-pure-drive-lite-100ul-v2.svg',
     category: 'better'
   },
   {
@@ -230,7 +230,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Lightweight design', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html',
-    imageUrl: '/images/head-extreme-lite-mp-2023-v3.jpg',
+    imageUrl: '/images/head-extreme-lite-mp-2023-v3.svg',
     category: 'best'
   },
   {
@@ -245,7 +245,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46rfDZK',
-    imageUrl: '/images/yonex-ezone-98ul-v3.jpg',
+    imageUrl: '/images/yonex-ezone-98ul-v3.svg',
     category: 'good'
   },
   {
@@ -260,7 +260,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Small head size', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-95ul-v3',
-    imageUrl: '/images/prince-textreme-tour-95ul-v3.jpg',
+    imageUrl: '/images/prince-textreme-tour-95ul-v3.svg',
     category: 'better'
   },
   {
@@ -275,7 +275,7 @@ export const rackets: Racket[] = [
     pros: ['FreeFlex technology', 'Ultra-lightweight', 'Maximum comfort', 'Great for beginners'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3I7kUfL',
-    imageUrl: '/images/wilson-clash-100ul-v4.jpg',
+    imageUrl: '/images/wilson-clash-100ul-v4.svg',
     category: 'best'
   },
   {
@@ -290,7 +290,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Lightweight design', 'Great spin and power', 'Quality construction'],
     cons: ['May feel unstable', 'Higher price point'],
     affiliateLink: 'https://amzn.to/42koJoC',
-    imageUrl: '/images/babolat-pure-aero-lite-100ul-v2.jpg',
+    imageUrl: '/images/babolat-pure-aero-lite-100ul-v2.svg',
     category: 'good'
   },
   {
@@ -305,7 +305,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Lightweight and versatile', 'Great for beginners', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://tennisexpress.com/products/head-speed-mp-l-2024-tennis-racquet-108290',
-    imageUrl: '/images/head-speed-mp-lite-2024.jpg',
+    imageUrl: '/images/head-speed-mp-lite-2024.svg',
     category: 'better'
   },
   {
@@ -320,7 +320,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Ultra-lightweight', 'Great spin and power', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mZ9zha',
-    imageUrl: '/images/yonex-vcore-100ul-v7.jpg',
+    imageUrl: '/images/yonex-vcore-100ul-v7.svg',
     category: 'best'
   },
   {
@@ -335,7 +335,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Lightweight and precise', 'Great comfort', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/phantom-100ul-v4',
-    imageUrl: '/images/prince-phantom-100ul-v4.jpg',
+    imageUrl: '/images/prince-phantom-100ul-v4.svg',
     category: 'good'
   },
   {
@@ -350,7 +350,7 @@ export const rackets: Racket[] = [
     pros: ['FeelFlex technology', 'Larger head size', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack control', 'Higher price point'],
     affiliateLink: 'https://amzn.to/45REF41',
-    imageUrl: '/images/wilson-blade-104ul-v9.jpg',
+    imageUrl: '/images/wilson-blade-104ul-v9.svg',
     category: 'better'
   },
   {
@@ -365,7 +365,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/41Dt2vc',
-    imageUrl: '/images/babolat-pure-strike-100ul-v4.jpg',
+    imageUrl: '/images/babolat-pure-strike-100ul-v4.svg',
     category: 'good'
   },
   {
@@ -380,7 +380,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527',
-    imageUrl: '/images/head-prestige-mp-lite-2023-v3.jpg',
+    imageUrl: '/images/head-prestige-mp-lite-2023-v3.svg',
     category: 'better'
   },
   {
@@ -395,7 +395,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Ultra-lightweight', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4pc9dFg',
-    imageUrl: '/images/yonex-ezone-100ul-v4.jpg',
+    imageUrl: '/images/yonex-ezone-100ul-v4.svg',
     category: 'best'
   },
 
@@ -412,7 +412,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great spin and power', 'Professional quality', 'Versatile performance'],
     cons: ['Higher price point', 'May require good technique'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/head-extreme-mp-2023.jpg',
+    imageUrl: '/images/head-extreme-mp-2023.svg',
     category: 'better'
   },
   {
@@ -427,7 +427,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Great power and spin', 'Quality construction', 'Good for aggressive play'],
     cons: ['May lack control', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/wilson-burn-100-v4.jpg',
+    imageUrl: '/images/wilson-burn-100-v4.svg',
     category: 'good'
   },
   {
@@ -442,7 +442,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Exceptional spin potential', 'Professional quality', 'Great for advanced players'],
     cons: ['Requires advanced technique', 'High price point', 'Stiff feel'],
     affiliateLink: 'https://amzn.to/3JOKGWA',
-    imageUrl: '/images/babolat-pure-aero-vs.jpg',
+    imageUrl: '/images/babolat-pure-aero-vs.svg',
     category: 'best'
   },
 
@@ -459,7 +459,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Exceptional control', 'Great feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'Higher price point', 'Less power'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-prestige-mp-2023.jpg',
+    imageUrl: '/images/head-prestige-mp-2023.svg',
     category: 'best'
   },
   {
@@ -474,7 +474,7 @@ export const rackets: Racket[] = [
     pros: ['Braided Graphite technology', 'Exceptional control', 'Professional quality', 'Great for advanced players'],
     cons: ['Heavy weight requires strength', 'Small head size', 'High price point'],
     affiliateLink: 'https://amzn.to/4muEr90',
-    imageUrl: '/images/wilson-pro-staff-97-v14.jpg',
+    imageUrl: '/images/wilson-pro-staff-97-v14.svg',
     category: 'better'
   },
   {
@@ -489,7 +489,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Exceptional control', 'Premium materials', 'Professional grade'],
     cons: ['Very high price point', 'Requires advanced skills', 'Less forgiving'],
     affiliateLink: 'https://amzn.to/4ltV0QR',
-    imageUrl: '/images/yonex-vcore-pro-97.jpg',
+    imageUrl: '/images/yonex-vcore-pro-97.svg',
     category: 'best'
   },
   {
@@ -504,7 +504,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Excellent precision', 'Great feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'Small head size', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-95',
-    imageUrl: '/images/prince-textreme-tour-95.jpg',
+    imageUrl: '/images/prince-textreme-tour-95.svg',
     category: 'better'
   },
 
@@ -521,7 +521,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-gravity-mp-2023.jpg',
+    imageUrl: '/images/head-gravity-mp-2023.svg',
     category: 'better'
   },
   {
@@ -536,7 +536,7 @@ export const rackets: Racket[] = [
     pros: ['Power Rib technology', 'Great versatility', 'Enhanced power', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-ultra-100-v4.jpg',
+    imageUrl: '/images/wilson-ultra-100-v4.svg',
     category: 'good'
   },
   {
@@ -551,7 +551,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great control', 'Enhanced precision', 'Professional quality'],
     cons: ['Stiff feel', 'Higher price', 'Requires good technique'],
     affiliateLink: 'https://amzn.to/46bXq15',
-    imageUrl: '/images/babolat-pure-strike-18x20.jpg',
+    imageUrl: '/images/babolat-pure-strike-18x20.svg',
     category: 'better'
   },
   {
@@ -566,7 +566,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Great versatility', 'Enhanced precision', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46aFhRn',
-    imageUrl: '/images/yonex-ezone-98.jpg',
+    imageUrl: '/images/yonex-ezone-98.svg',
     category: 'good'
   },
 
@@ -583,7 +583,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced performance', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-speed-pro-2023.jpg',
+    imageUrl: '/images/head-speed-pro-2023.svg',
     category: 'better'
   },
   {
@@ -598,7 +598,7 @@ export const rackets: Racket[] = [
     pros: ['FeelFlex technology', 'Great versatility', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4g66wAR',
-    imageUrl: '/images/wilson-blade-100-v8.jpg',
+    imageUrl: '/images/wilson-blade-100-v8.svg',
     category: 'good'
   },
   {
@@ -613,7 +613,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great power and control', 'Professional quality', 'Versatile performance'],
     cons: ['Stiff feel', 'Higher price', 'May require good technique'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/babolat-pure-drive-tour.jpg',
+    imageUrl: '/images/babolat-pure-drive-tour.svg',
     category: 'better'
   },
   {
@@ -628,7 +628,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Great spin potential', 'Professional quality', 'Enhanced aerodynamics'],
     cons: ['Higher price point', 'May require good technique'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-98.jpg',
+    imageUrl: '/images/yonex-vcore-98.svg',
     category: 'good'
   },
 
@@ -645,7 +645,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight design', 'Great versatility', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-radical-lite-mp-2023.jpg',
+    imageUrl: '/images/head-radical-lite-mp-2023.svg',
     category: 'better'
   },
   {
@@ -660,7 +660,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Ultra-lightweight', 'Great spin potential', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-burn-100ul-v4.jpg',
+    imageUrl: '/images/wilson-burn-100ul-v4.svg',
     category: 'good'
   },
   {
@@ -675,7 +675,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Lightweight design', 'Great spin and power', 'Quality construction'],
     cons: ['May feel unstable', 'Higher price point'],
     affiliateLink: 'https://amzn.to/42koJoC',
-    imageUrl: '/images/babolat-pure-aero-lite-100ul-v3.jpg',
+    imageUrl: '/images/babolat-pure-aero-lite-100ul-v3.svg',
     category: 'better'
   },
   {
@@ -690,7 +690,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Lightweight design', 'Great comfort and spin', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html',
-    imageUrl: '/images/head-extreme-lite-mp-2024.jpg',
+    imageUrl: '/images/head-extreme-lite-mp-2024.svg',
     category: 'best'
   },
   {
@@ -705,7 +705,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46rfDZK',
-    imageUrl: '/images/yonex-ezone-98ul-v4.jpg',
+    imageUrl: '/images/yonex-ezone-98ul-v4.svg',
     category: 'good'
   },
   {
@@ -720,7 +720,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-100ul-v4',
-    imageUrl: '/images/prince-textreme-tour-100ul-v4.jpg',
+    imageUrl: '/images/prince-textreme-tour-100ul-v4.svg',
     category: 'better'
   },
   {
@@ -735,7 +735,7 @@ export const rackets: Racket[] = [
     pros: ['FreeFlex technology', 'Ultra-lightweight', 'Maximum comfort', 'Great for beginners'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3I7kUfL',
-    imageUrl: '/images/wilson-clash-100ul-v5.jpg',
+    imageUrl: '/images/wilson-clash-100ul-v5.svg',
     category: 'best'
   },
   {
@@ -750,7 +750,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/41Dt2vc',
-    imageUrl: '/images/babolat-pure-strike-lite-100ul-v4.jpg',
+    imageUrl: '/images/babolat-pure-strike-lite-100ul-v4.svg',
     category: 'good'
   },
   {
@@ -765,7 +765,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527',
-    imageUrl: '/images/head-prestige-mp-lite-2024.jpg',
+    imageUrl: '/images/head-prestige-mp-lite-2024.svg',
     category: 'better'
   },
   {
@@ -780,7 +780,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Ultra-lightweight', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4pc9dFg',
-    imageUrl: '/images/yonex-ezone-100ul-v5.jpg',
+    imageUrl: '/images/yonex-ezone-100ul-v5.svg',
     category: 'best'
   },
 
@@ -797,7 +797,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Maximum spin and power', 'Professional quality', 'Great for advanced players'],
     cons: ['Requires advanced technique', 'High price point', 'Stiff feel'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/head-extreme-pro-2023.jpg',
+    imageUrl: '/images/head-extreme-pro-2023.svg',
     category: 'best'
   },
   {
@@ -812,7 +812,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Exceptional spin potential', 'Professional quality', 'Great for aggressive play'],
     cons: ['May lack control', 'Higher price point', 'Requires good technique'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-burn-100s-v4.jpg',
+    imageUrl: '/images/wilson-burn-100s-v4.svg',
     category: 'better'
   },
   {
@@ -827,7 +827,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Exceptional spin potential', 'Professional quality', 'Great for advanced players'],
     cons: ['Requires advanced technique', 'High price point', 'Stiff feel'],
     affiliateLink: 'https://amzn.to/3JOKGWA',
-    imageUrl: '/images/babolat-pure-aero-98.jpg',
+    imageUrl: '/images/babolat-pure-aero-98.svg',
     category: 'best'
   },
   {
@@ -842,7 +842,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Great spin and control', 'Professional quality', 'Enhanced aerodynamics'],
     cons: ['Requires advanced technique', 'High price point', 'Small head size'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-95.jpg',
+    imageUrl: '/images/yonex-vcore-95.svg',
     category: 'better'
   },
 
@@ -859,7 +859,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Exceptional control', 'Professional quality', 'Great for advanced players'],
     cons: ['Heavy weight requires strength', 'High price point', 'Requires advanced technique'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-prestige-pro-2023.jpg',
+    imageUrl: '/images/head-prestige-pro-2023.svg',
     category: 'best'
   },
   {
@@ -874,7 +874,7 @@ export const rackets: Racket[] = [
     pros: ['Braided Graphite technology', 'Great control', 'Lightweight design', 'Professional quality'],
     cons: ['Small head size', 'Higher price point', 'May require good technique'],
     affiliateLink: 'https://amzn.to/4muEr90',
-    imageUrl: '/images/wilson-pro-staff-97l-v14.jpg',
+    imageUrl: '/images/wilson-pro-staff-97l-v14.svg',
     category: 'better'
   },
   {
@@ -889,7 +889,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Maximum precision', 'Professional quality', 'Great for advanced players'],
     cons: ['Heavy weight requires strength', 'Very high price point', 'Requires advanced skills'],
     affiliateLink: 'https://amzn.to/4ltV0QR',
-    imageUrl: '/images/yonex-vcore-pro-97d.jpg',
+    imageUrl: '/images/yonex-vcore-pro-97d.svg',
     category: 'best'
   },
   {
@@ -904,7 +904,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Great control', 'Enhanced feel', 'Professional quality'],
     cons: ['May lack power', 'Higher price point', 'Requires good technique'],
     affiliateLink: 'https://princetennis.com/tour-100',
-    imageUrl: '/images/prince-textreme-tour-100.jpg',
+    imageUrl: '/images/prince-textreme-tour-100.svg',
     category: 'good'
   },
 
@@ -921,7 +921,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Exceptional versatility', 'Enhanced feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'High price point', 'May not excel in any one area'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-gravity-pro-2023.jpg',
+    imageUrl: '/images/head-gravity-pro-2023.svg',
     category: 'best'
   },
   {
@@ -936,7 +936,7 @@ export const rackets: Racket[] = [
     pros: ['Power Rib technology', 'Great spin and power', 'Versatile performance', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-ultra-100s-v4.jpg',
+    imageUrl: '/images/wilson-ultra-100s-v4.svg',
     category: 'good'
   },
   {
@@ -951,7 +951,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great versatility', 'Balanced power and control', 'Professional quality'],
     cons: ['Stiff feel', 'Higher price', 'May require good technique'],
     affiliateLink: 'https://amzn.to/46bXq15',
-    imageUrl: '/images/babolat-pure-strike-100.jpg',
+    imageUrl: '/images/babolat-pure-strike-100.svg',
     category: 'better'
   },
   {
@@ -966,7 +966,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Lightweight and versatile', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46aFhRn',
-    imageUrl: '/images/yonex-ezone-100l.jpg',
+    imageUrl: '/images/yonex-ezone-100l.svg',
     category: 'good'
   },
 
@@ -983,7 +983,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced performance', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-speed-mp-2023.jpg',
+    imageUrl: '/images/head-speed-mp-2023.svg',
     category: 'better'
   },
   {
@@ -998,7 +998,7 @@ export const rackets: Racket[] = [
     pros: ['FeelFlex technology', 'Larger head size', 'Great feel and power', 'Quality construction'],
     cons: ['May lack control', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4g66wAR',
-    imageUrl: '/images/wilson-blade-104-v8.jpg',
+    imageUrl: '/images/wilson-blade-104-v8.svg',
     category: 'good'
   },
   {
@@ -1013,7 +1013,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight design', 'Great power and control', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/babolat-pure-drive-lite.jpg',
+    imageUrl: '/images/babolat-pure-drive-lite.svg',
     category: 'better'
   },
   {
@@ -1028,7 +1028,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Lightweight design', 'Great spin potential', 'Enhanced aerodynamics'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-100l.jpg',
+    imageUrl: '/images/yonex-vcore-100l.svg',
     category: 'good'
   },
 
@@ -1045,7 +1045,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight design', 'Great versatility', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-radical-lite-mp-2024.jpg',
+    imageUrl: '/images/head-radical-lite-mp-2024.svg',
     category: 'better'
   },
   {
@@ -1060,7 +1060,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Ultra-lightweight', 'Great spin potential', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-burn-100ul-v5.jpg',
+    imageUrl: '/images/wilson-burn-100ul-v5.svg',
     category: 'good'
   },
   {
@@ -1075,7 +1075,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Lightweight design', 'Great spin and power', 'Quality construction'],
     cons: ['May feel unstable', 'Higher price point'],
     affiliateLink: 'https://amzn.to/42koJoC',
-    imageUrl: '/images/babolat-pure-aero-lite-100ul-v4.jpg',
+    imageUrl: '/images/babolat-pure-aero-lite-100ul-v4.svg',
     category: 'better'
   },
   {
@@ -1090,7 +1090,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Lightweight design', 'Great comfort and spin', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html',
-    imageUrl: '/images/head-extreme-lite-mp-2025.jpg',
+    imageUrl: '/images/head-extreme-lite-mp-2025.svg',
     category: 'best'
   },
   {
@@ -1105,7 +1105,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46rfDZK',
-    imageUrl: '/images/yonex-ezone-98ul-v5.jpg',
+    imageUrl: '/images/yonex-ezone-98ul-v5.svg',
     category: 'good'
   },
   {
@@ -1120,7 +1120,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-100ul-v5',
-    imageUrl: '/images/prince-textreme-tour-100ul-v5.jpg',
+    imageUrl: '/images/prince-textreme-tour-100ul-v5.svg',
     category: 'better'
   },
   {
@@ -1135,7 +1135,7 @@ export const rackets: Racket[] = [
     pros: ['FreeFlex technology', 'Ultra-lightweight', 'Maximum comfort', 'Great for beginners'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3I7kUfL',
-    imageUrl: '/images/wilson-clash-100ul-v6.jpg',
+    imageUrl: '/images/wilson-clash-100ul-v6.svg',
     category: 'best'
   },
   {
@@ -1150,7 +1150,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/41Dt2vc',
-    imageUrl: '/images/babolat-pure-strike-lite-100ul-v5.jpg',
+    imageUrl: '/images/babolat-pure-strike-lite-100ul-v5.svg',
     category: 'good'
   },
   {
@@ -1165,7 +1165,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527',
-    imageUrl: '/images/head-prestige-mp-lite-2025.jpg',
+    imageUrl: '/images/head-prestige-mp-lite-2025.svg',
     category: 'better'
   },
   {
@@ -1180,7 +1180,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Ultra-lightweight', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4pc9dFg',
-    imageUrl: '/images/yonex-ezone-100ul-v6.jpg',
+    imageUrl: '/images/yonex-ezone-100ul-v6.svg',
     category: 'best'
   },
 
@@ -1197,7 +1197,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great spin and power', 'Professional quality', 'Versatile performance'],
     cons: ['Higher price point', 'May require good technique'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/head-extreme-mp-2024.jpg',
+    imageUrl: '/images/head-extreme-mp-2024.svg',
     category: 'better'
   },
   {
@@ -1212,7 +1212,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Great power and spin', 'Quality construction', 'Good for aggressive play'],
     cons: ['May lack control', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-burn-100-v5.jpg',
+    imageUrl: '/images/wilson-burn-100-v5.svg',
     category: 'good'
   },
   {
@@ -1227,7 +1227,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Exceptional spin potential', 'Professional quality', 'Great for advanced players'],
     cons: ['Requires advanced technique', 'High price point', 'Stiff feel'],
     affiliateLink: 'https://amzn.to/3JOKGWA',
-    imageUrl: '/images/babolat-pure-aero-vs-2023.jpg',
+    imageUrl: '/images/babolat-pure-aero-vs-2023.svg',
     category: 'best'
   },
   {
@@ -1242,7 +1242,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Great spin and control', 'Professional quality', 'Enhanced aerodynamics'],
     cons: ['Requires advanced technique', 'High price point', 'Small head size'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-95-2023.jpg',
+    imageUrl: '/images/yonex-vcore-95-2023.svg',
     category: 'better'
   },
   {
@@ -1257,7 +1257,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Exceptional control', 'Great feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'Higher price point', 'Less power'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-prestige-mp-2024.jpg',
+    imageUrl: '/images/head-prestige-mp-2024.svg',
     category: 'best'
   },
   {
@@ -1272,7 +1272,7 @@ export const rackets: Racket[] = [
     pros: ['Braided Graphite technology', 'Exceptional control', 'Professional quality', 'Great for advanced players'],
     cons: ['Heavy weight requires strength', 'Small head size', 'High price point'],
     affiliateLink: 'https://amzn.to/4muEr90',
-    imageUrl: '/images/wilson-pro-staff-97-v15.jpg',
+    imageUrl: '/images/wilson-pro-staff-97-v15.svg',
     category: 'better'
   },
   {
@@ -1287,7 +1287,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Exceptional control', 'Premium materials', 'Professional grade'],
     cons: ['Very high price point', 'Requires advanced skills', 'Less forgiving'],
     affiliateLink: 'https://amzn.to/4ltV0QR',
-    imageUrl: '/images/yonex-vcore-pro-97-2023.jpg',
+    imageUrl: '/images/yonex-vcore-pro-97-2023.svg',
     category: 'best'
   },
   {
@@ -1302,7 +1302,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Excellent precision', 'Great feel', 'Professional quality'],
     cons: ['Requires advanced technique', 'Small head size', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-95-2023',
-    imageUrl: '/images/prince-textreme-tour-95-2023.jpg',
+    imageUrl: '/images/prince-textreme-tour-95-2023.svg',
     category: 'better'
   },
   {
@@ -1317,7 +1317,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-gravity-mp-2024.jpg',
+    imageUrl: '/images/head-gravity-mp-2024.svg',
     category: 'better'
   },
   {
@@ -1332,7 +1332,7 @@ export const rackets: Racket[] = [
     pros: ['Power Rib technology', 'Great versatility', 'Enhanced power', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-ultra-100-v5.jpg',
+    imageUrl: '/images/wilson-ultra-100-v5.svg',
     category: 'good'
   },
   {
@@ -1347,7 +1347,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great control', 'Enhanced precision', 'Professional quality'],
     cons: ['Stiff feel', 'Higher price', 'Requires good technique'],
     affiliateLink: 'https://amzn.to/46bXq15',
-    imageUrl: '/images/babolat-pure-strike-18x20-2023.jpg',
+    imageUrl: '/images/babolat-pure-strike-18x20-2023.svg',
     category: 'better'
   },
   {
@@ -1362,7 +1362,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric design', 'Great versatility', 'Enhanced precision', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46aFhRn',
-    imageUrl: '/images/yonex-ezone-98-2023.jpg',
+    imageUrl: '/images/yonex-ezone-98-2023.svg',
     category: 'good'
   },
   {
@@ -1377,7 +1377,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Great versatility', 'Enhanced performance', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4mbe2Mw',
-    imageUrl: '/images/head-speed-pro-2024.jpg',
+    imageUrl: '/images/head-speed-pro-2024.svg',
     category: 'better'
   },
   {
@@ -1392,7 +1392,7 @@ export const rackets: Racket[] = [
     pros: ['FeelFlex technology', 'Great versatility', 'Enhanced feel', 'Quality construction'],
     cons: ['May not excel in any one area', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4g66wAR',
-    imageUrl: '/images/wilson-blade-100-v9.jpg',
+    imageUrl: '/images/wilson-blade-100-v9.svg',
     category: 'good'
   },
   {
@@ -1407,7 +1407,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Great power and control', 'Professional quality', 'Versatile performance'],
     cons: ['Stiff feel', 'Higher price', 'May require good technique'],
     affiliateLink: 'https://amzn.to/3K7poU6',
-    imageUrl: '/images/babolat-pure-drive-tour-2023.jpg',
+    imageUrl: '/images/babolat-pure-drive-tour-2023.svg',
     category: 'better'
   },
   {
@@ -1422,7 +1422,7 @@ export const rackets: Racket[] = [
     pros: ['Aero Fin Technology', 'Great spin potential', 'Professional quality', 'Enhanced aerodynamics'],
     cons: ['Higher price point', 'May require good technique'],
     affiliateLink: 'https://amzn.to/42dZBjn',
-    imageUrl: '/images/yonex-vcore-98-2023.jpg',
+    imageUrl: '/images/yonex-vcore-98-2023.svg',
     category: 'good'
   },
   {
@@ -1437,7 +1437,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight design', 'Great versatility', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4659MrL',
-    imageUrl: '/images/head-radical-lite-mp-2025.jpg',
+    imageUrl: '/images/head-radical-lite-mp-2025.svg',
     category: 'better'
   },
   {
@@ -1452,7 +1452,7 @@ export const rackets: Racket[] = [
     pros: ['Spin Effect technology', 'Ultra-lightweight', 'Great spin potential', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3VDxJkY',
-    imageUrl: '/images/wilson-burn-100ul-v6.jpg',
+    imageUrl: '/images/wilson-burn-100ul-v6.svg',
     category: 'good'
   },
   {
@@ -1467,7 +1467,7 @@ export const rackets: Racket[] = [
     pros: ['AeroModular technology', 'Lightweight design', 'Great spin and power', 'Quality construction'],
     cons: ['May feel unstable', 'Higher price point'],
     affiliateLink: 'https://amzn.to/42koJoC',
-    imageUrl: '/images/babolat-pure-aero-lite-100ul-v5.jpg',
+    imageUrl: '/images/babolat-pure-aero-lite-100ul-v5.svg',
     category: 'better'
   },
   {
@@ -1482,7 +1482,7 @@ export const rackets: Racket[] = [
     pros: ['Auxetic Technology', 'Lightweight design', 'Great comfort and spin', 'Quality construction'],
     cons: ['May lack power for advanced players', 'Higher price point'],
     affiliateLink: 'https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html',
-    imageUrl: '/images/head-extreme-lite-mp-2026.jpg',
+    imageUrl: '/images/head-extreme-lite-mp-2026.svg',
     category: 'best'
   },
   {
@@ -1497,7 +1497,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://amzn.to/46rfDZK',
-    imageUrl: '/images/yonex-ezone-98ul-v6.jpg',
+    imageUrl: '/images/yonex-ezone-98ul-v6.svg',
     category: 'good'
   },
   {
@@ -1512,7 +1512,7 @@ export const rackets: Racket[] = [
     pros: ['Textreme Technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://princetennis.com/tour-100ul-v6',
-    imageUrl: '/images/prince-textreme-tour-100ul-v6.jpg',
+    imageUrl: '/images/prince-textreme-tour-100ul-v6.svg',
     category: 'better'
   },
   {
@@ -1527,7 +1527,7 @@ export const rackets: Racket[] = [
     pros: ['FreeFlex technology', 'Ultra-lightweight', 'Maximum comfort', 'Great for beginners'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/3I7kUfL',
-    imageUrl: '/images/wilson-clash-100ul-v7.jpg',
+    imageUrl: '/images/wilson-clash-100ul-v7.svg',
     category: 'best'
   },
   {
@@ -1542,7 +1542,7 @@ export const rackets: Racket[] = [
     pros: ['FSI Power technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['May lack power', 'Higher price point'],
     affiliateLink: 'https://amzn.to/41Dt2vc',
-    imageUrl: '/images/babolat-pure-strike-lite-100ul-v6.jpg',
+    imageUrl: '/images/babolat-pure-strike-lite-100ul-v6.svg',
     category: 'good'
   },
   {
@@ -1557,7 +1557,7 @@ export const rackets: Racket[] = [
     pros: ['Graphene 360+ technology', 'Lightweight and precise', 'Great for beginners', 'Quality construction'],
     cons: ['Smaller head size', 'Higher price point'],
     affiliateLink: 'https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527',
-    imageUrl: '/images/head-prestige-mp-lite-2026.jpg',
+    imageUrl: '/images/head-prestige-mp-lite-2026.svg',
     category: 'better'
   },
   {
@@ -1572,7 +1572,7 @@ export const rackets: Racket[] = [
     pros: ['Isometric Design', 'Ultra-lightweight', 'Great spin and comfort', 'Quality construction'],
     cons: ['May lack stability', 'Higher price point'],
     affiliateLink: 'https://amzn.to/4pc9dFg',
-    imageUrl: '/images/yonex-ezone-100ul-v7.jpg',
+    imageUrl: '/images/yonex-ezone-100ul-v7.svg',
     category: 'best'
   }
 ];
