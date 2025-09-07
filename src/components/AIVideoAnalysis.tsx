@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { Upload, Play, Pause, RotateCcw, Download, ArrowLeft, Camera, Zap, Target, TrendingUp, AlertCircle, CheckCircle } from 'lucide-react';
+import { subscribeToAIVideoAnalysis } from '@/lib/emailCollection';
 
 interface AIVideoAnalysisProps {
   onBackToHome?: () => void;
@@ -32,6 +33,9 @@ export default function AIVideoAnalysis({ onBackToHome }: AIVideoAnalysisProps) 
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isComingSoon, setIsComingSoon] = useState(true);
+  const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -116,6 +120,27 @@ export default function AIVideoAnalysis({ onBackToHome }: AIVideoAnalysisProps) 
     setVideoPreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
+    }
+  };
+
+  const handleEmailSubscribe = async () => {
+    if (!email || !email.includes('@')) {
+      setSubscriptionStatus('error');
+      return;
+    }
+
+    setIsSubscribing(true);
+    setSubscriptionStatus('idle');
+
+    try {
+      await subscribeToAIVideoAnalysis(email);
+      setSubscriptionStatus('success');
+      setEmail('');
+    } catch (error) {
+      console.error('Error subscribing email:', error);
+      setSubscriptionStatus('error');
+    } finally {
+      setIsSubscribing(false);
     }
   };
 
@@ -270,14 +295,48 @@ export default function AIVideoAnalysis({ onBackToHome }: AIVideoAnalysisProps) 
                 </div>
               </div>
 
-              {/* Notify Me Button */}
+              {/* Email Collection */}
               <div className="mb-12">
-                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Notify Me When Available
-                </button>
-                <p className="text-gray-500 text-sm mt-4">
-                  Be the first to know when AI Video Analysis launches
-                </p>
+                <div className="max-w-md mx-auto">
+                  {subscriptionStatus === 'success' ? (
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <CheckCircle className="h-8 w-8 text-green-600" />
+                      </div>
+                      <h3 className="text-xl font-bold text-green-900 mb-2">You're on the list!</h3>
+                      <p className="text-green-700">
+                        We'll notify you as soon as AI Video Analysis is available.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex space-x-3">
+                        <input
+                          type="email"
+                          placeholder="Enter your email address"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                        />
+                        <button 
+                          onClick={handleEmailSubscribe}
+                          disabled={isSubscribing}
+                          className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-bold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        >
+                          {isSubscribing ? 'Adding...' : 'Notify Me'}
+                        </button>
+                      </div>
+                      {subscriptionStatus === 'error' && (
+                        <p className="text-red-600 text-sm mt-2 text-center">
+                          Please enter a valid email address
+                        </p>
+                      )}
+                      <p className="text-gray-500 text-sm mt-3 text-center">
+                        Be the first to know when AI Video Analysis launches
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Back to Home */}
