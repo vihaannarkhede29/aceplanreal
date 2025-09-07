@@ -8,6 +8,7 @@ import EquipmentResultsPage from '@/components/EquipmentResultsPage';
 import ResultsPage from '@/components/ResultsPage';
 import LoginModal from '@/components/LoginModal';
 import RacketDatabase from '@/components/RacketDatabase';
+import AIVideoAnalysis from '@/components/AIVideoAnalysis';
 import { QuizAnswer, RecommendationResult } from '@/types';
 import { generateRecommendations } from '@/lib/recommendations';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
@@ -19,6 +20,7 @@ function HomeContent() {
   const [showEquipmentQuiz, setShowEquipmentQuiz] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRacketDatabase, setShowRacketDatabase] = useState(false);
+  const [showVideoAnalysis, setShowVideoAnalysis] = useState(false);
   const [results, setResults] = useState<RecommendationResult | null>(null);
   const [equipmentResults, setEquipmentResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -170,6 +172,7 @@ function HomeContent() {
     setShowQuiz(false);
     setShowEquipmentQuiz(false);
     setShowRacketDatabase(false);
+    setShowVideoAnalysis(false);
     setResults(null);
     setEquipmentResults(null);
     setViewPreviousPlan(false);
@@ -177,6 +180,10 @@ function HomeContent() {
 
   const handleViewRacketDatabase = () => {
     setShowRacketDatabase(true);
+  };
+
+  const handleVideoAnalysis = () => {
+    setShowVideoAnalysis(true);
   };
 
   if (isLoading) {
@@ -209,6 +216,12 @@ function HomeContent() {
     );
   }
 
+  if (showVideoAnalysis) {
+    return (
+      <AIVideoAnalysis onBackToHome={handleBackToHome} />
+    );
+  }
+
   if (showRacketDatabase) {
     return (
       <RacketDatabase onBackToHome={handleBackToHome} />
@@ -223,7 +236,7 @@ function HomeContent() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} onViewRacketDatabase={handleViewRacketDatabase} />
+      <HeroSection onGetPlan={handleGetPlan} onGetEquipment={handleGetEquipment} onSignIn={handleSignIn} onViewRacketDatabase={handleViewRacketDatabase} onVideoAnalysis={handleVideoAnalysis} />
       
       {/* Login Modal */}
       {showLoginModal && (

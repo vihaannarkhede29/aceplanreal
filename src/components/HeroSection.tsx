@@ -12,9 +12,10 @@ interface HeroSectionProps {
   onGetEquipment: () => void;
   onSignIn: () => void;
   onViewRacketDatabase?: () => void;
+  onVideoAnalysis?: () => void;
 }
 
-export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onViewRacketDatabase }: HeroSectionProps) {
+export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onViewRacketDatabase, onVideoAnalysis }: HeroSectionProps) {
   const { currentUser } = useAuth();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -228,7 +229,7 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
             <div className="mb-12">
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30 max-w-4xl mx-auto">
                 <h3 className="text-lg font-bold text-white mb-4 text-center">Quick Access</h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
                   <button 
                     onClick={onGetPlan}
                     className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
@@ -267,6 +268,16 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
                       <Trophy className="h-6 w-6 text-white" />
                     </div>
                     <span className="text-white font-semibold text-sm">All Rackets</span>
+                  </button>
+                  
+                  <button 
+                    onClick={onVideoAnalysis}
+                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-600 rounded-xl flex items-center justify-center">
+                      <Zap className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-white font-semibold text-sm">AI Analysis</span>
                   </button>
                   
                   <button 
