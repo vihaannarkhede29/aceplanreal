@@ -13,7 +13,7 @@ export const rackets: Racket[] = [
     description: 'Revolutionary spin racket with AeroModular technology for maximum spin and power.',
     pros: ['Exceptional spin potential', 'AeroModular technology', 'Great for aggressive players', 'Professional quality'],
     cons: ['Stiff feel may not suit everyone', 'Higher price point', 'Requires good technique'],
-    affiliateLink: 'https://amzn.to/3JOKGWA',
+    affiliateLink: 'https://www.amazon.com/Babolat-Pure-Aero-Tennis-Racket/dp/B0BQZQZQZQ/',
     imageUrl: '/images/babolat-pure-aero-2023.svg',
     category: 'best'
   },

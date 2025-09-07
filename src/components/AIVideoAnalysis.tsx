@@ -31,6 +31,7 @@ export default function AIVideoAnalysis({ onBackToHome }: AIVideoAnalysisProps) 
   const [uploadedVideo, setUploadedVideo] = useState<File | null>(null);
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isComingSoon, setIsComingSoon] = useState(true);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -165,7 +166,133 @@ export default function AIVideoAnalysis({ onBackToHome }: AIVideoAnalysisProps) 
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {!analysisResult ? (
+        {isComingSoon ? (
+          /* Coming Soon Page */
+          <div className="text-center py-16">
+            <div className="max-w-4xl mx-auto">
+              {/* Coming Soon Badge */}
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-6 py-3 rounded-full text-lg font-semibold mb-8">
+                <Zap className="h-5 w-5" />
+                <span>Coming Soon</span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                AI Video Analysis
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Revolutionary tennis technique analysis powered by artificial intelligence. Upload your video and get instant, professional feedback on your game.
+              </p>
+
+              {/* Feature Preview */}
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <Camera className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Video Upload</h3>
+                  <p className="text-gray-600">
+                    Simply upload your tennis video and our AI will analyze your technique in seconds
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <Target className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Stroke Analysis</h3>
+                  <p className="text-gray-600">
+                    Get detailed feedback on your forehand, backhand, serve, and volley technique
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <TrendingUp className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">AI Insights</h3>
+                  <p className="text-gray-600">
+                    Receive personalized recommendations to improve your game and reach your goals
+                  </p>
+                </div>
+              </div>
+
+              {/* What's Coming */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-12 border border-blue-200 mb-12">
+                <h2 className="text-3xl font-bold text-blue-900 mb-8">What's Coming</h2>
+                <div className="grid md:grid-cols-2 gap-8 text-left">
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Advanced Stroke Recognition</h4>
+                        <p className="text-blue-800 text-sm">AI-powered analysis of every aspect of your technique</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Footwork Analysis</h4>
+                        <p className="text-blue-800 text-sm">Court positioning, movement patterns, and balance assessment</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Progress Tracking</h4>
+                        <p className="text-blue-800 text-sm">Monitor your improvement over time with detailed reports</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Professional Coaching</h4>
+                        <p className="text-blue-800 text-sm">Get feedback from certified tennis professionals</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Personalized Drills</h4>
+                        <p className="text-blue-800 text-sm">Custom training plans based on your analysis results</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900">Mobile App</h4>
+                        <p className="text-blue-800 text-sm">Analyze your game on the go with our mobile application</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notify Me Button */}
+              <div className="mb-12">
+                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Notify Me When Available
+                </button>
+                <p className="text-gray-500 text-sm mt-4">
+                  Be the first to know when AI Video Analysis launches
+                </p>
+              </div>
+
+              {/* Back to Home */}
+              {onBackToHome && (
+                <button
+                  onClick={onBackToHome}
+                  className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  <ArrowLeft className="h-5 w-5" />
+                  <span>Back to Home</span>
+                </button>
+              )}
+            </div>
+          </div>
+        ) : !analysisResult ? (
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Upload Section */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
