@@ -225,3 +225,4 @@ export default function EquipmentQuiz({ onComplete, onBack }: EquipmentQuizProps
     </div>
   );
 }
+

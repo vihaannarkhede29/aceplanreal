@@ -131,3 +131,4 @@ export const equipmentQuestions: EquipmentQuestion[] = [
     description: 'This helps us recommend improvements or alternatives'
   }
 ];
+
