@@ -5,6 +5,7 @@ import { Article, ArticleCategory } from '@/types/articles';
 import { articleCategories } from '@/data/articleCategories';
 import { Calendar, Clock, Eye, Heart, Search, Filter, BookOpen, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -26,8 +27,8 @@ export default function ArticlesPage() {
       // Fetch articles from your API
       const response = await fetch('/api/articles/publish');
       if (response.ok) {
-        const publishedArticles = await response.json();
-        setArticles(publishedArticles);
+        const data = await response.json();
+        setArticles(data.articles || []);
       } else {
         // Fallback to empty array if no articles yet
         setArticles([]);
@@ -60,12 +61,17 @@ export default function ArticlesPage() {
     setFilteredArticles(filtered);
   };
 
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(date);
+  const formatDate = (date: Date | string) => {
+    try {
+      const dateObj = typeof date === 'string' ? new Date(date) : date;
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(dateObj);
+    } catch (error) {
+      return 'Recent';
+    }
   };
 
   if (loading) {
@@ -81,7 +87,8 @@ export default function ArticlesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -279,5 +286,6 @@ export default function ArticlesPage() {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 }
