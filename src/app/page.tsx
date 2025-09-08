@@ -378,6 +378,95 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* Blog Preview Section */}
+      <section id="blog-preview" className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Latest Tennis Insights
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get expert tips, equipment reviews, and training advice from our automated tennis blog
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="h-40 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-4xl">🎾</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Equipment Reviews</h3>
+              <p className="text-gray-600 mb-4">
+                In-depth reviews of the latest tennis rackets, strings, and gear with affiliate links to help you make the best purchase decisions.
+              </p>
+              <div className="text-sm text-gray-500">
+                <span className="flex items-center space-x-1 mb-2">
+                  <span>📅</span>
+                  <span>Updated daily</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span>💰</span>
+                  <span>Affiliate links included</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="h-40 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-4xl">🏃</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Training Tips</h3>
+              <p className="text-gray-600 mb-4">
+                Step-by-step drills, footwork exercises, and technique guides to help you improve your game systematically.
+              </p>
+              <div className="text-sm text-gray-500">
+                <span className="flex items-center space-x-1 mb-2">
+                  <span>📈</span>
+                  <span>UTR improvement guides</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span>🎯</span>
+                  <span>Beginner to advanced</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="h-40 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-4xl">⭐</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Player Stories</h3>
+              <p className="text-gray-600 mb-4">
+                Inspiring stories of players who achieved rapid improvement, including their routines, challenges, and success strategies.
+              </p>
+              <div className="text-sm text-gray-500">
+                <span className="flex items-center space-x-1 mb-2">
+                  <span>🏆</span>
+                  <span>Real success stories</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span>📚</span>
+                  <span>Actionable insights</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <a 
+              href="/articles"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              <span>Read All Articles</span>
+              <span>→</span>
+            </a>
+            <p className="text-gray-600 mt-4 text-sm">
+              New articles published automatically every day at 9 AM and 5 PM
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">

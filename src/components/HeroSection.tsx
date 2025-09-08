@@ -71,6 +71,10 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
                 Video Analysis
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
+              <a href="/articles" className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
+                Blog
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              </a>
               <a href="/monthly-calendar" className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 Calendar
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -132,6 +136,9 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
                 <button onClick={() => onVideoAnalysis && onVideoAnalysis()} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   Video Analysis
                 </button>
+                <a href="/articles" className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
+                  Blog
+                </a>
                 <button onClick={() => scrollToSection('about')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   About
                 </button>

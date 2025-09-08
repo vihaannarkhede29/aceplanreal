@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Article, ArticleCategory } from '@/types/articles';
 import { articleCategories } from '@/data/articleCategories';
-import { Calendar, Clock, Eye, Heart, Search, Filter, BookOpen } from 'lucide-react';
+import { Calendar, Clock, Eye, Heart, Search, Filter, BookOpen, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -13,7 +14,6 @@ export default function ArticlesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load articles from your data source
     loadArticles();
   }, []);
 
@@ -22,63 +22,22 @@ export default function ArticlesPage() {
   }, [articles, selectedCategory, searchQuery]);
 
   const loadArticles = async () => {
-    // Mock data - replace with actual API call
-    const mockArticles: Article[] = [
-      {
-        id: '1',
-        title: 'Perfect Your Forehand: 5 Common Mistakes to Avoid',
-        slug: 'perfect-forehand-mistakes',
-        excerpt: 'Master the fundamentals of tennis technique with these expert tips and drills.',
-        content: 'Full article content...',
-        author: 'AcePlan AI',
-        publishedAt: new Date('2024-01-15'),
-        category: 'technique',
-        tags: ['forehand', 'technique', 'beginner'],
-        readTime: 5,
-        featured: true,
-        imageUrl: '/images/articles/forehand-technique.jpg',
-        views: 1250,
-        likes: 89,
-        status: 'published'
-      },
-      {
-        id: '2',
-        title: 'Choosing the Right Tennis String: A Complete Guide',
-        slug: 'tennis-string-guide',
-        excerpt: 'Everything you need to know about tennis strings, from types to tension.',
-        content: 'Full article content...',
-        author: 'AcePlan AI',
-        publishedAt: new Date('2024-01-14'),
-        category: 'equipment',
-        tags: ['strings', 'equipment', 'guide'],
-        readTime: 7,
-        featured: false,
-        imageUrl: '/images/articles/tennis-strings.jpg',
-        views: 980,
-        likes: 67,
-        status: 'published'
-      },
-      {
-        id: '3',
-        title: 'Mental Toughness: How to Stay Focused During Matches',
-        slug: 'mental-toughness-tennis',
-        excerpt: 'Learn the psychological strategies that separate good players from great ones.',
-        content: 'Full article content...',
-        author: 'AcePlan AI',
-        publishedAt: new Date('2024-01-13'),
-        category: 'strategy',
-        tags: ['mental', 'strategy', 'focus'],
-        readTime: 6,
-        featured: true,
-        imageUrl: '/images/articles/mental-toughness.jpg',
-        views: 1100,
-        likes: 95,
-        status: 'published'
+    try {
+      // Fetch articles from your API
+      const response = await fetch('/api/articles/publish');
+      if (response.ok) {
+        const publishedArticles = await response.json();
+        setArticles(publishedArticles);
+      } else {
+        // Fallback to empty array if no articles yet
+        setArticles([]);
       }
-    ];
-
-    setArticles(mockArticles);
-    setLoading(false);
+    } catch (error) {
+      console.error('Error loading articles:', error);
+      setArticles([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const filterArticles = () => {
@@ -133,6 +92,15 @@ export default function ArticlesPage() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Stay updated with the latest tennis techniques, equipment reviews, and expert tips to improve your game.
             </p>
+            <div className="mt-6">
+              <Link 
+                href="/"
+                className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 font-medium"
+              >
+                <span>← Back to AcePlan</span>
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -200,45 +168,45 @@ export default function ArticlesPage() {
         </div>
 
         {/* Featured Articles */}
-        {selectedCategory === 'all' && (
+        {selectedCategory === 'all' && articles.filter(article => article.featured).length > 0 && (
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Articles</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {articles.filter(article => article.featured).map(article => (
-                <div key={article.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                  {article.imageUrl && (
+                <Link key={article.id} href={`/articles/${article.slug}`}>
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
                     <div className="h-48 bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
                       <BookOpen className="h-16 w-16 text-white" />
                     </div>
-                  )}
-                  <div className="p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${articleCategories.find(c => c.id === article.category)?.color}`}>
-                        {articleCategories.find(c => c.id === article.category)?.icon} {articleCategories.find(c => c.id === article.category)?.name}
-                      </span>
-                      <span className="text-gray-500 text-sm">Featured</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
-                    <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center space-x-4">
-                        <span className="flex items-center space-x-1">
-                          <Clock className="h-4 w-4" />
-                          <span>{article.readTime} min read</span>
+                    <div className="p-6">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${articleCategories.find(c => c.id === article.category)?.color}`}>
+                          {articleCategories.find(c => c.id === article.category)?.icon} {articleCategories.find(c => c.id === article.category)?.name}
                         </span>
-                        <span className="flex items-center space-x-1">
-                          <Eye className="h-4 w-4" />
-                          <span>{article.views}</span>
-                        </span>
-                        <span className="flex items-center space-x-1">
-                          <Heart className="h-4 w-4" />
-                          <span>{article.likes}</span>
-                        </span>
+                        <span className="text-gray-500 text-sm">Featured</span>
                       </div>
-                      <span>{formatDate(article.publishedAt)}</span>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
+                      <p className="text-gray-600 mb-4">{article.excerpt}</p>
+                      <div className="flex items-center justify-between text-sm text-gray-500">
+                        <div className="flex items-center space-x-4">
+                          <span className="flex items-center space-x-1">
+                            <Clock className="h-4 w-4" />
+                            <span>{article.readTime} min read</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <Eye className="h-4 w-4" />
+                            <span>{article.views || 0}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <Heart className="h-4 w-4" />
+                            <span>{article.likes || 0}</span>
+                          </span>
+                        </div>
+                        <span>{formatDate(article.publishedAt)}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -253,42 +221,58 @@ export default function ArticlesPage() {
           {filteredArticles.length === 0 ? (
             <div className="text-center py-12">
               <BookOpen className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles found</h3>
-              <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {articles.length === 0 ? 'No articles yet' : 'No articles found'}
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {articles.length === 0 
+                  ? 'Your first automated blog post will appear here soon! Check back tomorrow at 9 AM.'
+                  : 'Try adjusting your search or filter criteria.'
+                }
+              </p>
+              {articles.length === 0 && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-md mx-auto">
+                  <h4 className="font-semibold text-blue-900 mb-2">🚀 Coming Soon!</h4>
+                  <p className="text-blue-800 text-sm">
+                    Your automated tennis blog will start generating content daily. 
+                    Posts will include racket reviews, training tips, and player stories.
+                  </p>
+                </div>
+              )}
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredArticles.map(article => (
-                <div key={article.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                  {article.imageUrl && (
+                <Link key={article.id} href={`/articles/${article.slug}`}>
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
                     <div className="h-40 bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
                       <BookOpen className="h-12 w-12 text-white" />
                     </div>
-                  )}
-                  <div className="p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium text-white ${articleCategories.find(c => c.id === article.category)?.color}`}>
-                        {articleCategories.find(c => c.id === article.category)?.icon}
-                      </span>
-                      <span className="text-gray-500 text-sm">{articleCategories.find(c => c.id === article.category)?.name}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">{article.title}</h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">{article.excerpt}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center space-x-3">
-                        <span className="flex items-center space-x-1">
-                          <Clock className="h-4 w-4" />
-                          <span>{article.readTime}m</span>
+                    <div className="p-6">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium text-white ${articleCategories.find(c => c.id === article.category)?.color}`}>
+                          {articleCategories.find(c => c.id === article.category)?.icon}
                         </span>
-                        <span className="flex items-center space-x-1">
-                          <Eye className="h-4 w-4" />
-                          <span>{article.views}</span>
-                        </span>
+                        <span className="text-gray-500 text-sm">{articleCategories.find(c => c.id === article.category)?.name}</span>
                       </div>
-                      <span>{formatDate(article.publishedAt)}</span>
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">{article.title}</h3>
+                      <p className="text-gray-600 mb-4 line-clamp-3">{article.excerpt}</p>
+                      <div className="flex items-center justify-between text-sm text-gray-500">
+                        <div className="flex items-center space-x-3">
+                          <span className="flex items-center space-x-1">
+                            <Clock className="h-4 w-4" />
+                            <span>{article.readTime}m</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <Eye className="h-4 w-4" />
+                            <span>{article.views || 0}</span>
+                          </span>
+                        </div>
+                        <span>{formatDate(article.publishedAt)}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
