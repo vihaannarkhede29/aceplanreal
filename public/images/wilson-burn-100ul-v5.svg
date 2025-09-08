@@ -1,0 +1,25 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="racketGradient-wilson-burn-100ul-v5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E40AF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Racket frame -->
+  <ellipse cx="150" cy="100" rx="80" ry="120" fill="none" stroke="#1E40AF" stroke-width="3"/>
+  
+  <!-- Racket strings -->
+  <line x1="70" y1="100" x2="230" y2="100" stroke="#1E40AF" stroke-width="1" opacity="0.6"/>
+  <line x1="150" y1="20" x2="150" y2="180" stroke="#1E40AF" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Brand logo area -->
+  <rect x="120" y="80" width="60" height="40" fill="url(#racketGradient-wilson-burn-100ul-v5)" rx="5"/>
+  
+  <!-- Brand text -->
+  <text x="150" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="white">Wilson</text>
+  <text x="150" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="white">Wilson Burn </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="100" r="2" fill="#1E40AF"/>
+</svg>
