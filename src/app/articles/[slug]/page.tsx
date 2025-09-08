@@ -22,7 +22,8 @@ export default function ArticlePage() {
       // Fetch all articles and find the one with matching slug
       const response = await fetch('/api/articles/publish');
       if (response.ok) {
-        const articles = await response.json();
+        const data = await response.json();
+        const articles = data.articles || [];
         const foundArticle = articles.find((a: Article) => a.slug === slug);
         
         if (foundArticle) {
@@ -41,12 +42,17 @@ export default function ArticlePage() {
     }
   };
 
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(date);
+  const formatDate = (date: Date | string) => {
+    try {
+      const dateObj = typeof date === 'string' ? new Date(date) : date;
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(dateObj);
+    } catch (error) {
+      return 'Recent';
+    }
   };
 
   if (loading) {
