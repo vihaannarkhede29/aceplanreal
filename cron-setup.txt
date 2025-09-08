@@ -1,0 +1,12 @@
+# AcePlan Tennis Blog Generator - Complete Cron Setup
+# =====================================================
+
+# Weekdays: 9am, 5pm
+0 9 * * 1-5 /Users/VR/AcePlan/tennis-racket-finder/run-morning-blog.sh
+0 17 * * 1-5 /Users/VR/AcePlan/tennis-racket-finder/run-evening-blog.sh
+
+# Weekends: 9am, 12pm, 3pm, 7pm
+0 9 * * 6,0 /Users/VR/AcePlan/tennis-racket-finder/run-morning-blog.sh
+0 12 * * 6,0 /Users/VR/AcePlan/tennis-racket-finder/run-afternoon-blog.sh
+0 15 * * 6,0 /Users/VR/AcePlan/tennis-racket-finder/run-afternoon-blog.sh
+0 19 * * 6,0 /Users/VR/AcePlan/tennis-racket-finder/run-evening-blog.sh

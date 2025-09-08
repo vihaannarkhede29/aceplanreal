@@ -1,0 +1,28 @@
+2025-09-07 23:13:24,769 - INFO - Generating immediate post for morning
+2025-09-07 23:13:24,769 - INFO - Generating morning blog post (9am)...
+2025-09-07 23:13:25,370 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:13:25,370 - ERROR - Failed to generate morning post: name 'random' is not defined
+2025-09-07 23:13:41,036 - INFO - Generating immediate post for morning
+2025-09-07 23:13:41,036 - INFO - Generating morning blog post (9am)...
+2025-09-07 23:13:41,511 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:13:41,512 - INFO - Morning post generated successfully: generated_posts/morning_blog_20250907_231341.txt
+2025-09-07 23:15:17,391 - INFO - Created cron script: run-morning-blog.sh
+2025-09-07 23:15:17,392 - INFO - Created cron script: run-afternoon-blog.sh
+2025-09-07 23:15:17,392 - INFO - Created cron script: run-evening-blog.sh
+2025-09-07 23:15:17,392 - INFO - Created cron-setup.txt with complete cron configuration
+2025-09-07 23:18:24,415 - INFO - Generating immediate post for morning
+2025-09-07 23:18:24,415 - INFO - Generating morning blog post (9am)...
+2025-09-07 23:18:25,001 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:18:25,002 - INFO - Morning post generated successfully: generated_posts/morning_blog_20250907_231825.txt
+2025-09-07 23:18:42,804 - INFO - Generating immediate post for afternoon
+2025-09-07 23:18:42,805 - INFO - Generating afternoon blog post...
+2025-09-07 23:18:43,509 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:18:43,509 - INFO - Afternoon post generated successfully: generated_posts/afternoon_blog_20250907_231843.txt
+2025-09-07 23:24:15,034 - INFO - Generating immediate post for evening
+2025-09-07 23:24:15,034 - INFO - Generating evening blog post...
+2025-09-07 23:24:15,715 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:24:15,716 - INFO - Evening post generated successfully: generated_posts/evening_blog_20250907_232415.txt
+2025-09-07 23:24:39,868 - INFO - Generating immediate post for morning
+2025-09-07 23:24:39,868 - INFO - Generating morning blog post (9am)...
+2025-09-07 23:24:40,338 - INFO - Enhanced blog generator initialized successfully
+2025-09-07 23:24:40,339 - INFO - Morning post generated successfully: generated_posts/morning_blog_20250907_232440.txt

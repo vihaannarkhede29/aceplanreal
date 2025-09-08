@@ -67,6 +67,10 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
                 Equipment
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
+              <button onClick={() => onVideoAnalysis && onVideoAnalysis()} className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
+                Video Analysis
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              </button>
               <a href="/monthly-calendar" className="text-indigo-700 hover:text-indigo-900 font-semibold transition-all duration-300 hover:scale-105 relative group whitespace-nowrap flex-shrink-0">
                 Calendar
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -125,8 +129,8 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
                 <button onClick={() => onGetEquipment()} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   Equipment
                 </button>
-                <button onClick={() => scrollToSection('ai-analyzer')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
-                  AI Video Analyzer
+                <button onClick={() => onVideoAnalysis && onVideoAnalysis()} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
+                  Video Analysis
                 </button>
                 <button onClick={() => scrollToSection('about')} className="text-left px-4 py-2 text-indigo-700 hover:bg-indigo-50 rounded-lg">
                   About
@@ -225,73 +229,6 @@ export default function HeroSection({ onGetPlan, onGetEquipment, onSignIn, onVie
               </button>
             </div>
 
-            {/* Mini Toolbar - Perfect for iPad and tablet access */}
-            <div className="mb-12">
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30 max-w-4xl mx-auto">
-                <h3 className="text-lg font-bold text-white mb-4 text-center">Quick Access</h3>
-                <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-                  <button 
-                    onClick={onGetPlan}
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
-                      <Target className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">Get AcePlan</span>
-                  </button>
-                  
-                  <button 
-                    onClick={onGetEquipment}
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-                      <Trophy className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">Equipment</span>
-                  </button>
-                  
-                  <a 
-                    href="/monthly-calendar"
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
-                      <Calendar className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">Calendar</span>
-                  </a>
-                  
-                  <button 
-                    onClick={onViewRacketDatabase}
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
-                      <Trophy className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">All Rackets</span>
-                  </button>
-                  
-                  <button 
-                    onClick={onVideoAnalysis}
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-600 rounded-xl flex items-center justify-center">
-                      <Zap className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">AI Analysis</span>
-                  </button>
-                  
-                  <button 
-                    onClick={onSignIn}
-                    className="flex flex-col items-center space-y-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center">
-                      <User className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">Sign In</span>
-                  </button>
-                </div>
-              </div>
-            </div>
 
             {/* Features Grid */}
             <div className="grid md:grid-cols-3 gap-6 mb-12">
