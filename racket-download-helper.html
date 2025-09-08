@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Racket Image Download Helper</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .racket { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .priority { background-color: #e8f5e8; border-color: #4caf50; }
+        .filename { background-color: #f0f0f0; padding: 5px; border-radius: 4px; font-family: monospace; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .instructions { background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎾 Racket Image Download Helper</h1>
+    
+    <div class="instructions">
+        <h3>📋 Instructions:</h3>
+        <ol>
+            <li>Click each link below to open the product page</li>
+            <li>Find the main product image (usually the first large image)</li>
+            <li>Right-click on the image → "Save image as..."</li>
+            <li>Save with the exact filename shown in the green box</li>
+            <li>Place the image in your <code>/public/images/</code> folder</li>
+            <li>Run <code>npm run build</code> to test</li>
+        </ol>
+    </div>
+    
+    <h2>🔥 Priority Rackets (Start Here)</h2>
+  
+        <div class="racket priority">
+            <h3>1. Babolat Pure Aero 2023</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3JOKGWA" target="_blank">https://amzn.to/3JOKGWA</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-2023.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>2. Yonex EZONE 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46aFhRn" target="_blank">https://amzn.to/46aFhRn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>3. Babolat Pure Drive</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3K7poU6" target="_blank">https://amzn.to/3K7poU6</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>4. Yonex VCORE 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42dZBjn" target="_blank">https://amzn.to/42dZBjn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>5. Wilson Pro Staff RF97 v14</h3>
+            <p><strong>Link:</strong> <a href="https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/ref=sr_1_1_sspa?crid=1NJSSF65P9J4Y&dib=eyJ2IjoiMSJ9.mo5J7qpxR6aG-HHu-H3ec0vfGHgsg_BpHEUA0xzyZueS_xNhztqKd6qjEaj0gCgnn9CEpRBsN3rfrkV0zNQiuvORqQGiP2gtdSUkor8TNXOQvIdDSNsJWBuDYemNcEhOAzFGbNwmcDij8cOiP7tNGHE8CdORi9U5BZd4P6o7RZG4Ourtn70W9IvLrI72CTYvQMt-gpsZMO6ezHLqm7W6BKtuntkSU9mBzvHEYH2VxAPO4-nnUIF1vAgvBXSqSEEOCAcbj5BApsxTd9G-FKoNQXara_hOodpADa7eM6w9kUg.maJ0Up1SQQWzdNzFIT_I_zlXxEwUWIM5Vu5d1J9S-lc&dib_tag=se&keywords=Wilson%2BPro%2BStaff%2BRF97%2Bv13&qid=1757025470&sprefix=babolat%2Bpure%2Baero%2B2023%2Caps%2C200&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1" target="_blank">https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/ref=sr_1_1_sspa?crid=1NJSSF65P9J4Y&dib=eyJ2IjoiMSJ9.mo5J7qpxR6aG-HHu-H3ec0vfGHgsg_BpHEUA0xzyZueS_xNhztqKd6qjEaj0gCgnn9CEpRBsN3rfrkV0zNQiuvORqQGiP2gtdSUkor8TNXOQvIdDSNsJWBuDYemNcEhOAzFGbNwmcDij8cOiP7tNGHE8CdORi9U5BZd4P6o7RZG4Ourtn70W9IvLrI72CTYvQMt-gpsZMO6ezHLqm7W6BKtuntkSU9mBzvHEYH2VxAPO4-nnUIF1vAgvBXSqSEEOCAcbj5BApsxTd9G-FKoNQXara_hOodpADa7eM6w9kUg.maJ0Up1SQQWzdNzFIT_I_zlXxEwUWIM5Vu5d1J9S-lc&dib_tag=se&keywords=Wilson%2BPro%2BStaff%2BRF97%2Bv13&qid=1757025470&sprefix=babolat%2Bpure%2Baero%2B2023%2Caps%2C200&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-pro-staff-rf97-v14.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>6. Prince Textreme Tour 100P</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100p" target="_blank">https://princetennis.com/tour-100p</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100p.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>7. Wilson Blade 98 v8</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4g66wAR" target="_blank">https://amzn.to/4g66wAR</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-98-v8.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>8. Prince Phantom 100X</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Prince_Phantom_100X_305g/descpageRCTWABG-PHNX5.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyJ9ew8gx3hOZTmJrYkXZqx1QFt1wsxPqUdI3qrAQK678KNTZwNGBbBoCgPoQAvD_BwE" target="_blank">https://www.tennis-warehouse.com/Prince_Phantom_100X_305g/descpageRCTWABG-PHNX5.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyJ9ew8gx3hOZTmJrYkXZqx1QFt1wsxPqUdI3qrAQK678KNTZwNGBbBoCgPoQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100x.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>9. Head Radical MP 2021</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4659MrL" target="_blank">https://amzn.to/4659MrL</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-radical-mp-2021.jpg</span></p>
+        </div>
+      
+        <div class="racket priority">
+            <h3>10. Babolat Pure Strike 16x19</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46bXq15" target="_blank">https://amzn.to/46bXq15</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-16x19.jpg</span></p>
+        </div>
+      
+    <h2>📋 All Rackets (Complete List)</h2>
+  
+        <div class="racket priority">
+            <h3>1. Babolat Pure Aero 2023</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3JOKGWA" target="_blank">https://amzn.to/3JOKGWA</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-2023.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>2. Wilson Pro Staff RF97 v14</h3>
+            <p><strong>Link:</strong> <a href="https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/ref=sr_1_1_sspa?crid=1NJSSF65P9J4Y&dib=eyJ2IjoiMSJ9.mo5J7qpxR6aG-HHu-H3ec0vfGHgsg_BpHEUA0xzyZueS_xNhztqKd6qjEaj0gCgnn9CEpRBsN3rfrkV0zNQiuvORqQGiP2gtdSUkor8TNXOQvIdDSNsJWBuDYemNcEhOAzFGbNwmcDij8cOiP7tNGHE8CdORi9U5BZd4P6o7RZG4Ourtn70W9IvLrI72CTYvQMt-gpsZMO6ezHLqm7W6BKtuntkSU9mBzvHEYH2VxAPO4-nnUIF1vAgvBXSqSEEOCAcbj5BApsxTd9G-FKoNQXara_hOodpADa7eM6w9kUg.maJ0Up1SQQWzdNzFIT_I_zlXxEwUWIM5Vu5d1J9S-lc&dib_tag=se&keywords=Wilson%2BPro%2BStaff%2BRF97%2Bv13&qid=1757025470&sprefix=babolat%2Bpure%2Baero%2B2023%2Caps%2C200&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1" target="_blank">https://www.amazon.com/Wilson-Staff-Performance-Tennis-Racket/dp/B0BV8C4ZWX/ref=sr_1_1_sspa?crid=1NJSSF65P9J4Y&dib=eyJ2IjoiMSJ9.mo5J7qpxR6aG-HHu-H3ec0vfGHgsg_BpHEUA0xzyZueS_xNhztqKd6qjEaj0gCgnn9CEpRBsN3rfrkV0zNQiuvORqQGiP2gtdSUkor8TNXOQvIdDSNsJWBuDYemNcEhOAzFGbNwmcDij8cOiP7tNGHE8CdORi9U5BZd4P6o7RZG4Ourtn70W9IvLrI72CTYvQMt-gpsZMO6ezHLqm7W6BKtuntkSU9mBzvHEYH2VxAPO4-nnUIF1vAgvBXSqSEEOCAcbj5BApsxTd9G-FKoNQXara_hOodpADa7eM6w9kUg.maJ0Up1SQQWzdNzFIT_I_zlXxEwUWIM5Vu5d1J9S-lc&dib_tag=se&keywords=Wilson%2BPro%2BStaff%2BRF97%2Bv13&qid=1757025470&sprefix=babolat%2Bpure%2Baero%2B2023%2Caps%2C200&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-pro-staff-rf97-v14.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>3. Head Radical MP 2021</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4659MrL" target="_blank">https://amzn.to/4659MrL</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-radical-mp-2021.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>4. Yonex EZONE 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46aFhRn" target="_blank">https://amzn.to/46aFhRn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>5. Prince Textreme Tour 100P</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100p" target="_blank">https://princetennis.com/tour-100p</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100p.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>6. Wilson Blade 98 v8</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4g66wAR" target="_blank">https://amzn.to/4g66wAR</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-98-v8.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>7. Babolat Pure Strike 16x19</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46bXq15" target="_blank">https://amzn.to/46bXq15</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-16x19.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>8. Head Speed MP</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4mbe2Mw" target="_blank">https://amzn.to/4mbe2Mw</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-mp.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>9. Yonex VCORE 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42dZBjn" target="_blank">https://amzn.to/42dZBjn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>10. Prince Phantom 100X</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Prince_Phantom_100X_305g/descpageRCTWABG-PHNX5.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyJ9ew8gx3hOZTmJrYkXZqx1QFt1wsxPqUdI3qrAQK678KNTZwNGBbBoCgPoQAvD_BwE" target="_blank">https://www.tennis-warehouse.com/Prince_Phantom_100X_305g/descpageRCTWABG-PHNX5.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyJ9ew8gx3hOZTmJrYkXZqx1QFt1wsxPqUdI3qrAQK678KNTZwNGBbBoCgPoQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100x.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>11. Wilson Clash 100 v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/47wU9f1" target="_blank">https://amzn.to/47wU9f1</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket priority">
+            <h3>12. Babolat Pure Drive</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3K7poU6" target="_blank">https://amzn.to/3K7poU6</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>13. Head Extreme MP 2022</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/45ROu1X" target="_blank">https://amzn.to/45ROu1X</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-extreme-mp-2022.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>14. Yonex VCORE Pro 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m1a2hi" target="_blank">https://amzn.to/4m1a2hi</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-pro-100.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>15. Prince Textreme Tour 100T</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100t" target="_blank">https://princetennis.com/tour-100t</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100t.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>16. Wilson Ultra 100 v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/464QUcf" target="_blank">https://amzn.to/464QUcf</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-100-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>17. Babolat Pure Strike 18x20</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m1afB6" target="_blank">https://amzn.to/4m1afB6</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-18x20.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>18. Head Prestige MP</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4mR6dfO" target="_blank">https://amzn.to/4mR6dfO</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-prestige-mp.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>19. Yonex EZONE 98</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m1MYz2" target="_blank">https://amzn.to/4m1MYz2</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-98.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>20. Prince Phantom 100P</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Prince_Phantom_100P/descpageRCPRINCE-PHNP1.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7je-c5OW94ooCiT-rJiPvrgO&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyAVYla2HBXbBITg9_W6at-tfVZea6o-EWlb9RVTM8xrHWY9RNL29MRoCzY4QAvD_BwE" target="_blank">https://www.tennis-warehouse.com/Prince_Phantom_100P/descpageRCPRINCE-PHNP1.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7je-c5OW94ooCiT-rJiPvrgO&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyAVYla2HBXbBITg9_W6at-tfVZea6o-EWlb9RVTM8xrHWY9RNL29MRoCzY4QAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100p.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>21. Wilson Blade 98 16x19 v8</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3I4BXz4" target="_blank">https://amzn.to/3I4BXz4</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-98-16x19-v8.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>22. Babolat Pure Aero Lite</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4nn5UcM" target="_blank">https://amzn.to/4nn5UcM</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-lite.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>23. Head Speed Lite 2022</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4n9ZMF7" target="_blank">https://amzn.to/4n9ZMF7</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-lite-2022.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>24. Yonex VCORE 98</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4mRH7h9" target="_blank">https://amzn.to/4mRH7h9</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-98.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>25. Prince Textreme Tour 95P</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Prince_ATS_Textreme_Tour_95/descpageRCTWABG-ATR95.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyNOaNurK5mqp1H3W1iwCl4lkOqFp60BR5961otl9If_PHxsFspHPFRoC1wAQAvD_BwE" target="_blank">https://www.tennis-warehouse.com/Prince_ATS_Textreme_Tour_95/descpageRCTWABG-ATR95.html?from=gpmax&gad_source=1&gad_campaignid=17347568867&gbraid=0AAAAADyKN7gUY1gJYYSjVzwwhSvcyhLVS&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyNOaNurK5mqp1H3W1iwCl4lkOqFp60BR5961otl9If_PHxsFspHPFRoC1wAQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-95p.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>26. Wilson Clash 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3I4CgKe" target="_blank">https://amzn.to/3I4CgKe</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>27. Babolat Pure Drive Lite</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4pcnEcs" target="_blank">https://amzn.to/4pcnEcs</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive-lite.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>28. HEAD Graphene 360+ Extreme MP Tennis Racquet</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4p5LIxv" target="_blank">https://amzn.to/4p5LIxv</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-graphene-360-extreme-mp-tennis-racquet.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>29. Yonex EZONE 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4gvKjwB" target="_blank">https://amzn.to/4gvKjwB</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>30. Prince Textreme Tour 100L</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100l" target="_blank">https://princetennis.com/tour-100l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>31. Wilson Ultra 100L v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4gcyuuY" target="_blank">https://amzn.to/4gcyuuY</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-100l-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>32. Babolat Pure Strike 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/45ROKOt" target="_blank">https://amzn.to/45ROKOt</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>33. Head Prestige MP Lite</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Head_Prestige_MP_L/descpageRCHEAD-HPRMPL.html?srsltid=AfmBOor0PIJdhDVE4gA3YTj6veWJRSABEU2QckfGf8Dps4-1oW_rLjg_" target="_blank">https://www.tennis-warehouse.com/Head_Prestige_MP_L/descpageRCHEAD-HPRMPL.html?srsltid=AfmBOor0PIJdhDVE4gA3YTj6veWJRSABEU2QckfGf8Dps4-1oW_rLjg_</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-prestige-mp-lite.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>34. Yonex VCORE 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4gaHgJP" target="_blank">https://amzn.to/4gaHgJP</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>35. Prince Phantom 100L</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/phantom-100l" target="_blank">https://princetennis.com/phantom-100l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>36. Wilson Blade 104 v9</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3HOohbr" target="_blank">https://amzn.to/3HOohbr</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-104-v9.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>37. Babolat Pure Aero 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/45V31dm" target="_blank">https://amzn.to/45V31dm</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-100.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>38. Head Speed Pro 2025</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V4ngPn" target="_blank">https://amzn.to/3V4ngPn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-pro-2025.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>39. Yonex EZONE 98L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/45QgJhu" target="_blank">https://amzn.to/45QgJhu</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-98l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>40. Prince Textreme Tour 95L</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-95l" target="_blank">https://princetennis.com/tour-95l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-95l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>41. Wilson Clash 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46aEuQn" target="_blank">https://amzn.to/46aEuQn</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>42. Babolat Pure Drive 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/47qgpXY" target="_blank">https://amzn.to/47qgpXY</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>43. Head Extreme MP Lite 2023</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Head_Extreme_MP_Lite_2023/descpageRCHEAD-HEMPL.html" target="_blank">https://www.tennis-warehouse.com/Head_Extreme_MP_Lite_2023/descpageRCHEAD-HEMPL.html</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-extreme-mp-lite-2023.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>44. Yonex VCORE Pro 97</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m3ZH4o" target="_blank">https://amzn.to/4m3ZH4o</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-pro-97.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>45. Prince Phantom 93L</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/phantom-93l" target="_blank">https://princetennis.com/phantom-93l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-93l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>46. Wilson Blade 104L v8</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46dII9X" target="_blank">https://amzn.to/46dII9X</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-104l-v8.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>47. Babolat Pure Aero Lite 100</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/480ZD1O" target="_blank">https://amzn.to/480ZD1O</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-lite-100.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>48. Head Speed MP Lite 2023</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4lZRBcL" target="_blank">https://amzn.to/4lZRBcL</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-mp-lite-2023.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>49. Yonex EZONE 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42dZWm9" target="_blank">https://amzn.to/42dZWm9</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>50. Prince Textreme Tour 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100ul" target="_blank">https://princetennis.com/tour-100ul</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>51. Wilson Ultra 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/41FaSZZ" target="_blank">https://amzn.to/41FaSZZ</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>52. Babolat Pure Strike 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://www.babolat.com/us/pure-strike-100-lite/101484.html" target="_blank">https://www.babolat.com/us/pure-strike-100-lite/101484.html</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>53. Head Prestige MP Lite 2023</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42jSc1X" target="_blank">https://amzn.to/42jSc1X</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-prestige-mp-lite-2023.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>54. Yonex VCORE 98UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V5kvNU" target="_blank">https://amzn.to/3V5kvNU</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-98ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>55. Prince Phantom 95L</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/phantom-95l" target="_blank">https://princetennis.com/phantom-95l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-95l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>56. Wilson Clash 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3I4Cwca" target="_blank">https://amzn.to/3I4Cwca</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>57. Babolat Pure Drive Lite 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/462rVI5" target="_blank">https://amzn.to/462rVI5</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive-lite-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>58. Head Auxetic 2.0 Extreme MP L Tennis Racquet</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4p78k0N" target="_blank">https://amzn.to/4p78k0N</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-auxetic-20-extreme-mp-l-tennis-racquet.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>59. Yonex EZONE 98UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/480ZMlS" target="_blank">https://amzn.to/480ZMlS</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-98ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>60. Prince Textreme Tour 95UL</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-95ul" target="_blank">https://princetennis.com/tour-95ul</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-95ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>61. Wilson Ultra 105L v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4gcpuWv" target="_blank">https://amzn.to/4gcpuWv</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-105l-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>62. Babolat Pure Aero 100L</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3HOoyLv" target="_blank">https://amzn.to/3HOoyLv</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-100l.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>63. Head Speed MP Lite 2022</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4g7c5yY" target="_blank">https://amzn.to/4g7c5yY</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-mp-lite-2022.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>64. Yonex VCORE 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m7fq2u" target="_blank">https://amzn.to/4m7fq2u</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>65. Prince Phantom 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/phantom-100ul-v2" target="_blank">https://princetennis.com/phantom-100ul-v2</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>66. Wilson Blade 104UL v8</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4gvKOGZ" target="_blank">https://amzn.to/4gvKOGZ</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-104ul-v8.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>67. Babolat Pure Strike 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46898d3" target="_blank">https://amzn.to/46898d3</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>68. Head Prestige MP Lite 2023</h3>
+            <p><strong>Link:</strong> <a href="https://www.midwestracquetsports.com/head-speed-mp-l-2024-tennis-racquet/p/236024/?device=c&ttm_source=google&ttm_medium=cpc&ttm_campaign=google_shopping_tennis_racquets&gad_source=1&gad_campaignid=14994851203&gbraid=0AAAAAD_rX5XkOkmZa-sF0GhcM-DSbIhX1&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyENvlJ3U87r-HQBawrQ6g_5AcxYNxfFYn_8HfgRRXG0WvK5moJDQlxoCm0kQAvD_BwE" target="_blank">https://www.midwestracquetsports.com/head-speed-mp-l-2024-tennis-racquet/p/236024/?device=c&ttm_source=google&ttm_medium=cpc&ttm_campaign=google_shopping_tennis_racquets&gad_source=1&gad_campaignid=14994851203&gbraid=0AAAAAD_rX5XkOkmZa-sF0GhcM-DSbIhX1&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyENvlJ3U87r-HQBawrQ6g_5AcxYNxfFYn_8HfgRRXG0WvK5moJDQlxoCm0kQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-prestige-mp-lite-2023.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>69. Yonex EZONE 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46aEQ9F" target="_blank">https://amzn.to/46aEQ9F</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>70. Prince Textreme Tour 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-100ul-v2" target="_blank">https://princetennis.com/tour-100ul-v2</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>71. Wilson Ultra 100UL v5</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4g95F2l" target="_blank">https://amzn.to/4g95F2l</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-100ul-v5.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>72. Babolat Pure Drive Lite 100UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3K9YGu3" target="_blank">https://amzn.to/3K9YGu3</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive-lite-100ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>73. HEAD Graphene 360+ Extreme MP Tennis Racquets</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V1vt75" target="_blank">https://amzn.to/3V1vt75</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-graphene-360-extreme-mp-tennis-racquets.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>74. Yonex EZONE 98UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3I6VfUk" target="_blank">https://amzn.to/3I6VfUk</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-98ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>75. Prince Textreme Tour 95UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-95ul-v2" target="_blank">https://princetennis.com/tour-95ul-v2</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-95ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>76. Wilson Clash 100UL v3</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46aETST" target="_blank">https://amzn.to/46aETST</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100ul-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>77. Babolat Pure Aero Lite 98UL</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3K8O6n3" target="_blank">https://amzn.to/3K8O6n3</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-lite-98ul.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>78. Head Speed MP Lite 2023 v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V6Y2Qr" target="_blank">https://amzn.to/3V6Y2Qr</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-mp-lite-2023-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>79. Yonex VCORE 100UL GEN 7</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m71cid" target="_blank">https://amzn.to/4m71cid</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100ul-gen-7.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>80. Prince Phantom 100UL v3</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V6Y2Qr" target="_blank">https://amzn.to/3V6Y2Qr</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100ul-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>81. Wilson Blade 104UL v9</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m7lW9F" target="_blank">https://amzn.to/4m7lW9F</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-104ul-v9.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>82. Babolat Pure Strike 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4m1NsFm" target="_blank">https://amzn.to/4m1NsFm</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>83. Head 2023 Gravity MP Tennis Racquet</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3Ib8p2G" target="_blank">https://amzn.to/3Ib8p2G</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-2023-gravity-mp-tennis-racquet.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>84. Yonex EZONE 100UL 2022</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42l1TNF" target="_blank">https://amzn.to/42l1TNF</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100ul-2022.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>85. Prince Textreme Tour 100UL v3</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4no9mDX" target="_blank">https://amzn.to/4no9mDX</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-100ul-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>86. Wilson Ultra 100UL v5</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3VDxJkY" target="_blank">https://amzn.to/3VDxJkY</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-ultra-100ul-v5.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>87. Babolat Pure Drive Lite 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3V4ls96" target="_blank">https://amzn.to/3V4ls96</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-drive-lite-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>88. Head Extreme Lite MP 2023 v3</h3>
+            <p><strong>Link:</strong> <a href="https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html" target="_blank">https://www.tennis-warehouse.com/Head_Extreme_MP/descpageRCHEAD-HREM24.html</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-extreme-lite-mp-2023-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>89. Yonex EZONE 98UL v3</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/46rfDZK" target="_blank">https://amzn.to/46rfDZK</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-98ul-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>90. Prince Textreme Tour 95UL v3</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/tour-95ul-v3" target="_blank">https://princetennis.com/tour-95ul-v3</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-textreme-tour-95ul-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>91. Wilson Clash 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/3I7kUfL" target="_blank">https://amzn.to/3I7kUfL</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-clash-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>92. Babolat Pure Aero Lite 100UL v2</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/42koJoC" target="_blank">https://amzn.to/42koJoC</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-aero-lite-100ul-v2.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>93. Head Speed MP Lite 2024</h3>
+            <p><strong>Link:</strong> <a href="https://tennisexpress.com/products/head-speed-mp-l-2024-tennis-racquet-108290?gad_source=1&gad_campaignid=21670339161&gbraid=0AAAAAD_Vdwehuf6BRC4intGf2uA8vuvNN&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyM2g3KuX6nH92ZSwEGZ7s5eZMCJy5D2nbw5LOW6prdYRhAWDZTC87hoCs1kQAvD_BwE" target="_blank">https://tennisexpress.com/products/head-speed-mp-l-2024-tennis-racquet-108290?gad_source=1&gad_campaignid=21670339161&gbraid=0AAAAAD_Vdwehuf6BRC4intGf2uA8vuvNN&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyM2g3KuX6nH92ZSwEGZ7s5eZMCJy5D2nbw5LOW6prdYRhAWDZTC87hoCs1kQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-speed-mp-lite-2024.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>94. Yonex VCORE 100UL v7</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4mZ9zha" target="_blank">https://amzn.to/4mZ9zha</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-vcore-100ul-v7.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>95. Prince Phantom 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://princetennis.com/phantom-100ul-v4" target="_blank">https://princetennis.com/phantom-100ul-v4</a></p>
+            <p><strong>Save as:</strong> <span class="filename">prince-phantom-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>96. Wilson Blade 104UL v9</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/45REF41" target="_blank">https://amzn.to/45REF41</a></p>
+            <p><strong>Save as:</strong> <span class="filename">wilson-blade-104ul-v9.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>97. Babolat Pure Strike 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/41Dt2vc" target="_blank">https://amzn.to/41Dt2vc</a></p>
+            <p><strong>Save as:</strong> <span class="filename">babolat-pure-strike-100ul-v4.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>98. Head Prestige MP Lite 2023 v3</h3>
+            <p><strong>Link:</strong> <a href="https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527?gad_source=1&gad_campaignid=21680680006&gbraid=0AAAAAD_VdwdYbfCgTdqz_LxNPF9xqdTjI&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyM4KTZ1oOPOxeYz63mTD61uNiX-WA_tp299a9SrU5ixAYzhhNT437RoCYpoQAvD_BwE" target="_blank">https://tennisexpress.com/products/head-prestige-mp-l-2023-tennis-racquet-105527?gad_source=1&gad_campaignid=21680680006&gbraid=0AAAAAD_VdwdYbfCgTdqz_LxNPF9xqdTjI&gclid=CjwKCAjwt-_FBhBzEiwA7QEqyM4KTZ1oOPOxeYz63mTD61uNiX-WA_tp299a9SrU5ixAYzhhNT437RoCYpoQAvD_BwE</a></p>
+            <p><strong>Save as:</strong> <span class="filename">head-prestige-mp-lite-2023-v3.jpg</span></p>
+        </div>
+    
+        <div class="racket">
+            <h3>99. Yonex EZONE 100UL v4</h3>
+            <p><strong>Link:</strong> <a href="https://amzn.to/4pc9dFg" target="_blank">https://amzn.to/4pc9dFg</a></p>
+            <p><strong>Save as:</strong> <span class="filename">yonex-ezone-100ul-v4.jpg</span></p>
+        </div>
+    
+    <div class="instructions">
+        <h3>🆘 Alternative Sources:</h3>
+        <ul>
+            <li><a href="https://unsplash.com/s/photos/tennis-racket" target="_blank">Unsplash - Free Tennis Racket Photos</a></li>
+            <li><a href="https://pixabay.com/images/search/tennis-racket/" target="_blank">Pixabay - Free Tennis Racket Images</a></li>
+            <li><a href="https://www.pexels.com/search/tennis%20racket/" target="_blank">Pexels - Free Tennis Racket Photos</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+  
