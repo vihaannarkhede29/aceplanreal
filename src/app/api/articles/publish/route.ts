@@ -134,7 +134,45 @@ export async function GET() {
     const indexPath = path.join(ARTICLES_DIR, 'index.json');
     
     if (!fs.existsSync(indexPath)) {
-      return NextResponse.json({ articles: [] });
+      // Return sample articles if no file exists
+      return NextResponse.json({ 
+        articles: [
+          {
+            id: "sample-1",
+            title: "Top 10 Tennis Rackets for Spin Players in 2024: Ultimate Guide",
+            slug: "top-10-tennis-rackets-for-spin-players-in-2024-ultimate-guide",
+            excerpt: "Here are the top 10 tennis rackets that excel in their respective categories, offering exceptional performance for players of all skill levels.",
+            content: "Here are the top 10 tennis rackets that excel in their respective categories, offering exceptional performance for players of all skill levels.\n\n## Top 10 Tennis Rackets for Spin Players in 2024\n\n### 1. Babolat Pure Aero 2023\n\n**Type:** Power | **Weight:** 300g | **Head Size:** 100 in²\n\n**Best For:** Spin & Power\n\n**Standout Technology:** AeroModular\n\n**Skill Level:** Intermediate+\n\n**Why It's Great:** This racket excels in spin & power with its AeroModular technology, making it perfect for players seeking power characteristics.\n\n**[Get the Babolat Pure Aero 2023 here](https://amzn.to/3JOKGWA)**\n\n---\n\n### 2. Yonex EZONE 100\n\n**Type:** Power | **Weight:** 300g | **Head Size:** 100 in²\n\n**Best For:** Spin & Comfort\n\n**Standout Technology:** Isometric Design\n\n**Skill Level:** Intermediate\n\n**Why It's Great:** This racket excels in spin & comfort with its Isometric Design technology, making it perfect for players seeking power characteristics.\n\n**[Get the Yonex EZONE 100 here](https://amzn.to/46aFhRn)**\n\n---\n\n## Conclusion\n\nWhether you're looking to improve your UTR rating, find the perfect racket, or enhance your tennis game, the right approach and equipment make all the difference.\n\nFor more comprehensive tennis resources, equipment reviews, and training guides, visit [AcePlan](https://aceplan.me) and explore our extensive 100-racket database to find the perfect equipment for your game.\n\nOur database includes detailed specifications, reviews, and affiliate links to help you make informed purchasing decisions while supporting our platform.",
+            author: "AcePlan AI",
+            publishedAt: new Date().toISOString(),
+            category: "equipment",
+            tags: ["tennis rackets", "spin", "top 10", "equipment", "tennis", "aceplan"],
+            readTime: 4,
+            featured: false,
+            imageUrl: "/images/articles/tennis-blog.jpg",
+            views: 206,
+            likes: 73,
+            status: "published"
+          },
+          {
+            id: "sample-2",
+            title: "How to Improve Your UTR Rating Fast: 5 Proven Strategies",
+            slug: "how-to-improve-your-utr-rating-fast-5-proven-strategies",
+            excerpt: "Improving your UTR rating requires consistent practice, proper technique, and strategic match play to see significant gains.",
+            content: "Improving your UTR rating requires consistent practice, proper technique, and strategic match play to see significant gains.\n\n## 5 Key Strategies to Improve Your UTR Fast\n\n### 1. Consistent Match Play\n\nPlay at least 3-4 competitive matches per week. UTR is based on match results, so regular competition is essential.\n\n### 2. Targeted Practice Sessions\n\nFocus on your weaknesses during practice. If you struggle with backhands, dedicate 30% of practice time to backhand drills.\n\n### 3. Mental Game Development\n\nWork on staying calm under pressure and maintaining focus during crucial points. Mental toughness often determines match outcomes.\n\n### 4. Physical Conditioning\n\nImprove your fitness to maintain consistent performance throughout long matches. Endurance training is crucial for UTR improvement.\n\n### 5. Equipment Optimization\n\nEnsure your racket, strings, and other equipment are properly suited to your playing style and skill level.\n\n## Conclusion\n\nWhether you're looking to improve your UTR rating, find the perfect racket, or enhance your tennis game, the right approach and equipment make all the difference.\n\nFor more comprehensive tennis resources, equipment reviews, and training guides, visit [AcePlan](https://aceplan.me) and explore our extensive 100-racket database to find the perfect equipment for your game.\n\nOur database includes detailed specifications, reviews, and affiliate links to help you make informed purchasing decisions while supporting our platform.",
+            author: "AcePlan AI",
+            publishedAt: new Date().toISOString(),
+            category: "training",
+            tags: ["UTR", "improvement", "training", "strategy", "tennis", "aceplan"],
+            readTime: 2,
+            featured: true,
+            imageUrl: "/images/articles/tennis-blog.jpg",
+            views: 421,
+            likes: 90,
+            status: "published"
+          }
+        ]
+      });
     }
     
     const data = fs.readFileSync(indexPath, 'utf8');
