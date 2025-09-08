@@ -69,7 +69,6 @@ Visit official manufacturer websites for high-quality product images:
 ## Current Racket Models (103 total)
 
 ### Babolat (22 models):
-- babolat-pure-aero-2023.svg
 - babolat-pure-aero-98.svg
 - babolat-pure-aero-lite-100ul-v2.svg
 - babolat-pure-aero-lite-100ul-v3.svg
